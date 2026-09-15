@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artesanías EC</title>
+<meta name="description" content="Artesanías EC — catálogo de jabones artesanales, velones y flores eternas hechos a mano.">
+<link rel="icon" type="image/png" href="imagenes/favicon.png">
+<link rel="apple-touch-icon" href="imagenes/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450;1,9..144,550&family=Manrope:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3EEEC;
+    --surface:#FBF8F5;
+    --surface-2:#EDE4DF;
+    --ink:#2B2320;
+    --ink-soft:#5A4E48;
+    --border:#DDD1C8;
+    --sello:#5B6650;
+    --sello-strong:#3F4636;
+    --soap:#BC7F76;
+    --soap-soft:#EADAD5;
+    --sachet:#9C6B7A;
+    --sachet-soft:#EBDCE0;
+    --candle:#B8792A;
+    --candle-soft:#F0DCB9;
+    --flower:#7C8B6F;
+    --flower-soft:#DEE4D3;
+    --subenil:#B99552;
+    --subenil-soft:#F1E6C8;
+    --whatsapp:#25D366;
+    --shadow: 0 18px 40px -22px rgba(43,35,32,.35);
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --wrap: 1180px;
+    --footer-bg:#241C18;
+    --footer-text:#D9CFC7;
+    --footer-heading:#FBF8F5;
+    --footer-border:rgba(255,255,255,.12);
+    --footer-muted:#B7ACA3;
+    --footer-accent:#9CAE86;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1C1613; --surface:#241C18; --surface-2:#2C221D;
+      --ink:#F1E9E2; --ink-soft:#C9BAB0; --border:#3C302A;
+      --sello:#90A17E; --sello-strong:#A9BB97;
+      --soap:#D89C95; --soap-soft:#3A2926;
+      --sachet:#CB9AA8; --sachet-soft:#372B2E;
+      --candle:#D9A354; --candle-soft:#3B2E1C;
+      --flower:#9CAE86; --flower-soft:#2A3123;
+      --subenil:#D9B679; --subenil-soft:#3A311F;
+      --shadow: 0 18px 44px -20px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1C1613; --surface:#241C18; --surface-2:#2C221D;
+    --ink:#F1E9E2; --ink-soft:#C9BAB0; --border:#3C302A;
+    --sello:#90A17E; --sello-strong:#A9BB97;
+    --soap:#D89C95; --soap-soft:#3A2926;
+    --sachet:#CB9AA8; --sachet-soft:#372B2E;
+    --candle:#D9A354; --candle-soft:#3B2E1C;
+    --flower:#9CAE86; --flower-soft:#2A3123;
+    --subenil:#D9B679; --subenil-soft:#3A311F;
+    --shadow: 0 18px 44px -20px rgba(0,0,0,.55);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Manrope',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  img,svg{max-width:100%;}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;text-wrap:balance;margin:0;font-weight:450;}
+  p{margin:0;line-height:1.65;}
+  a{color:inherit;}
+  .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,4vw,48px);}
+  .eyebrow{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.72rem;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--sello));
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:999px;border:1px solid transparent;
+    font-family:'Manrope',sans-serif;font-weight:600;font-size:.92rem;
+    cursor:pointer;text-decoration:none;transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(.96);}
+  .btn--sello{background:var(--sello);color:#fdf6f1;}
+  .btn--sello:hover{background:var(--sello-strong);box-shadow:var(--shadow);}
+  .btn--ghost{background:transparent;border-color:var(--border);color:var(--ink);}
+  .btn--ghost:hover{border-color:var(--ink-soft);}
+  .btn--wa{background:var(--whatsapp);color:#fff;}
+  .btn--wa:hover{filter:brightness(1.06);box-shadow:var(--shadow);}
+  .btn--wa svg{width:16px;height:16px;flex:none;}
+
+  .site-header{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:116px;transition:height .25s ease;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:500;text-decoration:none;color:var(--ink);}
+  .brand .mark{height:88px;width:auto;flex:none;display:block;}
+  .footer-mark{height:100px;width:auto;display:block;}
+  nav.main-nav{display:flex;align-items:center;gap:28px;}
+  nav.main-nav a{
+    font-size:.92rem;font-weight:600;text-decoration:none;color:var(--ink-soft);
+    position:relative;padding-bottom:4px;
+  }
+  nav.main-nav a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--sello);
+    transition:right .3s ease;
+  }
+  nav.main-nav a:hover{color:var(--ink);}
+  nav.main-nav a:hover::after{right:0;}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;}
+
+  @media (max-width:760px){
+    nav.main-nav{
+      position:fixed;inset:116px 0 auto 0;background:var(--paper);
+      flex-direction:column;align-items:flex-start;gap:0;padding:8px clamp(16px,4vw,48px) 18px;
+      border-bottom:1px solid var(--border);
+      transform:translateY(-8px);opacity:0;pointer-events:none;transition:.25s ease;
+    }
+    nav.main-nav a{padding:12px 0;width:100%;border-bottom:1px solid var(--border);}
+    body.nav-open nav.main-nav{transform:translateY(0);opacity:1;pointer-events:auto;}
+    .nav-toggle{display:block;}
+    .header-actions .btn--sello{display:none;}
+  }
+
+  .hero{padding-block:clamp(48px,8vw,88px) clamp(56px,9vw,110px);position:relative;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-25%;right:-12%;width:56%;aspect-ratio:1;
+    background:radial-gradient(circle, var(--accent-glow, var(--sello)) 0%, transparent 70%);
+    opacity:.16;filter:blur(60px);pointer-events:none;animation:drift 18s ease-in-out infinite;
+  }
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,24px) scale(1.1);}}
+  @media (prefers-reduced-motion: reduce){.hero::before{animation:none;}}
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center;}
+  @media (max-width:880px){.hero .wrap{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.6rem);line-height:1.06;margin-top:14px;}
+  .hero h1 em{color:var(--sello);font-style:italic;}
+  .hero p.lede{margin-top:18px;max-width:46ch;color:var(--ink-soft);font-size:1.05rem;}
+  .hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+  .seals-row{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap;}
+  .seal-link{
+    display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);
+    background:var(--surface);border:1px solid var(--border);border-radius:999px;
+    padding:8px 16px 8px 8px;font-weight:600;font-size:.86rem;transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .seal-link:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+  .seal-link svg{width:34px;height:34px;flex:none;}
+
+  .hero-art{position:relative;height:clamp(320px,34vw,420px);}
+  .hero-art .seal-big{
+    position:absolute;border-radius:50%;aspect-ratio:1/1;object-fit:cover;
+    border:5px solid var(--surface);box-shadow:0 0 0 1px var(--border), var(--shadow);
+    filter:drop-shadow(0 20px 30px rgba(43,35,32,.18));animation:float 7s ease-in-out infinite;
+  }
+  .hero-art .s1{width:44%;top:2%;left:6%;animation-delay:0s;}
+  .hero-art .s2{width:40%;top:32%;right:2%;animation-delay:1.2s;}
+  .hero-art .s3{width:38%;bottom:0;left:22%;animation-delay:2.4s;}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @media (prefers-reduced-motion: reduce){
+    .hero-art .seal-big{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  .story-band{
+    border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    padding-block:clamp(30px,5vw,48px);background:var(--surface);
+  }
+  .story-band .wrap{display:flex;gap:20px;align-items:center;justify-content:center;text-align:center;flex-direction:column;}
+  .story-band p{font-family:'Caveat',cursive;font-size:clamp(1.5rem,2.6vw,2.1rem);color:var(--sello);max-width:52ch;line-height:1.3;}
+  .story-band span{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+
+  .collection{padding-block:clamp(56px,8vw,96px);scroll-margin-top:130px;}
+  .collection--soap{--accent:var(--soap);--accent-soft:var(--soap-soft);}
+  .collection--sachet{--accent:var(--sachet);--accent-soft:var(--sachet-soft);background:var(--surface);}
+  .collection--candle{--accent:var(--candle);--accent-soft:var(--candle-soft);}
+  .collection--flower{--accent:var(--flower);--accent-soft:var(--flower-soft);background:var(--surface);}
+  .collection--subenil{--accent:var(--subenil);--accent-soft:var(--subenil-soft);}
+  .collection-head{max-width:640px;margin-bottom:clamp(28px,4vw,44px);}
+  .collection-head h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-top:10px;}
+  .collection-head p{margin-top:14px;color:var(--ink-soft);font-size:1.02rem;}
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px;grid-auto-flow:dense;}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px;
+    opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .card.in-view{opacity:1;transform:translateY(0);}
+  .card:hover{box-shadow:var(--shadow);border-color:var(--accent);}
+  .card .art{
+    background:var(--accent-soft);border-radius:var(--radius-md);
+    aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  .card .art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
+  .card:hover .art img{transform:scale(1.05);}
+  .card--wide{grid-column:span 2;}
+  .card--wide .art{aspect-ratio:16/9;}
+  @media (max-width:640px){.card--wide{grid-column:span 1;}}
+  .card h3{font-size:1.2rem;color:var(--ink);}
+  .card .desc{color:var(--ink-soft);font-size:.9rem;flex:1;}
+  .card .tag{font-family:'Caveat',cursive;color:var(--accent);font-size:1.15rem;font-weight:600;}
+  .card .btn--wa{align-self:flex-start;padding:9px 16px;font-size:.82rem;}
+
+  @media (prefers-reduced-motion: reduce){.card{opacity:1;transform:none;}}
+
+  footer{background:var(--footer-bg);color:var(--footer-heading);padding-block:clamp(44px,7vw,72px) 26px;border-top:1px solid var(--footer-border);}
+  footer .wrap{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:36px;}
+  @media (max-width:760px){footer .wrap{grid-template-columns:1fr;}}
+  footer h3{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--footer-heading);font-weight:500;}
+  footer p, footer a{color:var(--footer-text);font-size:.92rem;}
+  footer a{text-decoration:none;}
+  footer a:hover{color:var(--footer-heading);}
+  footer .foot-note{
+    margin-top:38px;padding-top:20px;border-top:1px solid var(--footer-border);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-size:.8rem;color:var(--footer-muted);
+  }
+  footer .signoff{font-family:'Caveat',cursive;font-size:1.3rem;color:var(--footer-accent);}
+  .foot-col ul{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:8px;}
+
+  .social-row{display:inline-flex;align-items:center;gap:12px;margin-top:14px;text-decoration:none;}
+  .social-handle{font-family:'Caveat',cursive;font-size:1.35rem;font-weight:600;color:var(--footer-accent);}
+  .social-icon{
+    width:52px;height:52px;border-radius:50%;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--surface-2);border:1px solid var(--border);color:var(--ink);
+    transition:transform .25s ease, background .25s ease, color .25s ease;
+  }
+  .social-icon svg{width:26px;height:26px;}
+  .social-icon:hover{background:var(--sello);color:#fdf6f1;transform:translateY(-2px);}
+  .header-actions .social-icon{width:46px;height:46px;}
+  .header-actions .social-icon svg{width:22px;height:22px;}
+  footer .social-icon{background:rgba(255,255,255,.08);border-color:var(--footer-border);color:var(--footer-text);}
+  footer .social-icon:hover{background:var(--footer-accent);color:var(--footer-bg);}
+
+  .fab-wa{
+    position:fixed;right:20px;bottom:20px;z-index:50;
+    width:58px;height:58px;border-radius:50%;background:var(--whatsapp);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 12px 26px -8px rgba(0,0,0,.4);
+    transition:transform .25s ease;
+  }
+  .fab-wa:hover{transform:scale(1.08);}
+  .fab-wa svg{width:28px;height:28px;}
+
+  .season-banner{
+    background:var(--season-accent-soft);color:var(--season-accent);
+    font-weight:600;font-size:.85rem;text-align:center;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    padding:11px clamp(40px,6vw,64px);position:relative;
+  }
+  .season-banner button{
+    position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    background:none;border:none;font-size:1.05rem;line-height:1;cursor:pointer;
+    color:inherit;opacity:.65;padding:6px;
+  }
+  .season-banner button:hover{opacity:1;}
+  .season-badge{
+    display:inline-flex;align-items:center;gap:6px;margin-left:10px;
+    background:var(--season-accent-soft);color:var(--season-accent);
+    padding:4px 12px;border-radius:999px;font-size:.72rem;font-weight:700;
+    letter-spacing:.04em;text-transform:none;vertical-align:middle;
+  }
+</style>
+</head>
+<body>
+
+<div id="seasonBanner"></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img class="mark" src="imagenes/logo.png" alt="Artesanías EC" />
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#jabones">Jabones</a>
+      <a href="#sachets">Sachets</a>
+      <a href="#velones">Velones</a>
+      <a href="#flores">Flores Eternas</a>
+      <a href="#subeniles">Subeniles</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a class="social-icon" data-instagram href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="btn btn--sello" href="#contacto">Escribir por WhatsApp</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow" id="heroEyebrow">Taller familiar · hecho a mano</span>
+        <h1>Piezas con calma, <em>hechas para durar</em>.</h1>
+        <p class="lede">Jabones artesanales, velones vertidos a mano y flores eternas que no se marchitan. Cada pieza sale de un taller pequeño, en tandas cortas, con tiempo de sobra.</p>
+        <div class="ctas">
+          <a class="btn btn--sello" href="#jabones">Ver catálogo</a>
+          <a class="btn btn--ghost" href="#contacto">Cómo pedir</a>
+        </div>
+        <div class="seals-row">
+          <a class="seal-link" href="#jabones">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="var(--soap-soft)"/><rect x="28" y="42" width="44" height="26" rx="10" fill="var(--soap)"/><path d="M50 28c5 5 8 9 8 13a8 8 0 0 1-16 0c0-4 3-8 8-13z" fill="var(--soap)"/></svg>
+            Jabones
+          </a>
+          <a class="seal-link" href="#sachets">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="var(--sachet-soft)"/><rect x="34" y="34" width="32" height="40" rx="12" fill="var(--sachet)"/><path d="M50 22v14" stroke="var(--sachet)" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="20" r="4" fill="var(--sachet)"/></svg>
+            Sachets
+          </a>
+          <a class="seal-link" href="#velones">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="var(--candle-soft)"/><rect x="40" y="46" width="20" height="30" rx="4" fill="var(--candle)"/><path d="M50 22c6 7 9 12 9 17a9 9 0 0 1-18 0c0-5 3-10 9-17z" fill="var(--candle)"/></svg>
+            Velones
+          </a>
+          <a class="seal-link" href="#flores">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="var(--flower-soft)"/><g fill="var(--flower)"><ellipse cx="50" cy="50" rx="11" ry="18"/><ellipse cx="50" cy="50" rx="11" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="50" rx="11" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="50" rx="11" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="50" rx="11" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="8" fill="var(--candle)"/></g></svg>
+            Flores Eternas
+          </a>
+          <a class="seal-link" href="#subeniles">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="var(--subenil-soft)"/><rect x="32" y="40" width="36" height="24" rx="4" fill="var(--subenil)"/><path d="M50 40l-10-9h20z" fill="var(--subenil)"/><circle cx="50" cy="34" r="2.5" fill="var(--subenil)"/></svg>
+            Subeniles
+          </a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img class="seal-big s1" src="imagenes/jabones/jabon-petalos.jpg" alt="" />
+        <img class="seal-big s2" src="imagenes/velones/velon-te-alto-1.jpg" alt="" />
+        <img class="seal-big s3" src="imagenes/flores/rosas-eternas-amarillo.jpg" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <div class="story-band">
+    <div class="wrap">
+      <p>&ldquo;Cada jabón se corta, cada velón se vierte y cada flor se preserva a mano &mdash; una tanda pequeña a la vez.&rdquo;</p>
+      <span>Del taller a tu casa</span>
+    </div>
+  </div>
+
+  <section class="collection collection--soap" id="jabones">
+    <div class="wrap">
+      <div class="collection-head">
+        <span class="eyebrow">01 · Cuidado personal</span>
+        <h2>Jabones artesanales</h2>
+        <p>Saponificados en frío con aceites vegetales, sin químicos agresivos. Se curan durante semanas antes de salir del taller, lo que los hace más suaves y duraderos.</p>
+      </div>
+      <div class="card-grid" id="grid-jabones"></div>
+    </div>
+  </section>
+
+  <section class="collection collection--sachet" id="sachets">
+    <div class="wrap">
+      <div class="collection-head">
+        <span class="eyebrow">02 · Aromatización</span>
+        <h2>Sachets Aromáticos</h2>
+        <p>Placas perfumadas para colgar en clósets, gavetas o el espejo del carro. Cada una se decora a mano con flores secas y libera su fragancia por semanas.</p>
+      </div>
+      <div class="card-grid" id="grid-sachets"></div>
+    </div>
+  </section>
+
+  <section class="collection collection--candle" id="velones">
+    <div class="wrap">
+      <div class="collection-head">
+        <span class="eyebrow">03 · Ambientación</span>
+        <h2>Velones</h2>
+        <p>Vertidos a mano en tandas pequeñas, con pabilo de algodón y cera vegetal. Cada velón se deja curar 24 horas antes de encender su primera mecha.</p>
+      </div>
+      <div class="card-grid" id="grid-velones"></div>
+    </div>
+  </section>
+
+  <section class="collection collection--flower" id="flores">
+    <div class="wrap">
+      <div class="collection-head">
+        <span class="eyebrow">04 · Regalos que duran</span>
+        <h2>Flores Eternas</h2>
+        <p>Flores naturales preservadas con glicerina vegetal: conservan su textura y color hasta por tres años, sin agua, sin sol directo y sin mantenimiento.</p>
+      </div>
+      <div class="card-grid" id="grid-flores"></div>
+    </div>
+  </section>
+
+  <section class="collection collection--subenil" id="subeniles">
+    <div class="wrap">
+      <div class="collection-head">
+        <span class="eyebrow">05 · Detalles para tu evento</span>
+        <h2>Subeniles</h2>
+        <p>Recuerdos personalizados para baby showers, bodas y otras celebraciones. Cada cajita se arma a mano y se puede pedir por cantidad según tu evento.</p>
+      </div>
+      <div class="card-grid" id="grid-subeniles"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-col">
+      <img class="footer-mark" src="imagenes/logo.png" alt="Artesanías EC" />
+      <p style="margin-top:10px;max-width:38ch;">Escríbenos por WhatsApp con el nombre del producto que te interesa y te contamos precio, colores disponibles y tiempo de entrega.</p>
+      <a class="btn btn--wa" style="margin-top:18px;" data-wa data-item="">
+        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3 9 3 16c0 2.4.6 4.6 1.8 6.6L3 29l6.6-1.7A13 13 0 0 0 16 29c7 0 13-6 13-13S23 3 16 3zm0 23.5c-2.1 0-4.1-.6-5.8-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 0 1 5.5 16c0-5.8 4.7-10.5 10.5-10.5S26.5 10.2 26.5 16 21.8 26.5 16 26.5zm5.7-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.5-1.5 9.4 9.4 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.5.3-.5v-.5c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 2.9 1.3 3.1c.2.3 2.2 3.4 5.4 4.6.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <a class="social-row" data-instagram href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <span class="social-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </span>
+        <span class="social-handle">@ec__artesanias</span>
+      </a>
+    </div>
+    <div class="foot-col">
+      <h3 style="font-size:1rem;">Catálogo</h3>
+      <ul>
+        <li><a href="#jabones">Jabones</a></li>
+        <li><a href="#sachets">Sachets</a></li>
+        <li><a href="#velones">Velones</a></li>
+        <li><a href="#flores">Flores Eternas</a></li>
+        <li><a href="#subeniles">Subeniles</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h3 style="font-size:1rem;">Horario</h3>
+      <ul>
+        <li>Lunes a sábado</li>
+        <li>Pedidos y entregas se coordinan por WhatsApp</li>
+      </ul>
+    </div>
+    <div class="foot-note wrap" style="max-width:none;padding-inline:0;">
+      <span class="signoff">Hecho con cariño, en casa.</span>
+      <span>© <span id="year"></span> Artesanías EC</span>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-wa" data-wa data-item="" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#fff"><path d="M16 3C9 3 3 9 3 16c0 2.4.6 4.6 1.8 6.6L3 29l6.6-1.7A13 13 0 0 0 16 29c7 0 13-6 13-13S23 3 16 3zm0 23.5c-2.1 0-4.1-.6-5.8-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 0 1 5.5 16c0-5.8 4.7-10.5 10.5-10.5S26.5 10.2 26.5 16 21.8 26.5 16 26.5zm5.7-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.5-1.5 9.4 9.4 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.5.3-.5v-.5c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 2.9 1.3 3.1c.2.3 2.2 3.4 5.4 4.6.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script>
+  // === EDITAR AQUÍ: número real de WhatsApp de mamá, formato país+número sin espacios ni signos ===
+  const WHATSAPP_NUMBER = "18297200691"; // numero real de mama
+
+  // === EDITAR AQUÍ: cuando crees la página de Instagram de mamá, pega su link entre las comillas ===
+  const INSTAGRAM_URL = "https://www.instagram.com/ec__artesanias";
+
+  // === EDITAR AQUÍ: temporadas comerciales. Se activan solas según la fecha de hoy (mes/día, sin año). ===
+  // Para agregar una nueva, copia un bloque y cambia id, fechas (start/end en [mes, dia]), textos y colores.
+  const SEASONS = [
+    { id:'flores-amarillas', emoji:'🌼', badge:'Día de las Flores Amarillas',
+      banner:'🌼 21 de septiembre: Día de las Flores Amarillas — sorprende con una flor eterna que no se marchita.',
+      accent:'#A67C1D', accentSoft:'#F5E6B8', start:[9,18], end:[9,21] },
+    { id:'navidad', emoji:'🎄', badge:'Especial de Navidad',
+      banner:'🎄 Ideas de regalo para esta Navidad: jabones, velones y flores eternas.',
+      accent:'#B23B3B', accentSoft:'#F4D9D6', start:[12,1], end:[1,6] },
+    { id:'valentin', emoji:'💗', badge:'Especial de San Valentín',
+      banner:'💗 Detalles para San Valentín: velones aromáticos y flores eternas que no se marchitan.',
+      accent:'#C2486B', accentSoft:'#F5DCE3', start:[2,1], end:[2,14] },
+    { id:'madres', emoji:'🌷', badge:'Especial Día de las Madres',
+      banner:'🌷 Regalos para el Día de las Madres: flores eternas y sets de jabones.',
+      accent:'#B8792A', accentSoft:'#F0DCB9', start:[5,18], end:[5,31] }
+  ];
+
+  function dateInRange(month, day, start, end){
+    const val = month*100 + day, s = start[0]*100 + start[1], e = end[0]*100 + end[1];
+    return s <= e ? (val >= s && val <= e) : (val >= s || val <= e);
+  }
+
+  function getActiveSeason(){
+    const now = new Date();
+    return SEASONS.find(s => dateInRange(now.getMonth()+1, now.getDate(), s.start, s.end)) || null;
+  }
+
+  (function applySeason(){
+    const season = getActiveSeason();
+    if (!season) return;
+
+    document.documentElement.style.setProperty('--accent-glow', season.accent);
+    document.documentElement.style.setProperty('--season-accent', season.accent);
+    document.documentElement.style.setProperty('--season-accent-soft', season.accentSoft);
+
+    const eyebrow = document.getElementById('heroEyebrow');
+    if (eyebrow) eyebrow.insertAdjacentHTML('afterend', `<span class="season-badge">${season.emoji} ${season.badge}</span>`);
+
+    const dismissKey = `season-dismissed-${season.id}-${new Date().getFullYear()}`;
+    let dismissed = false;
+    try { dismissed = localStorage.getItem(dismissKey) === '1'; } catch(e) {}
+
+    if (!dismissed) {
+      const banner = document.getElementById('seasonBanner');
+      if (banner) {
+        banner.innerHTML = `<div class="season-banner"><span>${season.banner}</span><button aria-label="Cerrar aviso">✕</button></div>`;
+        banner.querySelector('button').addEventListener('click', () => {
+          banner.innerHTML = '';
+          try { localStorage.setItem(dismissKey, '1'); } catch(e) {}
+        });
+      }
+    }
+  })();
+
+  // === EDITAR AQUÍ: catálogo de productos. Para agregar uno nuevo, copia una línea y cambia los datos. ===
+  const WA_ICON = `<svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3 9 3 16c0 2.4.6 4.6 1.8 6.6L3 29l6.6-1.7A13 13 0 0 0 16 29c7 0 13-6 13-13S23 3 16 3zm0 23.5c-2.1 0-4.1-.6-5.8-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 0 1 5.5 16c0-5.8 4.7-10.5 10.5-10.5S26.5 10.2 26.5 16 21.8 26.5 16 26.5zm5.7-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.5-1.5 9.4 9.4 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.5.3-.5v-.5c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 2.9 1.3 3.1c.2.3 2.2 3.4 5.4 4.6.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>`;
+
+  const PRODUCTS = {
+    jabones: [
+      {img:"imagenes/jabones/jabon-exfoliante-cafe.jpg", title:"Jabón Exfoliante de Café", tag:"Fragancia Vainilla"},
+      {img:"imagenes/jabones/jabon-hidratante-vainilla.jpg", title:"Jabón Hidratante", tag:"Fragancia Vainilla"},
+      {img:"imagenes/jabones/jabon-hidratante-mango-gardenia.jpg", title:"Jabón Hidratante", tag:"Mango y Gardenia"},
+      {img:"imagenes/jabones/jabon-hidratante-sandalo.jpg", title:"Jabón Hidratante", tag:"Fragancia Sándalo"},
+      {img:"imagenes/jabones/set-regalo-jabones-velones.jpg", title:"Set de Regalo Artesanal", tag:"Jabones y velones", desc:"Combina piezas a tu gusto para armar un set de regalo.", wide:true},
+      {img:"imagenes/jabones/jabon-hidratante-suavidad.jpg", title:"Jabón Hidratante", tag:"Suavidad y frescura"},
+      {img:"imagenes/jabones/jabon-decorativo-sakura.jpg", title:"Jabón Decorativo", tag:"Fragancia Sakura"},
+      {img:"imagenes/jabones/jabon-hidratante-naranja.jpg", title:"Jabón Hidratante", tag:"Fragancia Naranja"},
+      {img:"imagenes/jabones/jabon-exfoliante-bolas.jpg", title:"Bolas de Jabón Exfoliante", tag:"Edición exfoliante"},
+      {img:"imagenes/jabones/jabon-unificador-tono.jpg", title:"Jabón Unificador de Tono de Piel", tag:"Piel pareja y luminosa"},
+      {img:"imagenes/jabones/jabon-hidratante-azul.jpg", title:"Jabón Hidratante", tag:"Azul"},
+      {img:"imagenes/jabones/jabon-suavizante-blanco.jpg", title:"Jabón Suavizante en Corazón", tag:"Blanco"},
+      {img:"imagenes/jabones/jabon-exfoliante-floral.jpg", title:"Jabón Exfoliante Floral", tag:"Blanco y Gris"},
+      {img:"imagenes/jabones/set-detalles-artesanales.jpg", title:"Set de Detalles Artesanales", tag:"Regalo especial", desc:"Caja con mini jabones, sachet y vela — ideal para un regalo pequeño."},
+      {img:"imagenes/jabones/set-jabones-vela-caja-kraft.jpg", title:"Set de Jabones y Vela en Caja Kraft", tag:"Regalo especial", desc:"Caja kraft con jabones jaspeados, sachet y velita aromática."}
+    ],
+    sachets: [
+      {img:"imagenes/jabones/sachet-lavanda.jpg", title:"Sachet Aromático", tag:"Ramas de Lavanda"},
+      {img:"imagenes/jabones/jabon-petalos.jpg", title:"Sachet Aromático", tag:"Edición floral"},
+      {img:"imagenes/jabones/jabon-canela-sandalo.jpg", title:"Sachet Aromático", tag:"Canela y Sándalo"},
+      {img:"imagenes/jabones/sachet-vainilla.jpg", title:"Sachet Aromático", tag:"Fragancia Vainilla"},
+      {img:"imagenes/jabones/sachet-ambar-algodon.jpg", title:"Sachet Aromático", tag:"Ámbar y Algodón"},
+      {img:"imagenes/jabones/sachet-cedro.jpg", title:"Sachet Aromático", tag:"Fragancia Cedro"}
+    ],
+    velones: [
+      {img:"imagenes/velones/velon-te-alto-1.jpg", title:"Velón Aromático", tag:"Té Alto"},
+      {img:"imagenes/velones/velon-vainilla-caramelo.jpg", title:"Velón Aromático", tag:"Vainilla y Caramelo"},
+      {img:"imagenes/velones/velon-te-alto-2.jpg", title:"Velón Aromático", tag:"Té Alto"},
+      {img:"imagenes/velones/velon-coco.jpg", title:"Velón Aromático", tag:"Coco"},
+      {img:"imagenes/velones/velon-te-blanco.jpg", title:"Velón Aromático", tag:"Té Blanco"},
+      {img:"imagenes/velones/velon-ambar-negro.jpg", title:"Velón Aromático", tag:"Ámbar Negro"},
+      {img:"imagenes/velones/set-velon-difusor.jpg", title:"Set de Velón y Difusor", tag:"Edición especial", desc:"Set con velón, difusor de varillas y detalles decorativos.", wide:true},
+      {img:"imagenes/velones/velon-lavanda.jpg", title:"Velón Aromático", tag:"Lavanda"},
+      {img:"imagenes/velones/velon-eucalipto.jpg", title:"Velón Aromático", tag:"Eucalipto"}
+    ],
+    flores: [
+      {img:"imagenes/flores/claveles-eternos-blanco.jpg", title:"Ramo de Claveles Eternos", tag:"Blanco clásico", desc:"Claveles preservados en florero de vidrio con moño decorativo."},
+      {img:"imagenes/flores/rosas-eternas-amarillo.jpg", title:"Ramo de Rosas Eternas", tag:"Amarillo", desc:"Rosas preservadas en florero de vidrio, ideales para decorar cualquier espacio."},
+      {img:"imagenes/flores/rosas-eternas-azul-maceta.jpg", title:"Rosas Eternas en Maceta", tag:"Azul", desc:"Arreglo de rosas preservadas en maceta decorativa con acabado dorado."},
+      {img:"imagenes/flores/flor-liston-rosa-maceta.jpg", title:"Dhalia", tag:"Rosa", desc:"Flor artesanal hecha con listón de satín, presentada en maceta con moño."}
+    ],
+    subeniles: [
+      {img:"imagenes/subeniles/baby-shower-caja-individual.jpg", title:"Cajita de Jabones Bebé", tag:"Baby Shower", desc:"Mini jabones (osito, biberón, huellita y coche) en caja con ventana y moño de listón."},
+      {img:"imagenes/subeniles/baby-shower-pedido-mayor.jpg", title:"Recuerdos por Mayor", tag:"Baby Shower", desc:"Se arman por cantidad según el número de invitados de tu evento.", wide:true},
+      {img:"imagenes/subeniles/baby-shower-produccion.jpg", title:"Mini Jabones para Armar", tag:"Baby Shower", desc:"Mini jabones sueltos (osito, biberón, huellita, coche y más) listos para empacar en tu cajita."}
+    ]
+  };
+
+  function renderGrid(gridId, items){
+    const grid = document.getElementById(gridId);
+    grid.innerHTML = items.map(p => `
+      <article class="card${p.wide ? ' card--wide' : ''}">
+        <div class="art"><img src="${p.img}" alt="${p.title}" loading="lazy" /></div>
+        <h3>${p.title}</h3>
+        ${p.desc ? `<p class="desc">${p.desc}</p>` : ''}
+        <span class="tag">${p.tag}</span>
+        <a class="btn btn--wa" data-wa data-item="${p.title} (${p.tag})">
+          ${WA_ICON}
+          Pedir por WhatsApp
+        </a>
+      </article>
+    `).join('');
+  }
+
+  renderGrid('grid-jabones', PRODUCTS.jabones);
+  renderGrid('grid-sachets', PRODUCTS.sachets);
+  renderGrid('grid-velones', PRODUCTS.velones);
+  renderGrid('grid-flores', PRODUCTS.flores);
+  renderGrid('grid-subeniles', PRODUCTS.subeniles);
+
+  document.querySelectorAll('[data-wa]').forEach(el=>{
+    el.href = '#';
+    el.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const item = el.getAttribute('data-item');
+      const msg = item
+        ? `Hola, me interesa: ${item}. ¿Me da más información?`
+        : 'Hola, vi el catálogo y me gustaría más información.';
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  });
+
+  const igLinks = document.querySelectorAll('[data-instagram]');
+  if (INSTAGRAM_URL) {
+    igLinks.forEach(el => { el.href = INSTAGRAM_URL; });
+  } else {
+    igLinks.forEach(el => { el.style.display = 'none'; });
+  }
+
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', ()=>{
+    const open = document.body.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.querySelectorAll('#mainNav a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      document.body.classList.remove('nav-open');
+      navToggle.setAttribute('aria-expanded','false');
+    });
+  });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduceMotion){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach((entry, i)=>{
+        if(entry.isIntersecting){
+          setTimeout(()=>entry.target.classList.add('in-view'), (i%4)*80);
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15});
+    document.querySelectorAll('.card').forEach(c=>io.observe(c));
+  } else {
+    document.querySelectorAll('.card').forEach(c=>c.classList.add('in-view'));
+  }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
