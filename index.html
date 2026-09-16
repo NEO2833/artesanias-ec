@@ -208,13 +208,6 @@
   }
   .card .art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
   .card:hover .art img{transform:scale(1.05);}
-  .card .art .zoom-hint{
-    position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:50%;
-    background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;
-    opacity:0;transition:opacity .25s ease;pointer-events:none;
-  }
-  .card .art .zoom-hint svg{width:16px;height:16px;}
-  .card:hover .art .zoom-hint{opacity:1;}
 
   .lightbox{
     position:fixed;inset:0;z-index:100;background:rgba(20,16,14,.92);
@@ -602,10 +595,7 @@
     const grid = document.getElementById(gridId);
     grid.innerHTML = items.map(p => `
       <article class="card${p.wide ? ' card--wide' : ''}">
-        <div class="art">
-          <img src="${p.img}" alt="${p.title}" loading="lazy" />
-          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg></span>
-        </div>
+        <div class="art"><img src="${p.img}" alt="${p.title}" loading="lazy" /></div>
         <h3>${p.title}</h3>
         ${p.desc ? `<p class="desc">${p.desc}</p>` : ''}
         <span class="tag">${p.tag}</span>
