@@ -525,6 +525,13 @@
   }
 
   function getActiveSeason(){
+    // Para previsualizar una temporada sin esperar la fecha, entra a la página agregando ?season=id al final,
+    // por ejemplo: ecartesanias.com/?season=navidad
+    const preview = new URLSearchParams(location.search).get('season');
+    if (preview) {
+      const found = SEASONS.find(s => s.id === preview);
+      if (found) return found;
+    }
     const now = new Date();
     return SEASONS.find(s => dateInRange(now.getMonth()+1, now.getDate(), s.start, s.end)) || null;
   }
