@@ -273,22 +273,30 @@
   .fab-wa svg{width:28px;height:28px;}
 
   .season-banner{
-    background:var(--season-accent-soft);color:var(--season-accent);
-    font-weight:600;font-size:.85rem;text-align:center;
+    background:var(--footer-bg);color:var(--footer-text);
+    font-size:.82rem;text-align:center;
     display:flex;align-items:center;justify-content:center;gap:10px;
-    padding:11px clamp(40px,6vw,64px);position:relative;
+    padding:10px clamp(40px,6vw,64px);position:relative;
   }
+  .season-banner .season-dot{
+    width:6px;height:6px;border-radius:50%;flex:none;
+    background:var(--season-accent);box-shadow:0 0 0 3px color-mix(in srgb, var(--season-accent) 30%, transparent);
+  }
+  .season-banner strong{color:var(--footer-heading);font-weight:600;}
   .season-banner button{
     position:absolute;right:14px;top:50%;transform:translateY(-50%);
-    background:none;border:none;font-size:1.05rem;line-height:1;cursor:pointer;
-    color:inherit;opacity:.65;padding:6px;
+    background:none;border:none;font-size:1rem;line-height:1;cursor:pointer;
+    color:var(--footer-text);opacity:.6;padding:6px;
   }
-  .season-banner button:hover{opacity:1;}
+  .season-banner button:hover{opacity:1;color:var(--footer-heading);}
   .season-badge{
-    display:inline-flex;align-items:center;gap:6px;margin-left:10px;
-    background:var(--season-accent-soft);color:var(--season-accent);
-    padding:4px 12px;border-radius:999px;font-size:.72rem;font-weight:700;
-    letter-spacing:.04em;text-transform:none;vertical-align:middle;
+    display:inline-flex;align-items:center;gap:7px;margin-left:12px;
+    background:transparent;border:1px solid var(--season-accent);color:var(--season-accent);
+    padding:5px 14px 5px 10px;border-radius:999px;font-size:.68rem;font-weight:700;
+    letter-spacing:.07em;text-transform:uppercase;vertical-align:middle;
+  }
+  .season-badge .season-dot{
+    width:6px;height:6px;border-radius:50%;flex:none;background:var(--season-accent);
   }
 </style>
 </head>
@@ -485,17 +493,17 @@
   // === EDITAR AQUÍ: temporadas comerciales. Se activan solas según la fecha de hoy (mes/día, sin año). ===
   // Para agregar una nueva, copia un bloque y cambia id, fechas (start/end en [mes, dia]), textos y colores.
   const SEASONS = [
-    { id:'flores-amarillas', emoji:'🌼', badge:'Día de las Flores Amarillas',
-      banner:'🌼 21 de septiembre: Día de las Flores Amarillas — sorprende con una flor eterna que no se marchita.',
-      accent:'#A67C1D', accentSoft:'#F5E6B8', start:[9,18], end:[9,21] },
-    { id:'navidad', emoji:'🎄', badge:'Especial de Navidad',
-      banner:'🎄 Ideas de regalo para esta Navidad: jabones, velones y flores eternas.',
+    { id:'flores-amarillas', badge:'Día de las Flores Amarillas',
+      banner:'21 de septiembre: <strong>Día de las Flores Amarillas</strong> — sorprende con una flor eterna que no se marchita.',
+      accent:'#C9A94A', accentSoft:'#F5E6B8', start:[9,18], end:[9,21] },
+    { id:'navidad', badge:'Especial de Navidad',
+      banner:'Ideas de regalo para esta <strong>Navidad</strong>: jabones, velones y flores eternas.',
       accent:'#B23B3B', accentSoft:'#F4D9D6', start:[12,1], end:[1,6] },
-    { id:'valentin', emoji:'💗', badge:'Especial de San Valentín',
-      banner:'💗 Detalles para San Valentín: velones aromáticos y flores eternas que no se marchitan.',
+    { id:'valentin', badge:'Especial de San Valentín',
+      banner:'Detalles para <strong>San Valentín</strong>: velones aromáticos y flores eternas que no se marchitan.',
       accent:'#C2486B', accentSoft:'#F5DCE3', start:[2,1], end:[2,14] },
-    { id:'madres', emoji:'🌷', badge:'Especial Día de las Madres',
-      banner:'🌷 Regalos para el Día de las Madres: flores eternas y sets de jabones.',
+    { id:'madres', badge:'Especial Día de las Madres',
+      banner:'Regalos para el <strong>Día de las Madres</strong>: flores eternas y sets de jabones.',
       accent:'#B8792A', accentSoft:'#F0DCB9', start:[5,18], end:[5,31] }
   ];
 
@@ -518,7 +526,7 @@
     document.documentElement.style.setProperty('--season-accent-soft', season.accentSoft);
 
     const eyebrow = document.getElementById('heroEyebrow');
-    if (eyebrow) eyebrow.insertAdjacentHTML('afterend', `<span class="season-badge">${season.emoji} ${season.badge}</span>`);
+    if (eyebrow) eyebrow.insertAdjacentHTML('afterend', `<span class="season-badge"><span class="season-dot"></span>${season.badge}</span>`);
 
     const dismissKey = `season-dismissed-${season.id}-${new Date().getFullYear()}`;
     let dismissed = false;
@@ -527,7 +535,7 @@
     if (!dismissed) {
       const banner = document.getElementById('seasonBanner');
       if (banner) {
-        banner.innerHTML = `<div class="season-banner"><span>${season.banner}</span><button aria-label="Cerrar aviso">✕</button></div>`;
+        banner.innerHTML = `<div class="season-banner"><span class="season-dot"></span><span>${season.banner}</span><button aria-label="Cerrar aviso">✕</button></div>`;
         banner.querySelector('button').addEventListener('click', () => {
           banner.innerHTML = '';
           try { localStorage.setItem(dismissKey, '1'); } catch(e) {}
