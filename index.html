@@ -276,8 +276,11 @@
     background:var(--footer-bg);color:var(--footer-text);
     font-size:.82rem;text-align:center;
     display:flex;align-items:center;justify-content:center;gap:10px;
-    padding:10px clamp(40px,6vw,64px);position:relative;
+    padding-block:10px;padding-inline:clamp(40px,6vw,64px);position:relative;
+    max-height:80px;overflow:hidden;
+    transition:opacity .35s ease, max-height .35s ease, padding-block .35s ease;
   }
+  .season-banner.closing{opacity:0;max-height:0;padding-block:0;}
   .season-banner .season-dot{
     width:6px;height:6px;border-radius:50%;flex:none;
     background:var(--season-accent);box-shadow:0 0 0 3px color-mix(in srgb, var(--season-accent) 30%, transparent);
@@ -536,9 +539,15 @@
       const banner = document.getElementById('seasonBanner');
       if (banner) {
         banner.innerHTML = `<div class="season-banner"><span class="season-dot"></span><span>${season.banner}</span><button aria-label="Cerrar aviso">✕</button></div>`;
+        const bar = banner.querySelector('.season-banner');
         banner.querySelector('button').addEventListener('click', () => {
-          banner.innerHTML = '';
           try { localStorage.setItem(dismissKey, '1'); } catch(e) {}
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            banner.innerHTML = '';
+          } else {
+            bar.classList.add('closing');
+            bar.addEventListener('transitionend', () => { banner.innerHTML = ''; }, { once:true });
+          }
         });
       }
     }
