@@ -565,8 +565,10 @@
     'valentin': { svg: HEART_SVG, glow: 'var(--season-accent)' }
   };
 
+  const GARLAND_WAVE = 'M0,10 Q50,45 100,10 Q150,45 200,10 Q250,45 300,10 Q350,45 400,10 Q450,45 500,10 Q550,45 600,10 Q650,45 700,10 Q750,45 800,10 Q850,45 900,10 Q950,45 1000,10 Q1050,45 1100,10 Q1150,45 1200,10';
+
   function buildChristmasGarland(){
-    const wave = 'M0,10 Q50,45 100,10 Q150,45 200,10 Q250,45 300,10 Q350,45 400,10 Q450,45 500,10 Q550,45 600,10 Q650,45 700,10 Q750,45 800,10 Q850,45 900,10 Q950,45 1000,10 Q1050,45 1100,10 Q1150,45 1200,10';
+    const wave = GARLAND_WAVE;
     let ornaments = '';
     for (let i = 0; i < 12; i++){
       const x = 50 + i * 100;
@@ -581,8 +583,23 @@
     </svg>`;
   }
 
+  function buildValentineGarland(){
+    const heartPath = 'M20 34 C6 24 2 14 8 8 C13 3 20 6 20 12 C20 6 27 3 32 8 C38 14 34 24 20 34 Z';
+    let hearts = '';
+    for (let i = 0; i < 12; i++){
+      const x = 50 + i * 100;
+      const color = i % 2 === 0 ? 'var(--season-accent)' : '#E8A9BE';
+      hearts += `<g transform="translate(${x - 16},32) scale(0.55)"><path d="${heartPath}" fill="${color}"/></g>`;
+    }
+    return `<svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="${GARLAND_WAVE}" stroke="var(--flower)" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".55"/>
+      ${hearts}
+    </svg>`;
+  }
+
   const SEASON_HEADER_DECOR = {
-    'navidad': buildChristmasGarland
+    'navidad': buildChristmasGarland,
+    'valentin': buildValentineGarland
   };
 
   function spawnField(svg, glow){
