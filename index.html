@@ -319,11 +319,16 @@
   @keyframes season-sway{0%,100%{transform:rotate(-.6deg);}50%{transform:rotate(.6deg);}}
   @media (prefers-reduced-motion: reduce){.header-garland svg{animation:none;}}
   @media (max-width:760px){.header-garland{display:none;}}
+
+  .season-art{display:flex;justify-content:center;padding-block:18px;background:var(--surface);border-bottom:1px solid var(--border);}
+  .season-art svg{width:160px;height:auto;transform-origin:top center;animation:season-sway 4.5s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){.season-art svg{animation:none;}}
 </style>
 </head>
 <body>
 
 <div id="seasonBanner"></div>
+<div id="seasonArt"></div>
 
 <header class="site-header">
   <div class="wrap">
@@ -559,6 +564,32 @@
 
   const HEART_SVG = `<svg viewBox="0 0 40 40"><path d="M20 34 C6 24 2 14 8 8 C13 3 20 6 20 12 C20 6 27 3 32 8 C38 14 34 24 20 34 Z" fill="var(--season-accent)"/><ellipse cx="13" cy="12" rx="3" ry="4" fill="rgba(255,255,255,.35)"/></svg>`;
 
+  const WAX_HEART_SVG = `<svg viewBox="0 0 40 40">
+    <circle cx="20" cy="20" r="18" fill="var(--season-accent)"/>
+    <circle cx="20" cy="20" r="18" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5" stroke-dasharray="2 4"/>
+    <path d="M20 27 C13 22 10 17 13 13.5 C15.5 10.5 20 12 20 15.5 C20 12 24.5 10.5 27 13.5 C30 17 27 22 20 27 Z" fill="rgba(255,255,255,.85)"/>
+  </svg>`;
+
+  const VALENTINE_ART_SVG = `<svg viewBox="0 0 220 150">
+    <path d="M60 140 Q80 90 120 40" stroke="var(--flower)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M160 140 Q140 90 100 40" stroke="var(--flower)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <g transform="translate(120,38)"><g fill="var(--season-accent)"><circle cx="-7" cy="-4" r="9"/><circle cx="6" cy="-6" r="9"/><circle cx="8" cy="7" r="9"/><circle cx="-4" cy="9" r="9"/><circle cx="-10" cy="3" r="9"/></g><circle cx="0" cy="0" r="6" fill="#E8A9BE"/></g>
+    <g transform="translate(100,36)"><g fill="var(--season-accent)"><circle cx="-7" cy="-4" r="8"/><circle cx="6" cy="-6" r="8"/><circle cx="8" cy="7" r="8"/><circle cx="-4" cy="9" r="8"/><circle cx="-10" cy="3" r="8"/></g><circle cx="0" cy="0" r="5" fill="#E8A9BE"/></g>
+    <g fill="#C9A94A">
+      <path d="M110 90 C98 78 82 84 88 96 C76 88 70 104 88 106 Z"/>
+      <path d="M110 90 C122 78 138 84 132 96 C144 88 150 104 132 106 Z"/>
+      <circle cx="110" cy="92" r="5"/>
+    </g>
+  </svg>`;
+
+  const SEASON_ICONS = {
+    'valentin': WAX_HEART_SVG
+  };
+
+  const SEASON_ART = {
+    'valentin': VALENTINE_ART_SVG
+  };
+
   const SEASON_FIELDS = {
     'flores-amarillas': { svg: FLOWER_SVG, glow: 'var(--season-accent)' },
     'navidad': { svg: CRYSTAL_SVG, glow: '#BFE1FF' },
@@ -583,23 +614,8 @@
     </svg>`;
   }
 
-  function buildValentineGarland(){
-    const heartPath = 'M20 34 C6 24 2 14 8 8 C13 3 20 6 20 12 C20 6 27 3 32 8 C38 14 34 24 20 34 Z';
-    let hearts = '';
-    for (let i = 0; i < 12; i++){
-      const x = 50 + i * 100;
-      const color = i % 2 === 0 ? 'var(--season-accent)' : '#E8A9BE';
-      hearts += `<g transform="translate(${x - 16},32) scale(0.55)"><path d="${heartPath}" fill="${color}"/></g>`;
-    }
-    return `<svg viewBox="0 0 1200 60" preserveAspectRatio="none">
-      <path d="${GARLAND_WAVE}" stroke="var(--flower)" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".55"/>
-      ${hearts}
-    </svg>`;
-  }
-
   const SEASON_HEADER_DECOR = {
-    'navidad': buildChristmasGarland,
-    'valentin': buildValentineGarland
+    'navidad': buildChristmasGarland
   };
 
   function spawnField(svg, glow){
@@ -636,7 +652,7 @@
     document.documentElement.style.setProperty('--season-accent', season.accent);
     document.documentElement.style.setProperty('--season-accent-soft', season.accentSoft);
 
-    const seasonIcon = (SEASON_FIELDS[season.id] || {}).svg || DOT_SVG;
+    const seasonIcon = SEASON_ICONS[season.id] || (SEASON_FIELDS[season.id] || {}).svg || DOT_SVG;
 
     const eyebrow = document.getElementById('heroEyebrow');
     if (eyebrow) eyebrow.insertAdjacentHTML('afterend', `<span class="season-badge"><span class="season-dot">${seasonIcon}</span>${season.badge}</span>`);
@@ -652,6 +668,11 @@
         garland.innerHTML = SEASON_HEADER_DECOR[season.id]();
         header.appendChild(garland);
       }
+    }
+
+    if (SEASON_ART[season.id]) {
+      const artHost = document.getElementById('seasonArt');
+      if (artHost) artHost.innerHTML = `<div class="season-art">${SEASON_ART[season.id]}</div>`;
     }
 
     const dismissKey = `season-dismissed-${season.id}-${new Date().getFullYear()}`;
