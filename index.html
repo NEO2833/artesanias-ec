@@ -183,6 +183,18 @@
   .story-band p{font-family:'Caveat',cursive;font-size:clamp(1.5rem,2.6vw,2.1rem);color:var(--sello);max-width:52ch;line-height:1.3;}
   .story-band span{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
 
+  .how-to-order{padding-block:clamp(48px,7vw,80px);border-bottom:1px solid var(--border);scroll-margin-top:130px;}
+  .how-to-order .collection-head{max-width:520px;margin-inline:auto;text-align:center;}
+  .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;margin-top:36px;}
+  .step{text-align:center;padding-inline:12px;}
+  .step-num{
+    display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;
+    border-radius:50%;background:var(--sello);color:#fdf6f1;font-family:'Fraunces',serif;font-size:1.1rem;
+    margin-bottom:14px;
+  }
+  .step h3{font-size:1.05rem;margin-bottom:8px;color:var(--ink);}
+  .step p{color:var(--ink-soft);font-size:.9rem;line-height:1.55;}
+
   .collection{padding-block:clamp(56px,8vw,96px);scroll-margin-top:130px;}
   .collection--soap{--accent:var(--soap);--accent-soft:var(--soap-soft);}
   .collection--sachet{--accent:var(--sachet);--accent-soft:var(--sachet-soft);background:var(--surface);}
@@ -271,6 +283,47 @@
   }
   .fab-wa:hover{transform:scale(1.08);}
   .fab-wa svg{width:28px;height:28px;}
+
+  .fav-btn{
+    position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.88);border:1px solid var(--border);color:var(--ink-soft);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;
+    transition:transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .fav-btn svg{width:17px;height:17px;}
+  .fav-btn:hover{transform:scale(1.1);}
+  .fav-btn.active{background:var(--sello);color:#fdf6f1;border-color:var(--sello);}
+  .fav-btn.active svg path{fill-opacity:1;}
+
+  .fav-fab{
+    position:fixed;right:20px;bottom:88px;z-index:50;
+    min-width:52px;height:52px;padding-inline:16px;border-radius:999px;background:var(--sello);color:#fdf6f1;
+    display:none;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:.85rem;
+    box-shadow:0 12px 26px -8px rgba(0,0,0,.4);cursor:pointer;border:none;font-family:'Manrope',sans-serif;
+    transition:transform .2s ease;
+  }
+  .fav-fab.show{display:inline-flex;}
+  .fav-fab:hover{transform:scale(1.05);}
+  .fav-fab svg{width:18px;height:18px;flex:none;}
+
+  .fav-panel-overlay{
+    position:fixed;inset:0;z-index:120;background:rgba(20,16,14,.55);
+    display:flex;align-items:flex-end;justify-content:flex-end;padding:20px;
+    opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  .fav-panel-overlay.open{opacity:1;pointer-events:auto;}
+  .fav-panel{
+    width:320px;max-width:90vw;max-height:70vh;overflow-y:auto;background:var(--surface);
+    border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+    transform:translateY(16px);opacity:0;transition:transform .3s ease,opacity .3s ease;
+  }
+  .fav-panel-overlay.open .fav-panel{transform:translateY(0);opacity:1;}
+  .fav-panel h4{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:12px;color:var(--ink);}
+  .fav-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--ink);}
+  .fav-item button{background:none;border:none;color:var(--ink-soft);cursor:pointer;font-size:.95rem;padding:4px;flex:none;}
+  .fav-item button:hover{color:var(--sello);}
+  .fav-empty{color:var(--ink-soft);font-size:.88rem;padding:12px 0;line-height:1.5;}
+  .fav-panel .btn{width:100%;justify-content:center;margin-top:14px;}
 
   .season-banner{
     background:var(--footer-bg);color:var(--footer-text);
@@ -395,7 +448,7 @@
         <p class="lede">Jabones artesanales, velones vertidos a mano y flores eternas que no se marchitan. Cada pieza sale de un taller pequeño, en tandas cortas, con tiempo de sobra.</p>
         <div class="ctas">
           <a class="btn btn--sello" href="#jabones">Ver catálogo</a>
-          <a class="btn btn--ghost" href="#contacto">Cómo pedir</a>
+          <a class="btn btn--ghost" href="#como-pedir">Cómo pedir</a>
         </div>
         <div class="seals-row">
           <a class="seal-link" href="#jabones">
@@ -434,6 +487,32 @@
       <span>Del taller a tu casa</span>
     </div>
   </div>
+
+  <section class="how-to-order" id="como-pedir">
+    <div class="wrap">
+      <div class="collection-head">
+        <span class="eyebrow">Así de fácil</span>
+        <h2>¿Cómo pedir?</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <span class="step-num">1</span>
+          <h3>Elige tus favoritos</h3>
+          <p>Recorre el catálogo y marca ♡ los productos que más te gusten.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <h3>Escríbenos por WhatsApp</h3>
+          <p>Pide un producto directo desde su tarjeta, o envía toda tu lista de favoritos de una vez.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <h3>Coordinamos todo</h3>
+          <p>Te confirmamos precio, colores disponibles y cómo hacer la entrega.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="collection collection--soap" id="jabones">
     <div class="wrap">
@@ -539,6 +618,11 @@
 <a class="fab-wa" data-wa data-item="" aria-label="Escribir por WhatsApp">
   <svg viewBox="0 0 32 32" fill="#fff"><path d="M16 3C9 3 3 9 3 16c0 2.4.6 4.6 1.8 6.6L3 29l6.6-1.7A13 13 0 0 0 16 29c7 0 13-6 13-13S23 3 16 3zm0 23.5c-2.1 0-4.1-.6-5.8-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 0 1 5.5 16c0-5.8 4.7-10.5 10.5-10.5S26.5 10.2 26.5 16 21.8 26.5 16 26.5zm5.7-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.5-1.5 9.4 9.4 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.5.3-.5v-.5c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 2.9 1.3 3.1c.2.3 2.2 3.4 5.4 4.6.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>
 </a>
+
+<button class="fav-fab" id="favFab" aria-label="Ver mis favoritos">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-8.5C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8.5C19 16.65 12 21 12 21z"/></svg>
+  <span class="fav-count">0</span>
+</button>
 
 <script>
   // === EDITAR AQUÍ: número real de WhatsApp de mamá, formato país+número sin espacios ni signos ===
@@ -856,11 +940,16 @@
     ]
   };
 
+  const HEART_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.35-9.5-8.5C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8.5C19 16.65 12 21 12 21z" fill="currentColor" fill-opacity="0"/></svg>`;
+
   function renderGrid(gridId, items){
     const grid = document.getElementById(gridId);
     grid.innerHTML = items.map(p => `
       <article class="card${p.wide ? ' card--wide' : ''}">
-        <div class="art"><img src="${p.img}" alt="${p.title}" loading="lazy" /></div>
+        <div class="art">
+          <img src="${p.img}" alt="${p.title}" loading="lazy" />
+          <button class="fav-btn" data-fav-key="${p.img}" data-fav-label="${p.title} (${p.tag})" aria-label="Guardar en favoritos">${HEART_ICON}</button>
+        </div>
         <h3>${p.title}</h3>
         ${p.desc ? `<p class="desc">${p.desc}</p>` : ''}
         <span class="tag">${p.tag}</span>
@@ -870,7 +959,89 @@
         </a>
       </article>
     `).join('');
+    updateFavUI();
   }
+
+  const FAV_KEY = 'ec-favoritos';
+  function loadFavorites(){
+    try { return JSON.parse(localStorage.getItem(FAV_KEY) || '{}'); } catch(e){ return {}; }
+  }
+  function saveFavoritesData(){
+    try { localStorage.setItem(FAV_KEY, JSON.stringify(favorites)); } catch(e){}
+  }
+  let favorites = loadFavorites();
+
+  function updateFavUI(){
+    const count = Object.keys(favorites).length;
+    const fab = document.getElementById('favFab');
+    if (fab){
+      fab.classList.toggle('show', count > 0);
+      fab.querySelector('.fav-count').textContent = count;
+    }
+    document.querySelectorAll('.fav-btn').forEach(btn=>{
+      btn.classList.toggle('active', !!favorites[btn.getAttribute('data-fav-key')]);
+    });
+  }
+
+  function toggleFavorite(key, label){
+    if (favorites[key]) delete favorites[key];
+    else favorites[key] = label;
+    saveFavoritesData();
+    updateFavUI();
+  }
+
+  function renderFavPanel(){
+    const overlay = document.createElement('div');
+    overlay.className = 'fav-panel-overlay';
+    const items = Object.entries(favorites);
+    const itemsHtml = items.length
+      ? items.map(([key,label]) => `<div class="fav-item"><span>${label}</span><button data-remove="${key}" aria-label="Quitar">✕</button></div>`).join('')
+      : `<div class="fav-empty">Todavía no has guardado favoritos. Toca el corazón en cualquier producto del catálogo.</div>`;
+    overlay.innerHTML = `
+      <div class="fav-panel">
+        <h4>Tus favoritos</h4>
+        ${itemsHtml}
+        ${items.length ? `<a class="btn btn--wa" id="favSendBtn">${WA_ICON}Enviar por WhatsApp</a>` : ''}
+      </div>`;
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add('open')));
+
+    function closePanel(){
+      overlay.classList.remove('open');
+      overlay.addEventListener('transitionend', () => overlay.remove(), { once:true });
+    }
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closePanel(); });
+    overlay.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        delete favorites[btn.getAttribute('data-remove')];
+        saveFavoritesData();
+        updateFavUI();
+        closePanel();
+        renderFavPanel();
+      });
+    });
+    const sendBtn = overlay.querySelector('#favSendBtn');
+    if (sendBtn){
+      sendBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const list = Object.values(favorites).map(l => `- ${l}`).join('\n');
+        const msg = `Hola, me interesan estos productos:\n${list}\n¿Me dan más información?`;
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+      });
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    const favBtn = e.target.closest('.fav-btn');
+    if (favBtn) {
+      e.stopPropagation();
+      toggleFavorite(favBtn.getAttribute('data-fav-key'), favBtn.getAttribute('data-fav-label'));
+      return;
+    }
+  });
+
+  const favFab = document.getElementById('favFab');
+  if (favFab) favFab.addEventListener('click', renderFavPanel);
 
   renderGrid('grid-jabones', PRODUCTS.jabones);
   renderGrid('grid-sachets', PRODUCTS.sachets);
@@ -892,7 +1063,7 @@
 
   document.addEventListener('click', (e)=>{
     const art = e.target.closest('.card .art');
-    if (art) {
+    if (art && !e.target.closest('.fav-btn')) {
       const img = art.querySelector('img');
       if (img) openLightbox(img.src, img.alt);
     }
