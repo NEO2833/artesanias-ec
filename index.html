@@ -321,6 +321,15 @@
   }
   @media (prefers-reduced-motion: reduce){.petal-field{display:none;}}
 
+  .season-mascot{
+    position:fixed;left:18px;bottom:100px;width:128px;pointer-events:none;z-index:6;
+    animation:mascot-bob 4s ease-in-out infinite;
+  }
+  .season-mascot svg{width:100%;height:auto;display:block;filter:drop-shadow(0 12px 18px rgba(0,0,0,.3));}
+  @keyframes mascot-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  @media (max-width:900px){.season-mascot{display:none;}}
+  @media (prefers-reduced-motion: reduce){.season-mascot{animation:none;}}
+
   .header-garland{
     position:absolute;left:0;right:0;bottom:-20px;height:48px;
     pointer-events:none;overflow:visible;
@@ -583,8 +592,36 @@
     <path d="M20 30 C11 23 7 16 11 12 C14 9 20 11 20 15 C20 11 26 9 29 12 C33 16 29 23 20 30 Z" fill="var(--season-accent)"/>
   </svg>`;
 
+  const CUPID_CHARACTER_SVG = `<svg viewBox="0 0 200 220">
+    <ellipse cx="100" cy="26" rx="24" ry="8" fill="none" stroke="#E8C36B" stroke-width="4"/>
+    <path d="M55 120 C20 100 15 60 45 55 C65 52 75 80 70 105 C68 118 60 124 55 120 Z" fill="#FBF6EE" stroke="#E7DCC9" stroke-width="1.5"/>
+    <path d="M145 120 C180 100 185 60 155 55 C135 52 125 80 130 105 C132 118 140 124 145 120 Z" fill="#FBF6EE" stroke="#E7DCC9" stroke-width="1.5"/>
+    <path d="M70 210 C60 170 65 135 100 135 C135 135 140 170 130 210 Z" fill="#FBD9B8"/>
+    <path d="M78 205 C80 195 120 195 122 205 C118 212 82 212 78 205 Z" fill="#FFFFFF"/>
+    <circle cx="100" cy="90" r="46" fill="#FBD9B8"/>
+    <path d="M56 78 Q66 36 100 44 Q134 36 144 78 Q120 58 100 60 Q80 58 56 78 Z" fill="#EFC36E"/>
+    <path d="M52 82 C46 74 50 64 58 66 C56 74 56 80 52 82 Z" fill="#EFC36E"/>
+    <path d="M148 82 C154 74 150 64 142 66 C144 74 144 80 148 82 Z" fill="#EFC36E"/>
+    <ellipse cx="76" cy="102" rx="9" ry="6" fill="#F6A9BA" opacity=".8"/>
+    <ellipse cx="124" cy="102" rx="9" ry="6" fill="#F6A9BA" opacity=".8"/>
+    <circle cx="84" cy="90" r="4.5" fill="#3A2B22"/>
+    <circle cx="116" cy="90" r="4.5" fill="#3A2B22"/>
+    <circle cx="85.5" cy="88.5" r="1.3" fill="#fff"/>
+    <circle cx="117.5" cy="88.5" r="1.3" fill="#fff"/>
+    <path d="M90 106 Q100 112 110 106" stroke="#3A2B22" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M52 150 Q40 120 60 95" stroke="var(--season-accent)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <line x1="30" y1="150" x2="95" y2="118" stroke="var(--season-accent)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M26 152 C22 148 24 142 30 144 C32 148 30 152 26 152 Z" fill="var(--season-accent)"/>
+    <path d="M165 60 C161 55 154 57 155 63 C156 68 162 71 165 74 C168 71 174 68 175 63 C176 57 169 55 165 60 Z" fill="var(--season-accent)" opacity=".9"/>
+    <path d="M30 55 C27 51 22 53 23 57 C24 61 28 63 30 65 C32 63 36 61 37 57 C38 53 33 51 30 55 Z" fill="var(--season-accent)" opacity=".8"/>
+  </svg>`;
+
   const SEASON_ICONS = {
     'valentin': WAX_HEART_SVG
+  };
+
+  const SEASON_MASCOT = {
+    'valentin': CUPID_CHARACTER_SVG
   };
 
   const BUTTERFLY_SVG = `<svg viewBox="0 0 40 40">
@@ -668,6 +705,14 @@
     if (eyebrow) eyebrow.insertAdjacentHTML('afterend', `<span class="season-badge"><span class="season-dot">${seasonIcon}</span>${season.badge}</span>`);
 
     if (SEASON_FIELDS[season.id]) spawnField(SEASON_FIELDS[season.id].svg, SEASON_FIELDS[season.id].glow, SEASON_FIELDS[season.id].variant);
+
+    if (SEASON_MASCOT[season.id]) {
+      const mascot = document.createElement('div');
+      mascot.className = 'season-mascot';
+      mascot.setAttribute('aria-hidden', 'true');
+      mascot.innerHTML = SEASON_MASCOT[season.id];
+      document.body.appendChild(mascot);
+    }
 
     if (SEASON_HEADER_DECOR[season.id]) {
       const header = document.querySelector('.site-header');
