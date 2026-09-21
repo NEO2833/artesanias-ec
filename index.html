@@ -165,6 +165,7 @@
     position:absolute;border-radius:50%;aspect-ratio:1/1;object-fit:cover;
     border:5px solid var(--surface);box-shadow:0 0 0 1px var(--border), var(--shadow);
     filter:drop-shadow(0 20px 30px rgba(43,35,32,.18));animation:float 7s ease-in-out infinite;
+    transition:opacity .5s ease;
   }
   .hero-art .s1{width:44%;top:2%;left:6%;animation-delay:0s;}
   .hero-art .s2{width:40%;top:32%;right:2%;animation-delay:1.2s;}
@@ -1120,6 +1121,34 @@
   }
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  const HERO_ROTATION = {
+    s1: ["imagenes/jabones/jabon-petalos.jpg", "imagenes/jabones/jabon-exfoliante-cafe.jpg", "imagenes/jabones/jabon-hidratante-vainilla.jpg"],
+    s2: ["imagenes/velones/velon-te-alto-1.jpg", "imagenes/velones/velon-lavanda.jpg", "imagenes/velones/velon-vainilla-caramelo.jpg"],
+    s3: ["imagenes/flores/rosas-eternas-amarillo-hero.jpg", "imagenes/flores/claveles-eternos-blanco.jpg", "imagenes/flores/mini-ramo-rosas-amarillas.jpg"]
+  };
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.hero-art .seal-big').forEach(img => {
+      const key = ['s1', 's2', 's3'].find(k => img.classList.contains(k));
+      const list = key ? HERO_ROTATION[key] : null;
+      if (!list || list.length < 2) return;
+      let index = 0;
+      setInterval(() => {
+        index = (index + 1) % list.length;
+        const nextSrc = list[index];
+        const preload = new Image();
+        preload.onload = () => {
+          img.style.opacity = '0';
+          setTimeout(() => {
+            img.src = nextSrc;
+            img.style.opacity = '1';
+          }, 500);
+        };
+        preload.src = nextSrc;
+      }, 3000);
+    });
+  }
 </script>
 </body>
 </html>
