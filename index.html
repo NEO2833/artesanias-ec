@@ -299,33 +299,6 @@
   .season-badge .season-dot{width:14px;height:14px;flex:none;filter:drop-shadow(0 0 3px var(--season-accent));}
   .season-badge .season-dot svg{width:100%;height:100%;display:block;}
 
-  .season-modal-overlay{
-    position:fixed;inset:0;z-index:110;background:rgba(20,16,14,.7);backdrop-filter:blur(4px);
-    display:flex;align-items:center;justify-content:center;padding:24px;
-    opacity:0;pointer-events:none;transition:opacity .4s ease;
-  }
-  .season-modal-overlay.open{opacity:1;pointer-events:auto;}
-  .season-modal-card{
-    position:relative;max-width:440px;width:100%;background:var(--surface);border-radius:28px;
-    padding:44px 32px 36px;text-align:center;box-shadow:0 40px 80px -30px rgba(0,0,0,.5);
-    transform:scale(.92) translateY(12px);opacity:0;
-    transition:transform .45s cubic-bezier(.2,.8,.2,1), opacity .45s ease;
-  }
-  .season-modal-overlay.open .season-modal-card{transform:scale(1) translateY(0);opacity:1;}
-  .season-modal-card .modal-flowers{display:flex;justify-content:center;gap:10px;margin-bottom:16px;}
-  .season-modal-card .modal-flowers svg{width:32px;height:32px;}
-  .season-modal-card h3{font-family:'Fraunces',serif;font-style:italic;font-weight:450;font-size:1.5rem;color:var(--ink);margin-bottom:14px;text-wrap:balance;}
-  .season-modal-card p{color:var(--ink-soft);font-size:.95rem;line-height:1.65;margin-bottom:18px;}
-  .season-modal-card .modal-sign{font-family:'Caveat',cursive;font-size:1.4rem;color:var(--season-accent);}
-  .season-modal-close{
-    position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
-    background:var(--surface-2);border:1px solid var(--border);color:var(--ink-soft);
-    cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;
-    transition:background .2s ease,color .2s ease;
-  }
-  .season-modal-close:hover{background:var(--season-accent);color:#fff;}
-  @media (prefers-reduced-motion: reduce){.season-modal-overlay,.season-modal-card{transition:none;}}
-
   .petal-field{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden;}
   .petal{position:absolute;top:-10vh;width:var(--sz);height:var(--sz);opacity:0;filter:drop-shadow(0 0 6px var(--field-glow)) drop-shadow(0 4px 6px rgba(0,0,0,.15));animation:petal-fall var(--dur) linear infinite;animation-delay:var(--delay);}
   .petal svg{width:100%;height:100%;display:block;}
@@ -335,6 +308,16 @@
     50%{transform:translateY(55vh) translateX(var(--drift)) rotate(170deg);}
     92%{opacity:.8;}
     100%{transform:translateY(115vh) translateX(calc(var(--drift) * -1)) rotate(320deg);opacity:0;}
+  }
+  .petal.flutter{animation-name:butterfly-flutter;animation-timing-function:ease-in-out;}
+  @keyframes butterfly-flutter{
+    0%{transform:translate(0,0) rotate(0deg) scaleX(1);opacity:0;}
+    6%{opacity:.9;}
+    25%{transform:translate(var(--drift), 22vh) rotate(10deg) scaleX(.75);}
+    50%{transform:translate(0, 48vh) rotate(-8deg) scaleX(1);}
+    75%{transform:translate(calc(var(--drift) * -1), 74vh) rotate(8deg) scaleX(.8);}
+    92%{opacity:.85;}
+    100%{transform:translate(0, 100vh) rotate(0deg) scaleX(1);opacity:0;}
   }
   @media (prefers-reduced-motion: reduce){.petal-field{display:none;}}
 
@@ -552,7 +535,7 @@
       accent:'#C2486B', accentSoft:'#F5DCE3', start:[2,1], end:[2,14] },
     { id:'madres', badge:'Especial Día de las Madres',
       banner:'Regalos para el <strong>Día de las Madres</strong>: flores eternas y sets de jabones.',
-      accent:'#B8792A', accentSoft:'#F0DCB9', start:[5,18], end:[5,31] }
+      accent:'#C98B7A', accentSoft:'#F0DCD5', start:[5,18], end:[5,31] }
   ];
 
   function dateInRange(month, day, start, end){
@@ -604,43 +587,22 @@
     'valentin': WAX_HEART_SVG
   };
 
+  const BUTTERFLY_SVG = `<svg viewBox="0 0 40 40">
+    <g fill="var(--season-accent)">
+      <path d="M20 20 C14 6 2 4 4 16 C5 24 14 24 20 20 Z"/>
+      <path d="M20 20 C26 6 38 4 36 16 C35 24 26 24 20 20 Z"/>
+      <path d="M20 20 C15 26 6 30 8 34 C10 37 17 33 20 24 Z"/>
+      <path d="M20 20 C25 26 34 30 32 34 C30 37 23 33 20 24 Z"/>
+    </g>
+    <line x1="20" y1="14" x2="20" y2="28" stroke="var(--candle)" stroke-width="2" stroke-linecap="round"/>
+  </svg>`;
+
   const SEASON_FIELDS = {
     'flores-amarillas': { svg: FLOWER_SVG, glow: 'var(--season-accent)' },
     'navidad': { svg: CRYSTAL_SVG, glow: '#BFE1FF' },
     'valentin': { svg: [HEART_SVG, ROSE_SVG, CUPID_SVG], glow: 'var(--season-accent)' },
-    'madres': { svg: FLOWER_SVG, glow: 'var(--season-accent)' }
+    'madres': { svg: BUTTERFLY_SVG, glow: 'var(--season-accent)', variant: 'flutter' }
   };
-
-  function showMothersModal(){
-    const dismissKey = `season-modal-dismissed-madres-${new Date().getFullYear()}`;
-    let dismissed = false;
-    try { dismissed = localStorage.getItem(dismissKey) === '1'; } catch(e) {}
-    if (dismissed) return;
-
-    const overlay = document.createElement('div');
-    overlay.className = 'season-modal-overlay';
-    overlay.innerHTML = `
-      <div class="season-modal-card">
-        <button class="season-modal-close" aria-label="Cerrar">✕</button>
-        <div class="modal-flowers">${FLOWER_SVG}${FLOWER_SVG}${FLOWER_SVG}</div>
-        <h3>Para las que hacen magia con las manos.</h3>
-        <p>Este taller nació de una mamá que convirtió su tiempo libre en algo hermoso para compartir. Feliz Día de las Madres a ella, y a todas las que crean, cuidan y sostienen con amor cada día.</p>
-        <div class="modal-sign">Con cariño, Artesanías EC</div>
-      </div>`;
-    document.body.appendChild(overlay);
-    requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add('open')));
-
-    function closeModal(){
-      overlay.classList.remove('open');
-      try { localStorage.setItem(dismissKey, '1'); } catch(e) {}
-      document.removeEventListener('keydown', onKey);
-      overlay.addEventListener('transitionend', () => overlay.remove(), { once:true });
-    }
-    function onKey(e){ if (e.key === 'Escape') closeModal(); }
-    overlay.querySelector('.season-modal-close').addEventListener('click', closeModal);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-    document.addEventListener('keydown', onKey);
-  }
 
   const GARLAND_WAVE = 'M0,10 Q50,45 100,10 Q150,45 200,10 Q250,45 300,10 Q350,45 400,10 Q450,45 500,10 Q550,45 600,10 Q650,45 700,10 Q750,45 800,10 Q850,45 900,10 Q950,45 1000,10 Q1050,45 1100,10 Q1150,45 1200,10';
 
@@ -664,7 +626,7 @@
     'navidad': buildChristmasGarland
   };
 
-  function spawnField(svgOrList, glow){
+  function spawnField(svgOrList, glow, variant){
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const svgs = Array.isArray(svgOrList) ? svgOrList : [svgOrList];
     const field = document.createElement('div');
@@ -673,7 +635,7 @@
     field.style.setProperty('--field-glow', glow);
     for (let i = 0; i < 18; i++) {
       const petal = document.createElement('div');
-      petal.className = 'petal';
+      petal.className = variant ? `petal ${variant}` : 'petal';
       const onLeftEdge = Math.random() < 0.5;
       const pos = onLeftEdge ? Math.random() * 14 : 86 + Math.random() * 14;
       const size = 14 + Math.random() * 16;
@@ -705,9 +667,7 @@
     const eyebrow = document.getElementById('heroEyebrow');
     if (eyebrow) eyebrow.insertAdjacentHTML('afterend', `<span class="season-badge"><span class="season-dot">${seasonIcon}</span>${season.badge}</span>`);
 
-    if (SEASON_FIELDS[season.id]) spawnField(SEASON_FIELDS[season.id].svg, SEASON_FIELDS[season.id].glow);
-
-    if (season.id === 'madres') showMothersModal();
+    if (SEASON_FIELDS[season.id]) spawnField(SEASON_FIELDS[season.id].svg, SEASON_FIELDS[season.id].glow, SEASON_FIELDS[season.id].variant);
 
     if (SEASON_HEADER_DECOR[season.id]) {
       const header = document.querySelector('.site-header');
@@ -788,7 +748,8 @@
       {img:"imagenes/flores/rosas-eternas-azul-maceta.jpg", title:"Rosas Eternas en Maceta", tag:"Azul", desc:"Arreglo de rosas preservadas en maceta decorativa con acabado dorado."},
       {img:"imagenes/flores/flor-liston-rosa-maceta.jpg", title:"Dhalia", tag:"Rosa", desc:"Flor artesanal hecha con listón de satín, presentada en maceta con moño."},
       {img:"imagenes/flores/margaritas-eternas-rosa-amarillo.jpg", title:"Vara de Margaritas Eternas", tag:"Rosa y Amarillo", desc:"Dos margaritas artesanales en una misma vara, para lucir solas o en arreglo."},
-      {img:"imagenes/flores/margarita-eterna-amarillo.jpg", title:"Margarita Eterna", tag:"Amarillo"}
+      {img:"imagenes/flores/margarita-eterna-amarillo.jpg", title:"Margarita Eterna", tag:"Amarillo"},
+      {img:"imagenes/flores/mini-ramo-rosas-amarillas.jpg", title:"Mini Ramo de Rosas Eternas", tag:"Amarillo con lazo verde", desc:"Rosas eternas y flor de nube envueltas en papel, con moño de listón satinado."}
     ],
     subeniles: [
       {img:"imagenes/subeniles/baby-shower-caja-individual.jpg", title:"Cajita de Jabones Bebé", tag:"Baby Shower", desc:"Mini jabones (osito, biberón, huellita y coche) en caja con ventana y moño de listón."},
