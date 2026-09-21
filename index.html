@@ -165,7 +165,7 @@
     position:absolute;border-radius:50%;aspect-ratio:1/1;object-fit:cover;
     border:5px solid var(--surface);box-shadow:0 0 0 1px var(--border), var(--shadow);
     filter:drop-shadow(0 20px 30px rgba(43,35,32,.18));animation:float 7s ease-in-out infinite;
-    transition:opacity 1s ease;
+    transition:opacity 1.8s ease;
   }
   .hero-art .s1{width:44%;top:2%;left:6%;animation-delay:0s;}
   .hero-art .s2{width:40%;top:32%;right:2%;animation-delay:1.2s;}
@@ -1148,10 +1148,10 @@
             currentSrcBySlot[img.className] = nextSrc;
             img.src = nextSrc;
             img.style.opacity = '1';
-          }, 1000);
+          }, 1800);
         };
         preload.src = nextSrc;
-      }, 4000 + i * 700);
+      }, 5500 + i * 700);
     });
   }
 </script>
