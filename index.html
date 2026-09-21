@@ -106,8 +106,8 @@
     border-bottom:1px solid var(--border);
   }
   .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:116px;transition:height .25s ease;}
-  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:500;text-decoration:none;color:var(--ink);}
-  .brand .mark{height:88px;width:auto;flex:none;display:block;}
+  .brand{position:relative;display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:500;text-decoration:none;color:var(--ink);}
+  .brand .mark{position:relative;z-index:1;height:88px;width:auto;flex:none;display:block;}
   .footer-mark{height:100px;width:auto;display:block;}
   nav.main-nav{display:flex;align-items:center;gap:28px;}
   nav.main-nav a{
@@ -322,12 +322,12 @@
   @media (prefers-reduced-motion: reduce){.petal-field{display:none;}}
 
   .season-mascot{
-    position:fixed;left:18px;bottom:100px;width:128px;pointer-events:none;z-index:6;
+    position:absolute;left:-32px;top:2px;width:58px;z-index:0;pointer-events:none;
     animation:mascot-bob 4s ease-in-out infinite;
   }
-  .season-mascot svg{width:100%;height:auto;display:block;filter:drop-shadow(0 12px 18px rgba(0,0,0,.3));}
-  @keyframes mascot-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-  @media (max-width:900px){.season-mascot{display:none;}}
+  .season-mascot svg{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3));}
+  @keyframes mascot-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+  @media (max-width:760px){.season-mascot{display:none;}}
   @media (prefers-reduced-motion: reduce){.season-mascot{animation:none;}}
 
   .header-garland{
@@ -707,11 +707,14 @@
     if (SEASON_FIELDS[season.id]) spawnField(SEASON_FIELDS[season.id].svg, SEASON_FIELDS[season.id].glow, SEASON_FIELDS[season.id].variant);
 
     if (SEASON_MASCOT[season.id]) {
-      const mascot = document.createElement('div');
-      mascot.className = 'season-mascot';
-      mascot.setAttribute('aria-hidden', 'true');
-      mascot.innerHTML = SEASON_MASCOT[season.id];
-      document.body.appendChild(mascot);
+      const brand = document.querySelector('.brand');
+      if (brand) {
+        const mascot = document.createElement('div');
+        mascot.className = 'season-mascot';
+        mascot.setAttribute('aria-hidden', 'true');
+        mascot.innerHTML = SEASON_MASCOT[season.id];
+        brand.insertBefore(mascot, brand.firstChild);
+      }
     }
 
     if (SEASON_HEADER_DECOR[season.id]) {
