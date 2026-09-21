@@ -165,7 +165,7 @@
     position:absolute;border-radius:50%;aspect-ratio:1/1;object-fit:cover;
     border:5px solid var(--surface);box-shadow:0 0 0 1px var(--border), var(--shadow);
     filter:drop-shadow(0 20px 30px rgba(43,35,32,.18));animation:float 7s ease-in-out infinite;
-    transition:opacity .5s ease;
+    transition:opacity 1s ease;
   }
   .hero-art .s1{width:44%;top:2%;left:6%;animation-delay:0s;}
   .hero-art .s2{width:40%;top:32%;right:2%;animation-delay:1.2s;}
@@ -1122,31 +1122,36 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  const HERO_ROTATION = {
-    s1: ["imagenes/jabones/jabon-petalos.jpg", "imagenes/jabones/jabon-exfoliante-cafe.jpg", "imagenes/jabones/jabon-hidratante-vainilla.jpg"],
-    s2: ["imagenes/velones/velon-te-alto-1.jpg", "imagenes/velones/velon-lavanda.jpg", "imagenes/velones/velon-vainilla-caramelo.jpg"],
-    s3: ["imagenes/flores/rosas-eternas-amarillo-hero.jpg", "imagenes/flores/claveles-eternos-blanco.jpg", "imagenes/flores/mini-ramo-rosas-amarillas.jpg"]
-  };
+  const ALL_PRODUCT_IMAGES = [
+    ...PRODUCTS.jabones, ...PRODUCTS.sachets, ...PRODUCTS.velones, ...PRODUCTS.flores, ...PRODUCTS.subeniles
+  ].map(p => p.img);
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.hero-art .seal-big').forEach(img => {
-      const key = ['s1', 's2', 's3'].find(k => img.classList.contains(k));
-      const list = key ? HERO_ROTATION[key] : null;
-      if (!list || list.length < 2) return;
-      let index = 0;
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && ALL_PRODUCT_IMAGES.length > 3) {
+    const heroSlots = Array.from(document.querySelectorAll('.hero-art .seal-big'));
+    const currentSrcBySlot = {};
+    heroSlots.forEach(img => { currentSrcBySlot[img.className] = img.getAttribute('src'); });
+
+    function pickRandomImage(){
+      const taken = Object.values(currentSrcBySlot);
+      const candidates = ALL_PRODUCT_IMAGES.filter(src => !taken.includes(src));
+      const pool = candidates.length ? candidates : ALL_PRODUCT_IMAGES;
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    heroSlots.forEach((img, i) => {
       setInterval(() => {
-        index = (index + 1) % list.length;
-        const nextSrc = list[index];
+        const nextSrc = pickRandomImage();
         const preload = new Image();
         preload.onload = () => {
           img.style.opacity = '0';
           setTimeout(() => {
+            currentSrcBySlot[img.className] = nextSrc;
             img.src = nextSrc;
             img.style.opacity = '1';
-          }, 500);
+          }, 1000);
         };
         preload.src = nextSrc;
-      }, 3000);
+      }, 4000 + i * 700);
     });
   }
 </script>
