@@ -323,12 +323,21 @@
 
   .season-mascot{
     position:absolute;left:-32px;top:2px;width:58px;z-index:0;pointer-events:none;
-    animation:mascot-bob 4s ease-in-out infinite;
+    animation:cupid-peek 7s cubic-bezier(.45,.05,.35,1) infinite;
   }
   .season-mascot svg{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3));}
-  @keyframes mascot-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+  @keyframes cupid-peek{
+    0%,14%{transform:translateX(50px) rotate(6deg);}
+    26%{transform:translateX(-6px) rotate(-8deg);}
+    32%{transform:translateX(2px) rotate(2deg);}
+    38%{transform:translateX(-2px) rotate(-2deg);}
+    50%,62%{transform:translateX(0) rotate(0deg);}
+    76%,100%{transform:translateX(50px) rotate(6deg);}
+  }
   @media (max-width:760px){.season-mascot{display:none;}}
-  @media (prefers-reduced-motion: reduce){.season-mascot{animation:none;}}
+  @media (prefers-reduced-motion: reduce){
+    .season-mascot{animation:none;transform:translateX(0) rotate(0deg);}
+  }
 
   .header-garland{
     position:absolute;left:0;right:0;bottom:-20px;height:48px;
