@@ -2,6 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QHZ5TKXS4M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QHZ5TKXS4M');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Artesanías EC</title>
 <meta name="description" content="Artesanías EC — catálogo de jabones artesanales, velones y flores eternas hechos a mano.">
@@ -284,6 +292,12 @@
   }
   .fab-wa:hover{transform:scale(1.08);}
   .fab-wa svg{width:28px;height:28px;}
+
+  .new-badge{
+    position:absolute;top:10px;left:10px;z-index:2;
+    background:var(--sello);color:#fdf6f1;font-size:.65rem;font-weight:700;
+    letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;
+  }
 
   .fav-btn{
     position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;
@@ -903,9 +917,9 @@
       {img:"imagenes/jabones/jabon-unificador-tono.jpg", title:"Jabón Unificador de Tono de Piel", tag:"Piel pareja y luminosa"},
       {img:"imagenes/jabones/jabon-hidratante-azul.jpg", title:"Jabón Hidratante", tag:"Azul"},
       {img:"imagenes/jabones/jabon-suavizante-blanco.jpg", title:"Jabón Suavizante en Corazón", tag:"Blanco"},
-      {img:"imagenes/jabones/jabon-exfoliante-floral.jpg", title:"Jabón Exfoliante Floral", tag:"Blanco y Gris"},
-      {img:"imagenes/jabones/set-detalles-artesanales.jpg", title:"Set de Detalles Artesanales", tag:"Regalo especial", desc:"Caja con mini jabones, sachet y vela — ideal para un regalo pequeño."},
-      {img:"imagenes/jabones/set-jabones-vela-caja-kraft.jpg", title:"Set de Jabones y Vela en Caja Kraft", tag:"Regalo especial", desc:"Caja kraft con jabones jaspeados, sachet y velita aromática."}
+      {img:"imagenes/jabones/jabon-exfoliante-floral.jpg", title:"Jabón Exfoliante Floral", tag:"Blanco y Gris", isNew:true},
+      {img:"imagenes/jabones/set-detalles-artesanales.jpg", title:"Set de Detalles Artesanales", tag:"Regalo especial", desc:"Caja con mini jabones, sachet y vela — ideal para un regalo pequeño.", isNew:true},
+      {img:"imagenes/jabones/set-jabones-vela-caja-kraft.jpg", title:"Set de Jabones y Vela en Caja Kraft", tag:"Regalo especial", desc:"Caja kraft con jabones jaspeados, sachet y velita aromática.", isNew:true}
     ],
     sachets: [
       {img:"imagenes/jabones/sachet-lavanda.jpg", title:"Sachet Aromático", tag:"Ramas de Lavanda"},
@@ -931,9 +945,9 @@
       {img:"imagenes/flores/rosas-eternas-amarillo.jpg", title:"Ramo de Rosas Eternas", tag:"Amarillo", desc:"Rosas preservadas en florero de vidrio, ideales para decorar cualquier espacio."},
       {img:"imagenes/flores/rosas-eternas-azul-maceta.jpg", title:"Rosas Eternas en Maceta", tag:"Azul", desc:"Arreglo de rosas preservadas en maceta decorativa con acabado dorado."},
       {img:"imagenes/flores/flor-liston-rosa-maceta.jpg", title:"Dhalia", tag:"Rosa", desc:"Flor artesanal hecha con listón de satín, presentada en maceta con moño."},
-      {img:"imagenes/flores/margaritas-eternas-rosa-amarillo.jpg", title:"Vara de Margaritas Eternas", tag:"Rosa y Amarillo", desc:"Dos margaritas artesanales en una misma vara, para lucir solas o en arreglo."},
-      {img:"imagenes/flores/margarita-eterna-amarillo.jpg", title:"Margarita Eterna", tag:"Amarillo"},
-      {img:"imagenes/flores/mini-ramo-rosas-amarillas.jpg", title:"Mini Ramo de Rosas Eternas", tag:"Amarillo con lazo verde", desc:"Rosas eternas y flor de nube envueltas en papel, con moño de listón satinado."}
+      {img:"imagenes/flores/margaritas-eternas-rosa-amarillo.jpg", title:"Vara de Margaritas Eternas", tag:"Rosa y Amarillo", desc:"Dos margaritas artesanales en una misma vara, para lucir solas o en arreglo.", isNew:true},
+      {img:"imagenes/flores/margarita-eterna-amarillo.jpg", title:"Margarita Eterna", tag:"Amarillo", isNew:true},
+      {img:"imagenes/flores/mini-ramo-rosas-amarillas.jpg", title:"Mini Ramo de Rosas Eternas", tag:"Amarillo con lazo verde", desc:"Rosas eternas y flor de nube envueltas en papel, con moño de listón satinado.", isNew:true}
     ],
     subeniles: [
       {img:"imagenes/subeniles/baby-shower-caja-individual.jpg", title:"Cajita de Jabones Bebé", tag:"Baby Shower", desc:"Mini jabones (osito, biberón, huellita y coche) en caja con ventana y moño de listón."},
@@ -950,6 +964,7 @@
       <article class="card${p.wide ? ' card--wide' : ''}">
         <div class="art">
           <img src="${p.img}" alt="${p.title}" loading="lazy" />
+          ${p.isNew ? '<span class="new-badge">Nuevo</span>' : ''}
           <button class="fav-btn" data-fav-key="${p.img}" data-fav-label="${p.title} (${p.tag})" aria-label="Guardar en favoritos">${HEART_ICON}</button>
         </div>
         <h3>${p.title}</h3>
