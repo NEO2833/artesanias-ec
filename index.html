@@ -377,43 +377,7 @@
     92%{opacity:.8;}
     100%{transform:translateY(115vh) translateX(calc(var(--drift) * -1)) rotate(320deg);opacity:0;}
   }
-  .petal.flutter{animation-name:butterfly-flutter;animation-timing-function:ease-in-out;}
-  @keyframes butterfly-flutter{
-    0%{transform:translate(0,0) rotate(0deg) scaleX(1);opacity:0;}
-    6%{opacity:.9;}
-    25%{transform:translate(var(--drift), 22vh) rotate(10deg) scaleX(.75);}
-    50%{transform:translate(0, 48vh) rotate(-8deg) scaleX(1);}
-    75%{transform:translate(calc(var(--drift) * -1), 74vh) rotate(8deg) scaleX(.8);}
-    92%{opacity:.85;}
-    100%{transform:translate(0, 100vh) rotate(0deg) scaleX(1);opacity:0;}
-  }
   @media (prefers-reduced-motion: reduce){.petal-field{display:none;}}
-
-  .season-mascot{
-    position:absolute;left:-32px;top:2px;width:58px;z-index:0;pointer-events:none;
-    animation:cupid-peek 7s cubic-bezier(.45,.05,.35,1) infinite;
-  }
-  .season-mascot svg{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3));}
-  @keyframes cupid-peek{
-    0%,14%{transform:translateX(50px) rotate(6deg);}
-    26%{transform:translateX(-6px) rotate(-8deg);}
-    32%{transform:translateX(2px) rotate(2deg);}
-    38%{transform:translateX(-2px) rotate(-2deg);}
-    50%,62%{transform:translateX(0) rotate(0deg);}
-    76%,100%{transform:translateX(50px) rotate(6deg);}
-  }
-  @media (max-width:760px){.season-mascot{display:none;}}
-  @media (prefers-reduced-motion: reduce){
-    .season-mascot{animation:none;transform:translateX(0) rotate(0deg);}
-  }
-
-  .season-mascot.mothers-mascot{animation:none;left:-38px;top:8px;width:52px;}
-  .season-mascot.mothers-mascot .wing-mom{transform-origin:0 0;animation:wing-flap 1.6s ease-in-out infinite;}
-  .season-mascot.mothers-mascot .wing-baby{transform-origin:0 0;animation:wing-flap 1.3s ease-in-out infinite .2s;}
-  @keyframes wing-flap{0%,100%{transform:scaleX(1);}50%{transform:scaleX(.75);}}
-  @media (prefers-reduced-motion: reduce){
-    .season-mascot.mothers-mascot .wing-mom, .season-mascot.mothers-mascot .wing-baby{animation:none;}
-  }
 
   /* === Navidad: charamico dorado con las fotos colgando como adornos === */
   :root{--xmas-pine:#1F3A2E;--xmas-gold:#B8924A;--xmas-gold-hi:#E2C27E;--xmas-kraft:#E6D3B3;--xmas-kraft-ink:#4A3A26;--xmas-light:#F2C46B;}
@@ -489,6 +453,90 @@
 
   @media (prefers-reduced-motion: reduce){
     .charamico .light,.ornament-sway{animation:none;}
+  }
+
+  /* === San Valentín: listón de satín y sello de lacre amarrando las fotos === */
+  :root{--val-wine:#4A0F1E;--val-lacre:#9E1B32;--val-satin:#C9576E;--val-satin-hi:#F2B8C2;--val-blush:#F1DCDA;--val-blush-ink:#6E1A2C;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){--val-satin:#D8687F;--val-blush:#3A2328;--val-blush-ink:#F2C9CF;}
+  }
+  :root[data-theme="dark"]{--val-satin:#D8687F;--val-blush:#3A2328;--val-blush-ink:#F2C9CF;}
+
+  .season-banner--valentin{background:var(--val-wine);color:#F3DADD;font-size:.86rem;}
+  .season-banner--valentin strong{color:var(--val-satin-hi);}
+
+  [data-season="valentin"] nav.main-nav a::after{background:var(--val-satin);}
+
+  .season-badge--note{
+    position:relative;margin-left:4px;padding:4px 16px 5px 34px;border:none;border-radius:3px;
+    background:var(--val-blush);color:var(--val-blush-ink);
+    font-family:'Caveat',cursive;font-size:1.3rem;font-weight:600;letter-spacing:0;text-transform:none;
+    box-shadow:0 1px 0 rgba(0,0,0,.06);transform:rotate(-2deg);transform-origin:left center;
+  }
+  .season-badge--note::before{
+    content:"";position:absolute;left:9px;top:50%;width:17px;height:17px;margin-top:-8.5px;border-radius:46% 54% 50% 50%;
+    background:radial-gradient(circle at 35% 30%,#C8394F,var(--val-lacre) 60%,#6E0F22);
+    box-shadow:inset 0 0 0 3px rgba(0,0,0,.12);
+  }
+
+  .hero-art.is-lazo .seal-big{animation:none;border-color:var(--val-blush);z-index:1;}
+  .lazo{position:absolute;inset:0;pointer-events:none;z-index:0;}
+  .lazo--front{z-index:2;}
+  .lazo .bow-fold path{fill:none;stroke:var(--val-lacre);stroke-width:2px;stroke-opacity:.45;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+  .lazo svg{width:100%;height:100%;display:block;overflow:visible;}
+  .lazo .ribbon path{fill:none;stroke:var(--val-satin);stroke-width:11px;stroke-linecap:butt;vector-effect:non-scaling-stroke;}
+  .lazo .ribbon-shine path{fill:none;stroke:var(--val-satin-hi);stroke-width:2px;opacity:.55;vector-effect:non-scaling-stroke;}
+  .lazo .bow path{fill:var(--val-satin);stroke:var(--val-lacre);stroke-width:1.5px;stroke-opacity:.35;vector-effect:non-scaling-stroke;}
+  .wax-seal{
+    position:absolute;left:56%;top:40%;width:clamp(58px,6vw,74px);aspect-ratio:1;margin:calc(clamp(58px,6vw,74px) / -2) 0 0 calc(clamp(58px,6vw,74px) / -2);
+    z-index:3;pointer-events:none;filter:drop-shadow(0 6px 8px rgba(74,15,30,.35));
+  }
+  .wax-seal svg{width:100%;height:100%;display:block;}
+  .wax-seal .wax{fill:var(--val-lacre);}
+
+  /* === Día de las Madres: las fotos como ramo envuelto en papel kraft === */
+  :root{--mom-malva:#4B2E45;--mom-ink:#7A4E6D;--mom-petal:#EBD3D6;--mom-kraft-a:#E3CBA4;--mom-kraft-b:#D4B486;--mom-kraft-c:#C9A673;--mom-stem:#7C8B6F;--mom-card:#FFFCF8;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){--mom-ink:#E2BCD3;--mom-kraft-a:#8C7350;--mom-kraft-b:#7A6243;--mom-kraft-c:#6B5538;--mom-stem:#9CAE86;--mom-card:#F3E9DF;}
+  }
+  :root[data-theme="dark"]{--mom-ink:#E2BCD3;--mom-kraft-a:#8C7350;--mom-kraft-b:#7A6243;--mom-kraft-c:#6B5538;--mom-stem:#9CAE86;--mom-card:#F3E9DF;}
+
+  .season-banner--madres{background:var(--mom-malva);color:#EBDDE6;font-size:.86rem;}
+  .season-banner--madres strong{color:#F4CBD6;}
+
+  [data-season="madres"] nav.main-nav a::after{background:var(--mom-ink);}
+
+  .season-badge--card{
+    margin-left:4px;padding:3px 16px 5px;border:1px solid var(--border);border-radius:2px;
+    background:var(--mom-card);color:#7A4E6D;
+    font-family:'Caveat',cursive;font-size:1.32rem;font-weight:600;letter-spacing:0;text-transform:none;
+    box-shadow:0 6px 14px -8px rgba(75,46,69,.35);transform:rotate(-2.5deg);transform-origin:left center;
+  }
+
+  .hero-art.is-ramo{height:clamp(380px,40vw,480px);}
+  .hero-art.is-ramo .seal-big{animation:none;border-color:var(--mom-petal);}
+  .hero-art.is-ramo .s1{width:38%;top:22%;left:6%;bottom:auto;right:auto;z-index:2;}
+  .hero-art.is-ramo .s2{width:38%;top:22%;left:56%;bottom:auto;right:auto;z-index:2;}
+  .hero-art.is-ramo .s3{width:40%;top:0;left:30%;bottom:auto;right:auto;z-index:1;}
+  .ramo-stems,.ramo-wrap{position:absolute;inset:0;pointer-events:none;}
+  .ramo-stems{z-index:0;}
+  .ramo-wrap{z-index:3;}
+  .ramo-stems svg,.ramo-wrap svg{width:100%;height:100%;display:block;overflow:visible;}
+  .ramo-stems path{fill:none;stroke:var(--mom-stem);stroke-width:3px;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+  .ramo-wrap .kraft-a{fill:var(--mom-kraft-a);}
+  .ramo-wrap .kraft-b{fill:var(--mom-kraft-b);}
+  .ramo-wrap .kraft-c{fill:var(--mom-kraft-c);}
+  .ramo-wrap .fold{fill:none;stroke:rgba(74,58,38,.22);stroke-width:1px;vector-effect:non-scaling-stroke;}
+  .ramo-wrap .twine{fill:none;stroke:#F4EDE2;stroke-width:2px;stroke-linecap:round;vector-effect:non-scaling-stroke;filter:drop-shadow(0 1px 0 rgba(74,58,38,.35));}
+  .ramo-wrap .stem-ends{fill:none;stroke:var(--mom-stem);stroke-width:3px;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+  .ramo-card{
+    position:absolute;right:3%;top:74%;z-index:4;padding:6px 14px 8px;
+    background:var(--mom-card);color:#7A4E6D;border-radius:2px;
+    font-family:'Caveat',cursive;font-size:clamp(1.05rem,1.5vw,1.3rem);font-weight:600;line-height:1.1;white-space:nowrap;
+    box-shadow:0 10px 18px -10px rgba(75,46,69,.45);transform:rotate(7deg);transform-origin:0 0;
+  }
+  .ramo-card::before{
+    content:"";position:absolute;left:-26px;top:4px;width:30px;height:1.5px;background:#CDBFA9;transform:rotate(-24deg);transform-origin:right center;
   }
 </style>
 </head>
@@ -723,12 +771,12 @@
     { id:'navidad', badge:'Especial de Navidad',
       banner:'Ideas de regalo para esta <strong>Navidad</strong>: jabones, velones y flores eternas.',
       accent:'#8E2B3A', accentSoft:'#F3DDDF', glow:'#C8A15A', start:[12,1], end:[1,6] },
-    { id:'valentin', badge:'Especial de San Valentín',
+    { id:'valentin', badge:'Día del Amor y la Amistad',
       banner:'Detalles para <strong>San Valentín</strong>: velones aromáticos y flores eternas que no se marchitan.',
-      accent:'#C2486B', accentSoft:'#F5DCE3', start:[2,1], end:[2,14] },
-    { id:'madres', badge:'Especial Día de las Madres',
+      accent:'#9E1B32', accentSoft:'#F3DADD', glow:'#E8A0AE', start:[2,1], end:[2,14] },
+    { id:'madres', badge:'Día de las Madres',
       banner:'Regalos para el <strong>Día de las Madres</strong>: flores eternas y sets de jabones.',
-      accent:'#C98B7A', accentSoft:'#F0DCD5', start:[5,18], end:[5,31] }
+      accent:'#7A4E6D', accentSoft:'#EBD3D6', glow:'#D9A7B4', start:[5,18], end:[5,31] }
   ];
 
   function dateInRange(month, day, start, end){
@@ -756,7 +804,9 @@
 
   const DOT_SVG = `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="8" fill="var(--season-accent)"/></svg>`;
 
-  const HEART_SVG = `<svg viewBox="0 0 40 40"><path d="M20 34 C6 24 2 14 8 8 C13 3 20 6 20 12 C20 6 27 3 32 8 C38 14 34 24 20 34 Z" fill="var(--season-accent)"/><ellipse cx="13" cy="12" rx="3" ry="4" fill="rgba(255,255,255,.35)"/></svg>`;
+  const PETAL_SVG = `<svg viewBox="0 0 40 40"><path d="M20 3 C31 9 35 22 27 34 C24 38 16 38 13 34 C5 22 9 9 20 3 Z" fill="#B8304A"/><path d="M20 8 C26 13 27 22 22 31 C20 33 18 33 17 31" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-linecap="round"/></svg>`;
+
+  const PETAL_BLUSH_SVG = `<svg viewBox="0 0 40 40"><path d="M20 3 C31 9 35 22 27 34 C24 38 16 38 13 34 C5 22 9 9 20 3 Z" fill="#E8B4BC"/><path d="M20 8 C26 13 27 22 22 31 C20 33 18 33 17 31" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2" stroke-linecap="round"/></svg>`;
 
   const WAX_HEART_SVG = `<svg viewBox="0 0 40 40">
     <circle cx="20" cy="20" r="18" fill="var(--season-accent)"/>
@@ -764,94 +814,19 @@
     <path d="M20 27 C13 22 10 17 13 13.5 C15.5 10.5 20 12 20 15.5 C20 12 24.5 10.5 27 13.5 C30 17 27 22 20 27 Z" fill="rgba(255,255,255,.85)"/>
   </svg>`;
 
-  const ROSE_SVG = `<svg viewBox="0 0 40 40"><g fill="var(--season-accent)"><circle cx="13" cy="16" r="9"/><circle cx="26" cy="14" r="9"/><circle cx="28" cy="27" r="9"/><circle cx="16" cy="29" r="9"/><circle cx="10" cy="23" r="9"/></g><circle cx="20" cy="20" r="6" fill="#E8A9BE"/></svg>`;
-
-  const CUPID_SVG = `<svg viewBox="0 0 40 40">
-    <path d="M2 20 C-2 14 2 8 8 9 C11 10 13 13 13 15 C13 13 15 10 18 9 C15 5 7 4 3 9 C-3 15 1 21 7 24 Z" fill="rgba(255,255,255,.85)"/>
-    <path d="M38 20 C42 14 38 8 32 9 C29 10 27 13 27 15 C27 13 25 10 22 9 C25 5 33 4 37 9 C43 15 39 21 33 24 Z" fill="rgba(255,255,255,.85)"/>
-    <path d="M20 30 C11 23 7 16 11 12 C14 9 20 11 20 15 C20 11 26 9 29 12 C33 16 29 23 20 30 Z" fill="var(--season-accent)"/>
-  </svg>`;
-
-  const CUPID_CHARACTER_SVG = `<svg viewBox="0 0 200 220">
-    <ellipse cx="100" cy="26" rx="24" ry="8" fill="none" stroke="#E8C36B" stroke-width="4"/>
-    <path d="M55 120 C20 100 15 60 45 55 C65 52 75 80 70 105 C68 118 60 124 55 120 Z" fill="#FBF6EE" stroke="#E7DCC9" stroke-width="1.5"/>
-    <path d="M145 120 C180 100 185 60 155 55 C135 52 125 80 130 105 C132 118 140 124 145 120 Z" fill="#FBF6EE" stroke="#E7DCC9" stroke-width="1.5"/>
-    <path d="M70 210 C60 170 65 135 100 135 C135 135 140 170 130 210 Z" fill="#FBD9B8"/>
-    <path d="M78 205 C80 195 120 195 122 205 C118 212 82 212 78 205 Z" fill="#FFFFFF"/>
-    <circle cx="100" cy="90" r="46" fill="#FBD9B8"/>
-    <path d="M56 78 Q66 36 100 44 Q134 36 144 78 Q120 58 100 60 Q80 58 56 78 Z" fill="#EFC36E"/>
-    <path d="M52 82 C46 74 50 64 58 66 C56 74 56 80 52 82 Z" fill="#EFC36E"/>
-    <path d="M148 82 C154 74 150 64 142 66 C144 74 144 80 148 82 Z" fill="#EFC36E"/>
-    <ellipse cx="76" cy="102" rx="9" ry="6" fill="#F6A9BA" opacity=".8"/>
-    <ellipse cx="124" cy="102" rx="9" ry="6" fill="#F6A9BA" opacity=".8"/>
-    <circle cx="84" cy="90" r="4.5" fill="#3A2B22"/>
-    <circle cx="116" cy="90" r="4.5" fill="#3A2B22"/>
-    <circle cx="85.5" cy="88.5" r="1.3" fill="#fff"/>
-    <circle cx="117.5" cy="88.5" r="1.3" fill="#fff"/>
-    <path d="M90 106 Q100 112 110 106" stroke="#3A2B22" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <path d="M52 150 Q40 120 60 95" stroke="var(--season-accent)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-    <line x1="30" y1="150" x2="95" y2="118" stroke="var(--season-accent)" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M26 152 C22 148 24 142 30 144 C32 148 30 152 26 152 Z" fill="var(--season-accent)"/>
-    <path d="M165 60 C161 55 154 57 155 63 C156 68 162 71 165 74 C168 71 174 68 175 63 C176 57 169 55 165 60 Z" fill="var(--season-accent)" opacity=".9"/>
-    <path d="M30 55 C27 51 22 53 23 57 C24 61 28 63 30 65 C32 63 36 61 37 57 C38 53 33 51 30 55 Z" fill="var(--season-accent)" opacity=".8"/>
-  </svg>`;
-
   const SEASON_ICONS = {
     'valentin': WAX_HEART_SVG,
     'navidad': STAR_SVG
   };
 
-  const MOTHERS_MASCOT_SVG = `<svg viewBox="0 0 200 170">
-    <g transform="translate(150,95) scale(0.55)">
-      <g class="wing-baby" fill="#F0DCD5">
-        <path d="M0 0 C-14 -14 -30 -16 -28 -4 C-27 6 -14 8 0 0 Z"/>
-        <path d="M0 0 C14 -14 30 -16 28 -4 C27 6 14 8 0 0 Z"/>
-        <path d="M0 0 C-10 8 -20 12 -16 20 C-13 26 -4 20 0 10 Z"/>
-        <path d="M0 0 C10 8 20 12 16 20 C13 26 4 20 0 10 Z"/>
-      </g>
-      <circle cx="-14" cy="-9" r="3" fill="var(--season-accent)" opacity=".7"/>
-      <circle cx="14" cy="-9" r="3" fill="var(--season-accent)" opacity=".7"/>
-      <line x1="0" y1="-4" x2="0" y2="14" stroke="#8a6a5a" stroke-width="2.5" stroke-linecap="round"/>
-    </g>
-    <g transform="translate(75,85)">
-      <g class="wing-mom" fill="var(--season-accent)">
-        <path d="M0 0 C-30 -34 -68 -38 -64 -10 C-62 12 -32 18 0 0 Z"/>
-        <path d="M0 0 C30 -34 68 -38 64 -10 C62 12 32 18 0 0 Z"/>
-        <path d="M0 0 C-22 16 -44 26 -36 42 C-29 56 -10 44 0 22 Z"/>
-        <path d="M0 0 C22 16 44 26 36 42 C29 56 10 44 0 22 Z"/>
-      </g>
-      <g class="wing-mom" fill="#F6DCD3" opacity=".9">
-        <circle cx="-32" cy="-18" r="7"/>
-        <circle cx="32" cy="-18" r="7"/>
-        <circle cx="-20" cy="30" r="5"/>
-        <circle cx="20" cy="30" r="5"/>
-      </g>
-      <ellipse cx="0" cy="0" rx="5" ry="30" fill="#5A4238"/>
-      <path d="M-4 -28 C-10 -38 -18 -40 -16 -34" stroke="#5A4238" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <path d="M4 -28 C10 -38 18 -40 16 -34" stroke="#5A4238" stroke-width="2" fill="none" stroke-linecap="round"/>
-    </g>
-  </svg>`;
-
-  const SEASON_MASCOT = {
-    'valentin': { svg: CUPID_CHARACTER_SVG },
-    'madres': { svg: MOTHERS_MASCOT_SVG, extraClass: 'mothers-mascot' }
-  };
-
-  const BUTTERFLY_SVG = `<svg viewBox="0 0 40 40">
-    <g fill="var(--season-accent)">
-      <path d="M20 20 C14 6 2 4 4 16 C5 24 14 24 20 20 Z"/>
-      <path d="M20 20 C26 6 38 4 36 16 C35 24 26 24 20 20 Z"/>
-      <path d="M20 20 C15 26 6 30 8 34 C10 37 17 33 20 24 Z"/>
-      <path d="M20 20 C25 26 34 30 32 34 C30 37 23 33 20 24 Z"/>
-    </g>
-    <line x1="20" y1="14" x2="20" y2="28" stroke="var(--candle)" stroke-width="2" stroke-linecap="round"/>
-  </svg>`;
+  // Flor de nube (gypsophila): ramita blanca como la de los mini ramos.
+  const GYPSOPHILA_SVG = `<svg viewBox="0 0 40 40"><path d="M20 38 L20 22 M20 26 L12 16 M20 24 L28 14 M20 22 L20 10" stroke="#8A9A78" stroke-width="1.4" fill="none" stroke-linecap="round"/><g fill="#FFFFFF" stroke="rgba(75,46,69,.25)" stroke-width=".8"><circle cx="12" cy="15" r="3.2"/><circle cx="9" cy="11" r="2.6"/><circle cx="15" cy="11" r="2.4"/><circle cx="28" cy="13" r="3.2"/><circle cx="31" cy="9" r="2.4"/><circle cx="25" cy="9" r="2.6"/><circle cx="20" cy="9" r="3.4"/><circle cx="20" cy="4.5" r="2.6"/></g></svg>`;
 
   const SEASON_FIELDS = {
     'flores-amarillas': { svg: FLOWER_SVG, glow: 'var(--season-accent)' },
     'navidad': { svg: EMBER_SVG, glow: '#F2C46B', variant: 'rise' },
-    'valentin': { svg: [HEART_SVG, ROSE_SVG, CUPID_SVG], glow: 'var(--season-accent)' },
-    'madres': { svg: BUTTERFLY_SVG, glow: 'var(--season-accent)', variant: 'flutter' }
+    'valentin': { svg: [PETAL_SVG, PETAL_BLUSH_SVG, PETAL_BLUSH_SVG], glow: 'rgba(158,27,50,.25)' },
+    'madres': { svg: GYPSOPHILA_SVG, glow: 'rgba(255,255,255,.6)' }
   };
 
   // Charamico: rama seca pintada de dorado, el árbol de Navidad tradicional dominicano.
@@ -871,10 +846,42 @@
     if (m === 1) return 'Todavía hay tiempo para los <strong>Reyes</strong>: velones, jabones y flores eternas para regalar.';
     if (m === 12 && d === 24) return 'Hoy es <strong>Nochebuena</strong>. Escríbenos y te ayudamos con un regalo de último momento.';
     if (m === 12 && d > 24) return '<strong>Feliz Navidad</strong> de parte de Artesanías EC.';
-    const today = new Date(now.getFullYear(), now.getMonth(), d);
-    const days = Math.round((new Date(now.getFullYear(), 11, 24) - today) / 86400000);
-    return `Faltan <strong>${days} ${days === 1 ? 'día' : 'días'} para Nochebuena</strong>. Pide con tiempo tus regalos hechos a mano.`;
+    return `Faltan <strong>${daysLabel(daysUntil(12, 24))} para Nochebuena</strong>. Pide con tiempo tus regalos hechos a mano.`;
   }
+
+  function valentinBannerText(){
+    const now = new Date();
+    if (now.getMonth() === 1 && now.getDate() === 14) return 'Hoy es el <strong>Día del Amor y la Amistad</strong>. Escríbenos y te ayudamos con un detalle de último momento.';
+    return `Faltan <strong>${daysLabel(daysUntil(2, 14))} para el 14 de febrero</strong>. Flores eternas, velones y jabones para regalar.`;
+  }
+
+  // En República Dominicana el Día de las Madres es el último domingo de mayo.
+  function mothersDay(year){
+    const d = new Date(year, 4, 31);
+    d.setDate(31 - d.getDay());
+    return d;
+  }
+
+  function madresBannerText(){
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let target = mothersDay(now.getFullYear());
+    if (target < today) target = mothersDay(now.getFullYear() + 1);
+    const days = Math.round((target - today) / 86400000);
+    if (days === 0) return 'Hoy es el <strong>Día de las Madres</strong>. Escríbenos y te ayudamos con un regalo de último momento.';
+    return `Faltan <strong>${daysLabel(days)} para el Día de las Madres</strong> (domingo ${target.getDate()} de mayo). Flores eternas y sets de jabones para mamá.`;
+  }
+
+  // Días que faltan para la próxima fecha [mes, día] (si ya pasó este año, cuenta para el siguiente).
+  function daysUntil(month, day){
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let target = new Date(now.getFullYear(), month - 1, day);
+    if (target < today) target = new Date(now.getFullYear() + 1, month - 1, day);
+    return Math.round((target - today) / 86400000);
+  }
+
+  function daysLabel(days){ return `${days} ${days === 1 ? 'día' : 'días'}`; }
 
   function loadScript(src){
     return new Promise((resolve, reject) => {
@@ -882,6 +889,86 @@
       el.src = src; el.onload = resolve; el.onerror = reject;
       document.head.appendChild(el);
     });
+  }
+
+  function loadGsap(){
+    const CDN = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/';
+    return loadScript(CDN + 'gsap.min.js')
+      .then(() => loadScript(CDN + 'ScrollTrigger.min.js'))
+      .then(() => gsap.registerPlugin(ScrollTrigger));
+  }
+
+  // Listón de satín que amarra las tres fotos del inicio, con moño y sello de lacre "EC".
+  // Coordenadas en % del área de fotos (viewBox 100x100 estirado), por eso el trazo no escala.
+  // El listón largo va detrás de las fotos; el moño y las puntas van al frente.
+  const LAZO_BACK_SVG = `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <g class="ribbon"><path pathLength="1" d="M-4 78 C12 62 30 52 44 46 C52 43 54 42 56 40 C66 30 82 26 104 8"/></g>
+    <g class="ribbon-shine"><path pathLength="1" d="M-4 78 C12 62 30 52 44 46 C52 43 54 42 56 40 C66 30 82 26 104 8"/></g>
+  </svg>`;
+
+  const LAZO_FRONT_SVG = `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <g class="ribbon">
+      <path pathLength="1" d="M56 40 C55 48 52 56 47 64"/>
+      <path pathLength="1" d="M56 40 C60 47 65 52 71 56"/>
+    </g>
+    <g class="ribbon-shine">
+      <path pathLength="1" d="M56 40 C55 48 52 56 47 64"/>
+      <path pathLength="1" d="M56 40 C60 47 65 52 71 56"/>
+    </g>
+    <g class="bow">
+      <path d="M56 40 C46 26 36 26 38 36 C39 42 48 42 56 40 Z"/>
+      <path d="M56 40 C66 24 78 26 75 37 C73 43 64 42 56 40 Z"/>
+    </g>
+    <g class="bow-fold">
+      <path d="M55 39 C48 33 43 32 41 35"/>
+      <path d="M57 39 C64 32 70 31 72 34"/>
+    </g>
+  </svg>`;
+
+  const WAX_SEAL_SVG = `<svg viewBox="0 0 100 100">
+    <path class="wax" d="M50 4 C62 3 70 10 79 12 C90 15 96 27 95 38 C94 47 99 55 96 65 C93 77 84 82 76 89 C67 96 57 95 48 97 C37 99 28 92 20 86 C10 79 5 70 4 58 C3 48 1 38 6 28 C11 17 22 13 32 9 C38 6 44 5 50 4 Z"/>
+    <circle cx="50" cy="50" r="31" fill="none" stroke="rgba(0,0,0,.22)" stroke-width="3"/>
+    <circle cx="50" cy="50" r="31" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1" transform="translate(-1 -1)"/>
+    <text x="50" y="61" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="32" fill="rgba(0,0,0,.28)">EC</text>
+    <text x="49" y="60" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="32" fill="rgba(255,225,225,.55)">EC</text>
+    <ellipse cx="34" cy="24" rx="10" ry="5" fill="rgba(255,255,255,.22)" transform="rotate(-30 34 24)"/>
+  </svg>`;
+
+  function setupValentin(){
+    const badge = document.querySelector('.season-badge');
+    if (badge) { badge.classList.add('season-badge--note'); badge.querySelector('.season-dot')?.remove(); }
+
+    const art = document.querySelector('.hero-art');
+    if (!art) return;
+    art.classList.add('is-lazo');
+    const lazoBack = document.createElement('div');
+    lazoBack.className = 'lazo lazo--back';
+    lazoBack.innerHTML = LAZO_BACK_SVG;
+    const lazoFront = document.createElement('div');
+    lazoFront.className = 'lazo lazo--front';
+    lazoFront.innerHTML = LAZO_FRONT_SVG;
+    const seal = document.createElement('div');
+    seal.className = 'wax-seal';
+    seal.innerHTML = WAX_SEAL_SVG;
+    art.prepend(lazoBack);
+    art.append(lazoFront, seal);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    loadGsap().then(() => {
+      gsap.timeline({ delay: .3 })
+        .from(lazoBack.querySelectorAll('path'), { strokeDasharray: 1, strokeDashoffset: 1, duration: 1.2, ease: 'power2.inOut', clearProps: 'strokeDasharray,strokeDashoffset' })
+        .from(lazoFront.querySelectorAll('.ribbon path, .ribbon-shine path'), { strokeDasharray: 1, strokeDashoffset: 1, duration: .6, ease: 'power2.out', clearProps: 'strokeDasharray,strokeDashoffset' }, '-=.2')
+        .from(lazoFront.querySelectorAll('.bow path, .bow-fold path'), { scale: 0, svgOrigin: '56 40', duration: .6, ease: 'back.out(2)', stagger: .08 }, '-=.4')
+        .from(seal, { scale: 1.9, rotation: -25, opacity: 0, duration: .45, ease: 'power3.in' }, '-=.1')
+        .to(seal, { scaleX: 1.08, scaleY: .92, duration: .08, yoyo: true, repeat: 1, ease: 'power1.out' });
+
+      // Parallax al hacer scroll: el regalo completo sube más lento, las fotos crecen un poco y el sello gira.
+      const hero = document.querySelector('.hero');
+      const scrub = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
+      gsap.to(art, { y: 70, ease: 'none', scrollTrigger: { ...scrub } });
+      gsap.fromTo(art.querySelectorAll('.seal-big'), { scale: 1 }, { scale: 1.1, ease: 'none', scrollTrigger: { ...scrub } });
+      gsap.to(seal.firstElementChild, { rotation: 18, ease: 'none', scrollTrigger: { ...scrub } });
+    }).catch(() => {});
   }
 
   function setupChristmas(){
@@ -906,11 +993,8 @@
     });
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const CDN = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/';
-    loadScript(CDN + 'gsap.min.js')
-      .then(() => loadScript(CDN + 'ScrollTrigger.min.js'))
+    loadGsap()
       .then(() => {
-        gsap.registerPlugin(ScrollTrigger);
         const ornaments = art.querySelectorAll('.ornament');
         gsap.timeline()
           .from(branch.querySelectorAll('.limb'), { strokeDasharray: 1, strokeDashoffset: 1, duration: 1.4, ease: 'power2.inOut', stagger: .2, clearProps: 'strokeDasharray,strokeDashoffset' })
@@ -931,12 +1015,73 @@
       .catch(() => {});
   }
 
+  // Ramo: las tres fotos salen de un cono de papel kraft amarrado con hilo, con tarjeta para mamá.
+  // Coordenadas en % del área de fotos (viewBox 100x100 estirado).
+  const RAMO_STEMS_SVG = `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path pathLength="1" d="M26 50 C34 66 44 80 49 96"/>
+    <path pathLength="1" d="M50 30 C50 54 50 76 50 96"/>
+    <path pathLength="1" d="M74 50 C66 66 56 80 51 96"/>
+    <path pathLength="1" d="M38 62 C32 58 28 58 24 60 M62 60 C68 56 72 56 76 58"/>
+  </svg>`;
+
+  const RAMO_WRAP_SVG = `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path class="kraft-a" d="M0 56 C8 52 20 50 34 51 L52 91 L45 91 Z"/>
+    <path class="kraft-b" d="M100 56 C92 52 80 50 66 51 L48 91 L55 91 Z"/>
+    <path class="kraft-c" d="M27 63 C38 58 62 58 73 63 L55 91 L45 91 Z"/>
+    <path class="fold" d="M34 51 L50 89 M66 51 L50 89"/>
+    <path class="twine" d="M44 86 C48 88 52 88 56 86 M50 87 C44 82 40 84 42 88 C44 90 48 89 50 87 C56 82 60 84 58 88 C56 90 52 89 50 87 M49 88 C47 92 45 95 43 97 M51 88 C53 92 56 94 60 95"/>
+    <path class="stem-ends" d="M47 91 L46 99 M50 91 L50 100 M53 91 L54 99"/>
+  </svg>`;
+
+  function setupMadres(){
+    const badge = document.querySelector('.season-badge');
+    if (badge) { badge.classList.add('season-badge--card'); badge.querySelector('.season-dot')?.remove(); }
+
+    const art = document.querySelector('.hero-art');
+    if (!art) return;
+    art.classList.add('is-ramo');
+    const stems = document.createElement('div');
+    stems.className = 'ramo-stems';
+    stems.innerHTML = RAMO_STEMS_SVG;
+    const wrap = document.createElement('div');
+    wrap.className = 'ramo-wrap';
+    wrap.innerHTML = RAMO_WRAP_SVG;
+    const card = document.createElement('div');
+    card.className = 'ramo-card';
+    card.textContent = 'Para mamá, con amor';
+    art.prepend(stems);
+    art.append(wrap, card);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    loadGsap().then(() => {
+      // Orden de florecer: la del centro primero, luego los lados.
+      const blooms = ['.s3', '.s1', '.s2'].map(c => art.querySelector('.seal-big' + c)).filter(Boolean);
+      gsap.timeline({ delay: .3 })
+        .from(wrap.querySelectorAll('.kraft-a, .kraft-b, .kraft-c, .fold'), { y: 40, opacity: 0, duration: .7, ease: 'power3.out', stagger: .1 })
+        .from(wrap.querySelectorAll('.twine, .stem-ends'), { opacity: 0, duration: .4 }, '-=.2')
+        .from(stems.querySelectorAll('path'), { strokeDasharray: 1, strokeDashoffset: 1, duration: .8, ease: 'power2.out', stagger: .1, clearProps: 'strokeDasharray,strokeDashoffset' }, '-=.4')
+        .from(blooms, { scale: .2, yPercent: 60, opacity: 0, duration: 1.1, ease: 'back.out(1.6)', stagger: .2, clearProps: 'opacity' }, '-=.5')
+        .from(card, { rotation: -40, opacity: 0, y: -20, duration: .9, ease: 'elastic.out(1, .5)' }, '-=.4');
+
+      // Parallax al hacer scroll: el ramo sube más lento, las flores crecen un poco y la tarjeta se mece.
+      const hero = document.querySelector('.hero');
+      const scrub = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
+      gsap.to(art, { y: 70, ease: 'none', scrollTrigger: { ...scrub } });
+      gsap.fromTo(blooms, { scale: 1 }, { scale: 1.1, ease: 'none', immediateRender: false, scrollTrigger: { ...scrub } });
+      gsap.to(card, { rotation: 14, ease: 'none', scrollTrigger: { ...scrub } });
+    }).catch(() => {});
+  }
+
   const SEASON_SETUP = {
-    'navidad': setupChristmas
+    'navidad': setupChristmas,
+    'valentin': setupValentin,
+    'madres': setupMadres
   };
 
   const SEASON_BANNER_TEXT = {
-    'navidad': christmasBannerText
+    'navidad': christmasBannerText,
+    'valentin': valentinBannerText,
+    'madres': madresBannerText
   };
 
   function spawnField(svgOrList, glow, variant){
@@ -982,18 +1127,6 @@
     if (eyebrow) eyebrow.insertAdjacentHTML('afterend', `<span class="season-badge"><span class="season-dot">${seasonIcon}</span>${season.badge}</span>`);
 
     if (SEASON_FIELDS[season.id]) spawnField(SEASON_FIELDS[season.id].svg, SEASON_FIELDS[season.id].glow, SEASON_FIELDS[season.id].variant);
-
-    if (SEASON_MASCOT[season.id]) {
-      const brand = document.querySelector('.brand');
-      if (brand) {
-        const cfg = SEASON_MASCOT[season.id];
-        const mascot = document.createElement('div');
-        mascot.className = 'season-mascot' + (cfg.extraClass ? ' ' + cfg.extraClass : '');
-        mascot.setAttribute('aria-hidden', 'true');
-        mascot.innerHTML = cfg.svg;
-        brand.insertBefore(mascot, brand.firstChild);
-      }
-    }
 
     if (SEASON_SETUP[season.id]) SEASON_SETUP[season.id]();
 
