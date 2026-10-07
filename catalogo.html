@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QHZ5TKXS4M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QHZ5TKXS4M');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="transicion.js"></script>
+<title>Catálogo · Artesanías EC</title>
+<meta name="description" content="Artesanías EC — catálogo de jabones artesanales, velones y flores eternas hechos a mano.">
+<link rel="icon" type="image/png" href="imagenes/favicon.png">
+<link rel="apple-touch-icon" href="imagenes/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..650,0..100,0..1;1,9..144,300..650,0..100,0..1&family=Manrope:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3EEEC;
+    --surface:#FBF8F5;
+    --surface-2:#EDE4DF;
+    --ink:#2B2320;
+    --ink-soft:#5A4E48;
+    --border:#DDD1C8;
+    --sello:#5B6650;
+    --sello-strong:#3F4636;
+    --soap:#BC7F76;
+    --soap-soft:#EADAD5;
+    --sachet:#9C6B7A;
+    --sachet-soft:#EBDCE0;
+    --candle:#B8792A;
+    --candle-soft:#F0DCB9;
+    --flower:#7C8B6F;
+    --flower-soft:#DEE4D3;
+    --subenil:#B99552;
+    --subenil-soft:#F1E6C8;
+    --whatsapp:#25D366;
+    --shadow: 0 18px 40px -22px rgba(43,35,32,.35);
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --wrap: 1180px;
+    --footer-bg:#2E3527;
+    --footer-text:#D6DCCB;
+    --footer-heading:#F6F2EA;
+    --footer-border:rgba(255,255,255,.12);
+    --footer-muted:#AEB8A2;
+    --footer-accent:#C9D6B4;
+    /* Inicio en salvia profunda, tomado del verde del logo */
+    --hero-bg:#3B4433;
+    --hero-ink:#F6F2EA;
+    --hero-ink-soft:rgba(246,242,234,.78);
+    --hero-line:rgba(246,242,234,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1C1613; --surface:#241C18; --surface-2:#2C221D;
+      --ink:#F1E9E2; --ink-soft:#C9BAB0; --border:#3C302A;
+      --sello:#90A17E; --sello-strong:#A9BB97;
+      --soap:#D89C95; --soap-soft:#3A2926;
+      --sachet:#CB9AA8; --sachet-soft:#372B2E;
+      --candle:#D9A354; --candle-soft:#3B2E1C;
+      --flower:#9CAE86; --flower-soft:#2A3123;
+      --subenil:#D9B679; --subenil-soft:#3A311F;
+      --shadow: 0 18px 44px -20px rgba(0,0,0,.55);
+      --hero-bg:#2A3124; --footer-bg:#20261B;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1C1613; --surface:#241C18; --surface-2:#2C221D;
+    --ink:#F1E9E2; --ink-soft:#C9BAB0; --border:#3C302A;
+    --sello:#90A17E; --sello-strong:#A9BB97;
+    --soap:#D89C95; --soap-soft:#3A2926;
+    --sachet:#CB9AA8; --sachet-soft:#372B2E;
+    --candle:#D9A354; --candle-soft:#3B2E1C;
+    --flower:#9CAE86; --flower-soft:#2A3123;
+    --subenil:#D9B679; --subenil-soft:#3A311F;
+    --shadow: 0 18px 44px -20px rgba(0,0,0,.55);
+    --hero-bg:#2A3124; --footer-bg:#20261B;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Manrope',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  img,svg{max-width:100%;}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;text-wrap:balance;margin:0;font-weight:450;font-variation-settings:"SOFT" 100,"WONK" 0;}
+  p{margin:0;line-height:1.65;}
+  a{color:inherit;}
+  .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,4vw,48px);}
+  .eyebrow{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.72rem;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--sello));
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:999px;border:1px solid transparent;
+    font-family:'Manrope',sans-serif;font-weight:600;font-size:.92rem;
+    cursor:pointer;text-decoration:none;transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(.96);}
+  .btn--sello{background:var(--sello);color:#fdf6f1;}
+  .btn--sello:hover{background:var(--sello-strong);box-shadow:var(--shadow);}
+  .btn--ghost{background:transparent;border-color:var(--border);color:var(--ink);}
+  .btn--ghost:hover{border-color:var(--ink-soft);}
+  .btn--wa{background:var(--whatsapp);color:#fff;}
+  .btn--wa:hover{filter:brightness(1.06);box-shadow:var(--shadow);}
+  .btn--wa svg{width:16px;height:16px;flex:none;}
+
+  .site-header{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:92px;transition:height .25s ease;}
+  .brand{position:relative;display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:500;text-decoration:none;color:var(--ink);}
+  .brand .mark{position:relative;z-index:1;height:70px;width:auto;flex:none;display:block;}
+  .footer-mark{height:100px;width:auto;display:block;}
+  nav.main-nav{display:flex;align-items:center;gap:28px;}
+  nav.main-nav a{
+    font-size:.92rem;font-weight:600;text-decoration:none;color:var(--ink-soft);
+    position:relative;padding-bottom:4px;
+  }
+  nav.main-nav a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--sello);
+    transition:right .3s ease;
+  }
+  nav.main-nav a:hover{color:var(--ink);}
+  nav.main-nav a:hover::after{right:0;}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;}
+
+  @media (max-width:760px){
+    nav.main-nav{
+      position:fixed;inset:92px 0 auto 0;background:var(--paper);
+      flex-direction:column;align-items:flex-start;gap:0;padding:8px clamp(16px,4vw,48px) 18px;
+      border-bottom:1px solid var(--border);
+      transform:translateY(-8px);opacity:0;pointer-events:none;transition:.25s ease;
+    }
+    nav.main-nav a{padding:12px 0;width:100%;border-bottom:1px solid var(--border);}
+    body.nav-open nav.main-nav{transform:translateY(0);opacity:1;pointer-events:auto;}
+    .nav-toggle{display:block;}
+    .header-actions .btn--sello{display:none;}
+  }
+
+  .hero{
+    padding-block:clamp(40px,5.5vw,68px) clamp(64px,8vw,104px);position:relative;overflow:hidden;
+    background:var(--hero-bg);color:var(--hero-ink);
+  }
+  .hero::before{
+    content:"";position:absolute;top:-25%;right:-12%;width:56%;aspect-ratio:1;
+    background:radial-gradient(circle, var(--accent-glow, #E9D9B0) 0%, transparent 70%);
+    opacity:.14;filter:blur(60px);pointer-events:none;animation:drift 18s ease-in-out infinite;
+  }
+  /* Borde de abajo festoneado, como papel cortado a mano */
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:-1px;height:19px;pointer-events:none;
+    background:radial-gradient(circle at 20px 20px, var(--surface) 19.5px, transparent 20px) repeat-x;
+    background-size:40px 20px;
+  }
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,24px) scale(1.1);}}
+  @media (prefers-reduced-motion: reduce){.hero::before{animation:none;}}
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center;}
+  @media (max-width:880px){.hero .wrap{grid-template-columns:1fr;}}
+  .hero h1{
+    font-size:clamp(2.6rem,5vw,4.1rem);line-height:1.02;margin-top:16px;letter-spacing:-.015em;font-weight:400;
+    font-variation-settings:"SOFT" 100,"WONK" 1,"opsz" 144;color:var(--hero-ink);
+  }
+  .hero h1 em{color:inherit;font-style:italic;font-weight:350;}
+  .hero p.lede{margin-top:22px;max-width:44ch;color:var(--hero-ink-soft);font-size:1.06rem;}
+  .hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;}
+  .hero .btn--sello{background:var(--hero-ink);color:var(--hero-bg);}
+  .hero .btn--sello:hover{background:#FFFFFF;box-shadow:0 14px 30px -14px rgba(0,0,0,.5);}
+  .hero .btn--ghost{border-color:var(--hero-line);color:var(--hero-ink);}
+  .hero .btn--ghost:hover{border-color:var(--hero-ink);}
+  .seals-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;max-width:470px;margin-top:40px;padding-top:26px;border-top:1px solid var(--hero-line);}
+  .seal-link{
+    display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:var(--hero-ink-soft);
+    font-weight:600;font-size:.8rem;line-height:1.2;text-align:center;transition:color .25s ease;
+  }
+  .seal-link img{
+    width:clamp(48px,13vw,58px);height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;flex:none;display:block;
+    box-shadow:0 0 0 2px var(--hero-bg),0 0 0 3px var(--hero-line);transition:box-shadow .25s ease, transform .25s ease;
+  }
+  .seal-link:hover{color:var(--hero-ink);}
+  .seal-link:hover img{box-shadow:0 0 0 2px var(--hero-bg),0 0 0 4px var(--hero-ink);transform:translateY(-2px);}
+
+  .hero-art{position:relative;height:clamp(320px,36vw,450px);}
+  .hero-art .seal-big{
+    position:absolute;border-radius:50%;aspect-ratio:1/1;object-fit:cover;
+    border:5px solid var(--hero-ink);box-shadow:0 30px 50px -24px rgba(0,0,0,.55);
+    animation:float 7s ease-in-out infinite;
+    transition:opacity 1.8s ease;
+  }
+  .hero-art .s1{width:44%;top:2%;left:6%;animation-delay:0s;}
+  .hero-art .s2{width:40%;top:32%;right:2%;animation-delay:1.2s;}
+  .hero-art .s3{width:38%;bottom:0;left:22%;animation-delay:2.4s;}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @media (prefers-reduced-motion: reduce){
+    .hero-art .seal-big{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  .story-band{
+    border-bottom:1px solid var(--border);
+    padding-block:clamp(30px,5vw,48px);background:var(--surface);
+  }
+  .story-band .wrap{display:flex;gap:20px;align-items:center;justify-content:center;text-align:center;flex-direction:column;}
+  .story-band p{font-family:'Caveat',cursive;font-size:clamp(1.5rem,2.6vw,2.1rem);color:var(--sello);max-width:52ch;line-height:1.3;}
+  .story-band span{font-size:.88rem;color:var(--ink-soft);font-weight:600;}
+
+  .how-to-order{padding-block:clamp(48px,7vw,80px);border-bottom:1px solid var(--border);scroll-margin-top:130px;}
+  .how-to-order .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px);align-items:start;}
+  @media (max-width:760px){.how-to-order .wrap{grid-template-columns:1fr;}}
+  .how-to-order .collection-head{margin:0;}
+  .how-to-order .collection-head h2{
+    font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1;letter-spacing:-.015em;
+    font-variation-settings:"SOFT" 100,"WONK" 1,"opsz" 144;
+  }
+  .how-to-order .collection-head p{margin-top:16px;max-width:34ch;}
+  .steps-grid{display:flex;flex-direction:column;margin:0;padding:0;list-style:none;}
+  .step{display:grid;grid-template-columns:64px 1fr;gap:4px 18px;padding-block:20px;border-top:1px solid var(--border);}
+  .step:last-child{border-bottom:1px solid var(--border);}
+  .step-num{
+    grid-row:span 2;font-family:'Fraunces',serif;font-size:2.6rem;line-height:.9;color:var(--sello);
+    font-variation-settings:"SOFT" 100,"WONK" 1,"opsz" 144;font-weight:350;
+  }
+  .step h3{font-size:1.15rem;color:var(--ink);}
+  .step p{color:var(--ink-soft);font-size:.92rem;line-height:1.55;max-width:52ch;}
+
+  .collection{padding-block:clamp(56px,8vw,96px);scroll-margin-top:130px;}
+  .collection--soap{--accent:var(--soap);--accent-soft:var(--soap-soft);}
+  .collection--sachet{--accent:var(--sachet);--accent-soft:var(--sachet-soft);background:var(--surface);}
+  .collection--candle{--accent:var(--candle);--accent-soft:var(--candle-soft);}
+  .collection--flower{--accent:var(--flower);--accent-soft:var(--flower-soft);background:var(--surface);}
+  .collection--subenil{--accent:var(--subenil);--accent-soft:var(--subenil-soft);}
+  .collection-head{margin-bottom:clamp(28px,4vw,44px);}
+  .collection-head h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-top:10px;}
+  .collection-head p{margin-top:14px;color:var(--ink-soft);font-size:1.02rem;}
+  .collection .collection-head{
+    display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:end;
+    margin-bottom:clamp(36px,5vw,64px);
+  }
+  .collection .collection-head h2{
+    font-size:clamp(2.4rem,5vw,4rem);line-height:1;letter-spacing:-.015em;margin-top:0;
+    font-variation-settings:"SOFT" 100,"WONK" 1,"opsz" 144;
+  }
+  .collection .collection-head p{max-width:42ch;margin-top:18px;}
+  .collection-count{display:block;margin-top:18px;font-family:'Caveat',cursive;font-size:1.35rem;font-weight:600;color:var(--accent);}
+  /* La foto grande toma su forma real (nunca se recorta); el parallax mueve el marco completo. */
+  .collection-feature{margin:0;display:flex;justify-content:center;}
+  .collection-feature img{
+    display:block;width:auto;max-width:100%;height:auto;max-height:min(68vh,540px);
+    border-radius:var(--radius-lg);box-shadow:var(--shadow);background:var(--accent-soft);
+  }
+  .collection--sachet .collection-feature,.collection--flower .collection-feature{order:-1;}
+  @media (max-width:760px){
+    .collection .collection-head{grid-template-columns:1fr;}
+    .collection .collection-feature{order:-1;}
+  }
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:clamp(28px,3vw,40px) clamp(18px,2vw,28px);grid-auto-flow:dense;}
+  .card{
+    display:flex;flex-direction:column;gap:8px;
+    opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;
+  }
+  .card.in-view{opacity:1;transform:translateY(0);}
+  /* La foto siempre se ve completa (traen el nombre y la fragancia escritos en los bordes).
+     Si no llena el marco, el espacio se rellena con la misma foto difuminada. */
+  .card .art{
+    background:var(--accent-soft);border-radius:var(--radius-md);margin-bottom:8px;
+    aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    position:relative;cursor:pointer;isolation:isolate;
+  }
+  .card .art::before{
+    content:"";position:absolute;inset:-24px;z-index:-1;
+    background:var(--img) center/cover no-repeat;filter:blur(18px) saturate(1.05);opacity:.6;
+  }
+  .card .art img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .4s ease;}
+  .card:hover .art img{transform:scale(1.03);}
+
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(20,16,14,.92);
+    display:flex;align-items:center;justify-content:center;padding:32px;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+  .lightbox img{max-width:min(90vw,900px);max-height:85vh;object-fit:contain;border-radius:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);}
+  .lightbox-close{
+    position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
+    font-size:1.3rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease;
+  }
+  .lightbox-close:hover{background:rgba(255,255,255,.25);}
+  .card--wide{grid-column:span 2;}
+  .card--wide .art{aspect-ratio:3/2;}
+  @media (max-width:640px){.card--wide{grid-column:span 1;}}
+  .card h3{font-size:1.18rem;line-height:1.2;color:var(--ink);}
+  .card .desc{color:var(--ink-soft);font-size:.88rem;line-height:1.55;flex:1;}
+  .card .tag{font-family:'Caveat',cursive;color:var(--accent);font-size:1.2rem;font-weight:600;line-height:1.1;}
+  .card .btn--wa{
+    align-self:flex-start;margin-top:6px;padding:8px 14px 8px 12px;font-size:.8rem;
+    background:transparent;color:var(--ink);border-color:var(--border);
+  }
+  .card .btn--wa svg{color:var(--whatsapp);}
+  .card .btn--wa:hover{background:var(--whatsapp);border-color:var(--whatsapp);color:#fff;filter:none;}
+  .card .btn--wa:hover svg{color:#fff;}
+
+  @media (prefers-reduced-motion: reduce){.card{opacity:1;transform:none;}}
+
+  footer{position:relative;background:var(--footer-bg);color:var(--footer-heading);padding-block:clamp(56px,8vw,88px) 26px;}
+  footer::before{
+    content:"";position:absolute;left:0;right:0;top:-1px;height:20px;pointer-events:none;
+    background:radial-gradient(circle at 20px 0, var(--paper) 19.5px, transparent 20px) repeat-x;
+    background-size:40px 20px;
+  }
+  footer .wrap{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:36px;}
+  @media (max-width:760px){footer .wrap{grid-template-columns:1fr;}}
+  footer h3{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--footer-heading);font-weight:500;}
+  footer p, footer a{color:var(--footer-text);font-size:.92rem;}
+  footer a{text-decoration:none;}
+  footer a:hover{color:var(--footer-heading);}
+  footer .foot-note{
+    margin-top:38px;padding-top:20px;border-top:1px solid var(--footer-border);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-size:.8rem;color:var(--footer-muted);
+  }
+  footer .signoff{font-family:'Caveat',cursive;font-size:1.3rem;color:var(--footer-accent);}
+  .foot-col ul{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:8px;}
+
+  .social-row{display:inline-flex;align-items:center;gap:12px;margin-top:14px;text-decoration:none;}
+  .social-handle{font-family:'Caveat',cursive;font-size:1.35rem;font-weight:600;color:var(--footer-accent);}
+  .social-icon{
+    width:52px;height:52px;border-radius:50%;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--surface-2);border:1px solid var(--border);color:var(--ink);
+    transition:transform .25s ease, background .25s ease, color .25s ease;
+  }
+  .social-icon svg{width:26px;height:26px;}
+  .social-icon:hover{background:var(--sello);color:#fdf6f1;transform:translateY(-2px);}
+  .header-actions .social-icon{width:46px;height:46px;}
+  .header-actions .social-icon svg{width:22px;height:22px;}
+  footer .social-icon{background:rgba(255,255,255,.08);border-color:var(--footer-border);color:var(--footer-text);}
+  footer .social-icon:hover{background:var(--footer-accent);color:var(--footer-bg);}
+
+  .fab-wa{
+    position:fixed;right:20px;bottom:20px;z-index:50;
+    width:58px;height:58px;border-radius:50%;background:var(--whatsapp);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 12px 26px -8px rgba(0,0,0,.4);
+    transition:transform .25s ease;
+  }
+  .fab-wa:hover{transform:scale(1.08);}
+  .fab-wa svg{width:28px;height:28px;}
+
+  .new-badge{
+    position:absolute;top:10px;left:10px;z-index:2;
+    background:var(--sello);color:#fdf6f1;font-size:.65rem;font-weight:700;
+    letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;
+  }
+
+  .fav-btn{
+    position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.88);border:1px solid var(--border);color:var(--ink-soft);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;
+    transition:transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .fav-btn svg{width:17px;height:17px;}
+  .fav-btn:hover{transform:scale(1.1);}
+  .fav-btn.active{background:var(--sello);color:#fdf6f1;border-color:var(--sello);}
+  .fav-btn.active svg path{fill-opacity:1;}
+
+  .fav-fab{
+    position:fixed;right:20px;bottom:88px;z-index:50;
+    min-width:52px;height:52px;padding-inline:16px;border-radius:999px;background:var(--sello);color:#fdf6f1;
+    display:none;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:.85rem;
+    box-shadow:0 12px 26px -8px rgba(0,0,0,.4);cursor:pointer;border:none;font-family:'Manrope',sans-serif;
+    transition:transform .2s ease;
+  }
+  .fav-fab.show{display:inline-flex;}
+  .fav-fab:hover{transform:scale(1.05);}
+  .fav-fab svg{width:18px;height:18px;flex:none;}
+
+  .fav-panel-overlay{
+    position:fixed;inset:0;z-index:120;background:rgba(20,16,14,.55);
+    display:flex;align-items:flex-end;justify-content:flex-end;padding:20px;
+    opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  .fav-panel-overlay.open{opacity:1;pointer-events:auto;}
+  .fav-panel{
+    width:320px;max-width:90vw;max-height:70vh;overflow-y:auto;background:var(--surface);
+    border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+    transform:translateY(16px);opacity:0;transition:transform .3s ease,opacity .3s ease;
+  }
+  .fav-panel-overlay.open .fav-panel{transform:translateY(0);opacity:1;}
+  .fav-panel h4{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:12px;color:var(--ink);}
+  .fav-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--ink);}
+  .fav-item button{background:none;border:none;color:var(--ink-soft);cursor:pointer;font-size:.95rem;padding:4px;flex:none;}
+  .fav-item button:hover{color:var(--sello);}
+  .fav-empty{color:var(--ink-soft);font-size:.88rem;padding:12px 0;line-height:1.5;}
+  .fav-panel .btn{width:100%;justify-content:center;margin-top:14px;}
+
+</style>
+<link rel="stylesheet" href="temporadas.css">
+</head>
+<body>
+
+<div id="seasonBanner"></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="./" class="brand" aria-label="Ir a la portada">
+      <img class="mark" src="imagenes/logo.png" alt="Artesanías EC" />
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#jabones">Jabones</a>
+      <a href="#sachets">Sachets</a>
+      <a href="#velones">Velones</a>
+      <a href="#flores">Flores Eternas</a>
+      <a href="#subeniles">Souvenirs</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a class="social-icon" data-instagram href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="btn btn--sello" href="#contacto">Escribir por WhatsApp</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow" id="heroEyebrow"></span>
+        <h1>Detalles que permanecen en tus sentidos, <em>hechos con amor</em>.</h1>
+        <p class="lede">Jabones artesanales, velones vertidos a mano y flores eternas que no se marchitan. Cada pieza sale de un taller pequeño, en tandas cortas, con tiempo de sobra.</p>
+        <div class="ctas">
+          <a class="btn btn--sello" href="#jabones">Ver catálogo</a>
+          <a class="btn btn--ghost" href="#como-pedir">Cómo pedir</a>
+        </div>
+        <div class="seals-row">
+          <a class="seal-link" href="#jabones">
+            <img src="imagenes/jabones/jabon-hidratante-mango-gardenia.jpg" alt="" loading="lazy" />
+            Jabones
+          </a>
+          <a class="seal-link" href="#sachets">
+            <img src="imagenes/jabones/sachet-lavanda.jpg" alt="" loading="lazy" />
+            Sachets
+          </a>
+          <a class="seal-link" href="#velones">
+            <img src="imagenes/velones/velon-vainilla-caramelo.jpg" alt="" loading="lazy" />
+            Velones
+          </a>
+          <a class="seal-link" href="#flores">
+            <img src="imagenes/flores/rosas-liston-rosapalo-maceta.jpg" alt="" loading="lazy" />
+            Flores Eternas
+          </a>
+          <a class="seal-link" href="#subeniles">
+            <img src="imagenes/subeniles/baby-shower-caja-individual.jpg" alt="" loading="lazy" />
+            Souvenirs
+          </a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img class="seal-big s1" src="imagenes/jabones/jabon-petalos.jpg" alt="" />
+        <img class="seal-big s2" src="imagenes/velones/velon-te-alto-1.jpg" alt="" />
+        <img class="seal-big s3" src="imagenes/flores/rosas-eternas-amarillo-hero.jpg" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <div class="story-band">
+    <div class="wrap">
+      <p>&ldquo;Cada jabón se corta, cada velón se vierte y cada flor se preserva a mano &mdash; una tanda pequeña a la vez.&rdquo;</p>
+      <span>Del taller a tu casa</span>
+    </div>
+  </div>
+
+  <section class="how-to-order" id="como-pedir">
+    <div class="wrap">
+      <div class="collection-head">
+        <h2>¿Cómo pedir?</h2>
+        <p>No hay carrito ni pagos en línea: todo se coordina directo con nosotros por WhatsApp.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <span class="step-num">1</span>
+          <h3>Elige tus favoritos</h3>
+          <p>Recorre el catálogo y marca ♡ los productos que más te gusten.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <h3>Escríbenos por WhatsApp</h3>
+          <p>Pide un producto directo desde su tarjeta, o envía toda tu lista de favoritos de una vez.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <h3>Coordinamos todo</h3>
+          <p>Te confirmamos precio y colores disponibles, y vemos si recoges en casa o coordinamos un punto de encuentro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="collection collection--soap" id="jabones">
+    <div class="wrap">
+      <div class="collection-head">
+        <div class="collection-text">
+          <h2>Jabones artesanales</h2>
+          <p>Saponificados en frío con aceites vegetales, sin químicos agresivos. Se curan durante semanas antes de salir del taller, lo que los hace más suaves y duraderos.</p>
+          <span class="collection-count" data-count-for="grid-jabones"></span>
+        </div>
+        <figure class="collection-feature"><img src="imagenes/jabones/set-regalo-jabones-velones.jpg" alt="" loading="lazy" /></figure>
+      </div>
+      <div class="card-grid" id="grid-jabones"></div>
+    </div>
+  </section>
+
+  <section class="collection collection--sachet" id="sachets">
+    <div class="wrap">
+      <div class="collection-head">
+        <div class="collection-text">
+          <h2>Sachets Aromáticos</h2>
+          <p>Placas perfumadas para colgar en clósets, gavetas o el espejo del carro. Cada una se decora a mano con flores secas y libera su fragancia por semanas.</p>
+          <span class="collection-count" data-count-for="grid-sachets"></span>
+        </div>
+        <figure class="collection-feature"><img src="imagenes/jabones/sachet-ambar-algodon.jpg" alt="" loading="lazy" /></figure>
+      </div>
+      <div class="card-grid" id="grid-sachets"></div>
+    </div>
+  </section>
+
+  <section class="collection collection--candle" id="velones">
+    <div class="wrap">
+      <div class="collection-head">
+        <div class="collection-text">
+          <h2>Velones</h2>
+          <p>Vertidos a mano en tandas pequeñas, con pabilo de algodón y cera vegetal. Cada velón se deja curar 24 horas antes de encender su primera mecha.</p>
+          <span class="collection-count" data-count-for="grid-velones"></span>
+        </div>
+        <figure class="collection-feature"><img src="imagenes/velones/velon-coco.jpg" alt="" loading="lazy" /></figure>
+      </div>
+      <div class="card-grid" id="grid-velones"></div>
+    </div>
+  </section>
+
+  <section class="collection collection--flower" id="flores">
+    <div class="wrap">
+      <div class="collection-head">
+        <div class="collection-text">
+          <h2>Flores Eternas</h2>
+          <p>Flores naturales preservadas con glicerina vegetal: conservan su textura y color hasta por tres años, sin agua, sin sol directo y sin mantenimiento.</p>
+          <span class="collection-count" data-count-for="grid-flores"></span>
+        </div>
+        <figure class="collection-feature"><img src="imagenes/flores/rosas-eternas-azul-maceta.jpg" alt="" loading="lazy" /></figure>
+      </div>
+      <div class="card-grid" id="grid-flores"></div>
+    </div>
+  </section>
+
+  <section class="collection collection--subenil" id="subeniles">
+    <div class="wrap">
+      <div class="collection-head">
+        <div class="collection-text">
+          <h2>Souvenirs</h2>
+          <p>Recuerdos personalizados para baby showers, bodas y otras celebraciones. Cada cajita se arma a mano y se puede pedir por cantidad según tu evento.</p>
+          <span class="collection-count" data-count-for="grid-subeniles"></span>
+        </div>
+        <figure class="collection-feature"><img src="imagenes/subeniles/baby-shower-pedido-mayor.jpg" alt="" loading="lazy" /></figure>
+      </div>
+      <div class="card-grid" id="grid-subeniles"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-col">
+      <img class="footer-mark" src="imagenes/logo.png" alt="Artesanías EC" />
+      <p style="margin-top:10px;max-width:38ch;">Escríbenos por WhatsApp con el nombre del producto que te interesa y te contamos precio, colores disponibles y tiempo de entrega.</p>
+      <a class="btn btn--wa" style="margin-top:18px;" data-wa data-item="">
+        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3 9 3 16c0 2.4.6 4.6 1.8 6.6L3 29l6.6-1.7A13 13 0 0 0 16 29c7 0 13-6 13-13S23 3 16 3zm0 23.5c-2.1 0-4.1-.6-5.8-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 0 1 5.5 16c0-5.8 4.7-10.5 10.5-10.5S26.5 10.2 26.5 16 21.8 26.5 16 26.5zm5.7-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.5-1.5 9.4 9.4 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.5.3-.5v-.5c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 2.9 1.3 3.1c.2.3 2.2 3.4 5.4 4.6.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <a class="social-row" data-instagram href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <span class="social-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </span>
+        <span class="social-handle">@ec__artesanias</span>
+      </a>
+    </div>
+    <div class="foot-col">
+      <h3 style="font-size:1rem;">Catálogo</h3>
+      <ul>
+        <li><a href="#jabones">Jabones</a></li>
+        <li><a href="#sachets">Sachets</a></li>
+        <li><a href="#velones">Velones</a></li>
+        <li><a href="#flores">Flores Eternas</a></li>
+        <li><a href="#subeniles">Souvenirs</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h3 style="font-size:1rem;">Horario</h3>
+      <ul>
+        <li>Lunes a sábado</li>
+        <li>Pedidos por WhatsApp</li>
+        <li>Recoges en casa o coordinamos un punto de encuentro</li>
+      </ul>
+    </div>
+    <div class="foot-note wrap" style="max-width:none;padding-inline:0;">
+      <span class="signoff">Hecho con cariño, en casa.</span>
+      <span>© <span id="year"></span> Artesanías EC</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">✕</button>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<a class="fab-wa" data-wa data-item="" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#fff"><path d="M16 3C9 3 3 9 3 16c0 2.4.6 4.6 1.8 6.6L3 29l6.6-1.7A13 13 0 0 0 16 29c7 0 13-6 13-13S23 3 16 3zm0 23.5c-2.1 0-4.1-.6-5.8-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 0 1 5.5 16c0-5.8 4.7-10.5 10.5-10.5S26.5 10.2 26.5 16 21.8 26.5 16 26.5zm5.7-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.5-1.5 9.4 9.4 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.5.3-.5v-.5c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 2.9 1.3 3.1c.2.3 2.2 3.4 5.4 4.6.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script src="temporadas.js"></script>
+
+<button class="fav-fab" id="favFab" aria-label="Ver mis favoritos">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-8.5C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8.5C19 16.65 12 21 12 21z"/></svg>
+  <span class="fav-count">0</span>
+</button>
+
+<script>
+  // === EDITAR AQUÍ: número real de WhatsApp de mamá, formato país+número sin espacios ni signos ===
+  const WHATSAPP_NUMBER = "18297200691"; // numero real de mama
+
+  // === EDITAR AQUÍ: cuando crees la página de Instagram de mamá, pega su link entre las comillas ===
+  const INSTAGRAM_URL = "https://www.instagram.com/ec__artesanias";
+
+  // === EDITAR AQUÍ: catálogo de productos. Para agregar uno nuevo, copia una línea y cambia los datos. ===
+  const WA_ICON = `<svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3 9 3 16c0 2.4.6 4.6 1.8 6.6L3 29l6.6-1.7A13 13 0 0 0 16 29c7 0 13-6 13-13S23 3 16 3zm0 23.5c-2.1 0-4.1-.6-5.8-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 0 1 5.5 16c0-5.8 4.7-10.5 10.5-10.5S26.5 10.2 26.5 16 21.8 26.5 16 26.5zm5.7-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.5-1.5 9.4 9.4 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.5.3-.5v-.5c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 2.9 1.3 3.1c.2.3 2.2 3.4 5.4 4.6.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>`;
+
+  const PRODUCTS = {
+    jabones: [
+      {img:"imagenes/jabones/jabon-exfoliante-cafe.jpg", title:"Jabón Exfoliante de Café", tag:"Fragancia Vainilla"},
+      {img:"imagenes/jabones/jabon-hidratante-vainilla.jpg", title:"Jabón Hidratante", tag:"Fragancia Vainilla"},
+      {img:"imagenes/jabones/jabon-hidratante-mango-gardenia.jpg", title:"Jabón Hidratante", tag:"Mango y Gardenia"},
+      {img:"imagenes/jabones/jabon-hidratante-sandalo.jpg", title:"Jabón Hidratante", tag:"Fragancia Sándalo"},
+      {img:"imagenes/jabones/set-regalo-jabones-velones.jpg", title:"Set de Regalo Artesanal", tag:"Jabones y velones", desc:"Combina piezas a tu gusto para armar un set de regalo.", wide:true},
+      {img:"imagenes/jabones/jabon-hidratante-suavidad.jpg", title:"Jabón Hidratante", tag:"Suavidad y frescura"},
+      {img:"imagenes/jabones/jabon-decorativo-sakura.jpg", title:"Jabón Decorativo", tag:"Fragancia Sakura"},
+      {img:"imagenes/jabones/jabon-hidratante-naranja.jpg", title:"Jabón Hidratante", tag:"Fragancia Naranja"},
+      {img:"imagenes/jabones/jabon-exfoliante-bolas.jpg", title:"Bolas de Jabón Exfoliante", tag:"Edición exfoliante"},
+      {img:"imagenes/jabones/jabon-unificador-tono.jpg", title:"Jabón Unificador de Tono de Piel", tag:"Piel pareja y luminosa"},
+      {img:"imagenes/jabones/jabon-hidratante-azul.jpg", title:"Jabón Hidratante", tag:"Azul"},
+      {img:"imagenes/jabones/jabon-suavizante-blanco.jpg", title:"Jabón Suavizante en Corazón", tag:"Blanco"},
+      {img:"imagenes/jabones/jabon-exfoliante-floral.jpg", title:"Jabón Exfoliante Floral", tag:"Blanco y Gris", isNew:true},
+      {img:"imagenes/jabones/set-detalles-artesanales.jpg", title:"Set de Detalles Artesanales", tag:"Regalo especial", desc:"Caja con mini jabones, sachet y vela — ideal para un regalo pequeño.", isNew:true},
+      {img:"imagenes/jabones/set-jabones-vela-caja-kraft.jpg", title:"Set de Jabones y Vela en Caja Kraft", tag:"Regalo especial", desc:"Caja kraft con jabones jaspeados, sachet y velita aromática.", isNew:true},
+      {img:"imagenes/jabones/jabon-decorativo-margaritas.jpg", title:"Jabón Decorativo Margaritas", tag:"Rosa y Amarillo", desc:"Vara con dos margaritas talladas a mano, para lucir o regalar.", isNew:true},
+      {img:"imagenes/jabones/jabon-decorativo-margarita-amarilla.jpg", title:"Jabón Decorativo Margarita", tag:"Amarillo", isNew:true},
+      {img:"imagenes/jabones/jabon-suavizante-corazon-aguacate-lavanda.jpg", title:"Jabón Suavizante en Corazón", tag:"Aguacate y Lavanda", desc:"Hidrata y suaviza la piel con aceite natural de aguacate y fragancia de ramas de lavanda.", isNew:true},
+      {img:"imagenes/jabones/jabon-unificador-corazon-curcuma-coco-vainilla.jpg", title:"Jabón Unificador de Tono en Corazón", tag:"Cúrcuma, Coco y Vainilla", desc:"Ayuda a borrar manchas oscuras y unificar el tono de la piel, con cúrcuma, esencia de limón y fragancia de coco y vainilla.", isNew:true},
+      {img:"imagenes/jabones/set-jabones-cesta-dia-madres.jpg", title:"Cesta de Jabones Artesanales", tag:"Piel unificada e hidratada", desc:"Jabones artesanales para mantener el tono de tu piel unificado e hidratado.", wide:true, isNew:true}
+    ],
+    sachets: [
+      {img:"imagenes/jabones/sachet-lavanda.jpg", title:"Sachet Aromático", tag:"Ramas de Lavanda"},
+      {img:"imagenes/jabones/jabon-petalos.jpg", title:"Sachet Aromático", tag:"Edición floral"},
+      {img:"imagenes/jabones/jabon-canela-sandalo.jpg", title:"Sachet Aromático", tag:"Canela y Sándalo"},
+      {img:"imagenes/jabones/sachet-vainilla.jpg", title:"Sachet Aromático", tag:"Fragancia Vainilla"},
+      {img:"imagenes/jabones/sachet-ambar-algodon.jpg", title:"Sachet Aromático", tag:"Ámbar y Algodón"},
+      {img:"imagenes/jabones/sachet-cedro.jpg", title:"Sachet Aromático", tag:"Fragancia Cedro"}
+    ],
+    velones: [
+      {img:"imagenes/velones/velon-te-alto-1.jpg", title:"Velón Aromático", tag:"Té Alto"},
+      {img:"imagenes/velones/velon-vainilla-caramelo.jpg", title:"Velón Aromático", tag:"Vainilla y Caramelo"},
+      {img:"imagenes/velones/velon-te-alto-2.jpg", title:"Velón Aromático", tag:"Té Alto"},
+      {img:"imagenes/velones/velon-coco.jpg", title:"Velón Aromático", tag:"Coco"},
+      {img:"imagenes/velones/velon-te-blanco.jpg", title:"Velón Aromático", tag:"Té Blanco"},
+      {img:"imagenes/velones/velon-ambar-negro.jpg", title:"Velón Aromático", tag:"Ámbar Negro"},
+      {img:"imagenes/velones/set-velon-difusor.jpg", title:"Set de Velón y Difusor", tag:"Edición especial", desc:"Set con velón, difusor de varillas y detalles decorativos.", wide:true},
+      {img:"imagenes/velones/velon-lavanda.jpg", title:"Velón Aromático", tag:"Lavanda"},
+      {img:"imagenes/velones/velon-eucalipto.jpg", title:"Velón Aromático", tag:"Eucalipto"},
+      {img:"imagenes/velones/velon-flores-secas-lavanda.jpg", title:"Velón Aromático", tag:"Lavanda y Flores Secas", desc:"Vela en copa de cristal, decorada con flores secas de lavanda sobre la cera.", isNew:true}
+    ],
+    flores: [
+      {img:"imagenes/flores/claveles-eternos-blanco.jpg", title:"Ramo de Claveles Eternos", tag:"Blanco clásico", desc:"Claveles preservados en florero de vidrio con moño decorativo."},
+      {img:"imagenes/flores/rosas-eternas-amarillo.jpg", title:"Ramo de Rosas Eternas", tag:"Amarillo", desc:"Rosas preservadas en florero de vidrio, ideales para decorar cualquier espacio."},
+      {img:"imagenes/flores/rosas-eternas-azul-maceta.jpg", title:"Rosas Eternas en Maceta", tag:"Azul", desc:"Arreglo de rosas preservadas en maceta decorativa con acabado dorado."},
+      {img:"imagenes/flores/flor-liston-rosa-maceta.jpg", title:"Dhalia", tag:"Rosa", desc:"Flor artesanal hecha con listón de satín, presentada en maceta con moño."},
+      {img:"imagenes/flores/mini-ramo-rosas-amarillas.jpg", title:"Mini Ramo de Rosas Eternas", tag:"Amarillo con lazo verde", desc:"Rosas eternas y flor de nube envueltas en papel, con moño de listón satinado.", isNew:true},
+      {img:"imagenes/flores/rosas-liston-marfil-maceta.jpg", title:"Ramo de Rosas de Listón", tag:"Marfil", desc:"Rosas hechas a mano con listón de satín, presentadas en maceta de cerámica con moño.", isNew:true},
+      {img:"imagenes/flores/rosas-liston-rosapalo-maceta.jpg", title:"Ramo de Rosas de Listón", tag:"Rosa Palo", desc:"Rosas hechas a mano con listón de satín, presentadas en maceta de cerámica con moño dorado.", isNew:true},
+      {img:"imagenes/flores/centro-mesa-rosas-clavel-dhalia.jpg", title:"Centro de Mesa", tag:"Rosas, Clavel y Dhalia", desc:"Centro de mesa artesanal hecho con listón de satín, presentado en caja decorativa sobre base de pedestal.", isNew:true}
+    ],
+    subeniles: [
+      {img:"imagenes/subeniles/baby-shower-caja-individual.jpg", title:"Cajita de Jabones Bebé", tag:"Baby Shower", desc:"Mini jabones (osito, biberón, huellita y coche) en caja con ventana y moño de listón."},
+      {img:"imagenes/subeniles/baby-shower-pedido-mayor.jpg", title:"Recuerdos por Mayor", tag:"Baby Shower", desc:"Se arman por cantidad según el número de invitados de tu evento.", wide:true},
+      {img:"imagenes/subeniles/baby-shower-produccion.jpg", title:"Mini Jabones para Armar", tag:"Baby Shower", desc:"Mini jabones sueltos (osito, biberón, huellita, coche y más) listos para empacar en tu cajita."}
+    ]
+  };
+
+  const HEART_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.35-9.5-8.5C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8.5C19 16.65 12 21 12 21z" fill="currentColor" fill-opacity="0"/></svg>`;
+
+  function renderGrid(gridId, items){
+    const grid = document.getElementById(gridId);
+    grid.innerHTML = items.map(p => `
+      <article class="card${p.wide ? ' card--wide' : ''}">
+        <div class="art" style="--img:url('${p.img}')">
+          <img src="${p.img}" alt="${p.title}" loading="lazy" />
+          ${p.isNew ? '<span class="new-badge">Nuevo</span>' : ''}
+          <button class="fav-btn" data-fav-key="${p.img}" data-fav-label="${p.title} (${p.tag})" aria-label="Guardar en favoritos">${HEART_ICON}</button>
+        </div>
+        <h3>${p.title}</h3>
+        ${p.desc ? `<p class="desc">${p.desc}</p>` : ''}
+        <span class="tag">${p.tag}</span>
+        <a class="btn btn--wa" data-wa data-item="${p.title} (${p.tag})">
+          ${WA_ICON}
+          Pedir por WhatsApp
+        </a>
+      </article>
+    `).join('');
+    updateFavUI();
+  }
+
+  const FAV_KEY = 'ec-favoritos';
+  function loadFavorites(){
+    try { return JSON.parse(localStorage.getItem(FAV_KEY) || '{}'); } catch(e){ return {}; }
+  }
+  function saveFavoritesData(){
+    try { localStorage.setItem(FAV_KEY, JSON.stringify(favorites)); } catch(e){}
+  }
+  let favorites = loadFavorites();
+
+  function updateFavUI(){
+    const count = Object.keys(favorites).length;
+    const fab = document.getElementById('favFab');
+    if (fab){
+      fab.classList.toggle('show', count > 0);
+      fab.querySelector('.fav-count').textContent = count;
+    }
+    document.querySelectorAll('.fav-btn').forEach(btn=>{
+      btn.classList.toggle('active', !!favorites[btn.getAttribute('data-fav-key')]);
+    });
+  }
+
+  function toggleFavorite(key, label){
+    if (favorites[key]) delete favorites[key];
+    else favorites[key] = label;
+    saveFavoritesData();
+    updateFavUI();
+  }
+
+  function renderFavPanel(){
+    const overlay = document.createElement('div');
+    overlay.className = 'fav-panel-overlay';
+    const items = Object.entries(favorites);
+    const itemsHtml = items.length
+      ? items.map(([key,label]) => `<div class="fav-item"><span>${label}</span><button data-remove="${key}" aria-label="Quitar">✕</button></div>`).join('')
+      : `<div class="fav-empty">Todavía no has guardado favoritos. Toca el corazón en cualquier producto del catálogo.</div>`;
+    overlay.innerHTML = `
+      <div class="fav-panel">
+        <h4>Tus favoritos</h4>
+        ${itemsHtml}
+        ${items.length ? `<a class="btn btn--wa" id="favSendBtn">${WA_ICON}Enviar por WhatsApp</a>` : ''}
+      </div>`;
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add('open')));
+
+    function closePanel(){
+      overlay.classList.remove('open');
+      overlay.addEventListener('transitionend', () => overlay.remove(), { once:true });
+    }
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closePanel(); });
+    overlay.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        delete favorites[btn.getAttribute('data-remove')];
+        saveFavoritesData();
+        updateFavUI();
+        closePanel();
+        renderFavPanel();
+      });
+    });
+    const sendBtn = overlay.querySelector('#favSendBtn');
+    if (sendBtn){
+      sendBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const list = Object.values(favorites).map(l => `- ${l}`).join('\n');
+        const msg = `Hola, me interesan estos productos:\n${list}\n¿Me dan más información?`;
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+      });
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    const favBtn = e.target.closest('.fav-btn');
+    if (favBtn) {
+      e.stopPropagation();
+      toggleFavorite(favBtn.getAttribute('data-fav-key'), favBtn.getAttribute('data-fav-label'));
+      return;
+    }
+  });
+
+  const favFab = document.getElementById('favFab');
+  if (favFab) favFab.addEventListener('click', renderFavPanel);
+
+  renderGrid('grid-jabones', PRODUCTS.jabones);
+  renderGrid('grid-sachets', PRODUCTS.sachets);
+  renderGrid('grid-velones', PRODUCTS.velones);
+  renderGrid('grid-flores', PRODUCTS.flores);
+  renderGrid('grid-subeniles', PRODUCTS.subeniles);
+
+  document.querySelectorAll('[data-count-for]').forEach(el => {
+    const n = document.getElementById(el.dataset.countFor).children.length;
+    el.textContent = `${n} ${n === 1 ? 'pieza' : 'piezas'} hechas a mano`;
+  });
+
+  // Si llegan con un link a una sección (desde la portada, p. ej. catalogo.html#velones), bajamos a ella
+  // ahora que los productos ya están dibujados.
+  const linkedSection = location.hash && document.getElementById(location.hash.slice(1));
+  if (linkedSection) requestAnimationFrame(() => linkedSection.scrollIntoView({ behavior: 'instant' }));
+
+  // Parallax de las fotos grandes de cada sección: la foto completa crece y sube suavemente mientras bajas
+  // (se mueve el marco entero, así nunca se recorta).
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    loadGsap().then(() => {
+      document.querySelectorAll('.collection-feature img').forEach(img => {
+        gsap.fromTo(img, { scale: .9, y: 40 }, {
+          scale: 1.03, y: -40, ease: 'none',
+          scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      });
+    }).catch(() => {});
+  }
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+
+  function openLightbox(src, alt){
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.classList.add('open');
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+  }
+
+  document.addEventListener('click', (e)=>{
+    const art = e.target.closest('.card .art');
+    if (art && !e.target.closest('.fav-btn')) {
+      const img = art.querySelector('img');
+      if (img) openLightbox(img.src, img.alt);
+    }
+  });
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e)=>{ if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeLightbox(); });
+
+  document.querySelectorAll('[data-wa]').forEach(el=>{
+    el.href = '#';
+    el.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const item = el.getAttribute('data-item');
+      const msg = item
+        ? `Hola, me interesa: ${item}. ¿Me da más información?`
+        : 'Hola, vi el catálogo y me gustaría más información.';
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  });
+
+  const igLinks = document.querySelectorAll('[data-instagram]');
+  if (INSTAGRAM_URL) {
+    igLinks.forEach(el => { el.href = INSTAGRAM_URL; });
+  } else {
+    igLinks.forEach(el => { el.style.display = 'none'; });
+  }
+
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', ()=>{
+    const open = document.body.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.querySelectorAll('#mainNav a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      document.body.classList.remove('nav-open');
+      navToggle.setAttribute('aria-expanded','false');
+    });
+  });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduceMotion){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach((entry, i)=>{
+        if(entry.isIntersecting){
+          setTimeout(()=>entry.target.classList.add('in-view'), (i%4)*80);
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15});
+    document.querySelectorAll('.card').forEach(c=>io.observe(c));
+  } else {
+    document.querySelectorAll('.card').forEach(c=>c.classList.add('in-view'));
+  }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const ALL_PRODUCT_IMAGES = [
+    ...PRODUCTS.jabones, ...PRODUCTS.sachets, ...PRODUCTS.velones, ...PRODUCTS.flores, ...PRODUCTS.subeniles
+  ].map(p => p.img);
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && ALL_PRODUCT_IMAGES.length > 3) {
+    const heroSlots = Array.from(document.querySelectorAll('.hero-art .seal-big'));
+    const currentSrcBySlot = {};
+    heroSlots.forEach(img => { currentSrcBySlot[img.className] = img.getAttribute('src'); });
+
+    function pickRandomImage(){
+      const taken = Object.values(currentSrcBySlot);
+      const candidates = ALL_PRODUCT_IMAGES.filter(src => !taken.includes(src));
+      const pool = candidates.length ? candidates : ALL_PRODUCT_IMAGES;
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    heroSlots.filter(img => !img.dataset.fixed).forEach((img, i) => {
+      setInterval(() => {
+        const nextSrc = pickRandomImage();
+        const preload = new Image();
+        preload.onload = () => {
+          img.style.opacity = '0';
+          setTimeout(() => {
+            currentSrcBySlot[img.className] = nextSrc;
+            img.src = nextSrc;
+            img.style.opacity = '1';
+          }, 1800);
+        };
+        preload.src = nextSrc;
+      }, 5500 + i * 700);
+    });
+  }
+</script>
+</body>
+</html>

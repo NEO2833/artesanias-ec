@@ -1,0 +1,231 @@
+/* Temporadas comerciales: barra de aviso, etiqueta, partículas y diseño especial del inicio.
+   Lo usan la portada (index.html) y el catálogo (catalogo.html). */
+.season-banner{
+  background:var(--footer-bg);color:var(--footer-text);
+  font-size:.82rem;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding-block:10px;padding-inline:clamp(40px,6vw,64px);position:relative;
+  max-height:80px;overflow:hidden;
+  transition:opacity .35s ease, max-height .35s ease, padding-block .35s ease;
+}
+.season-banner.closing{opacity:0;max-height:0;padding-block:0;}
+.season-banner .season-dot{width:16px;height:16px;flex:none;filter:drop-shadow(0 0 4px var(--season-accent));}
+.season-banner .season-dot svg{width:100%;height:100%;display:block;}
+.season-banner strong{color:var(--footer-heading);font-weight:600;}
+.season-banner button{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;font-size:1rem;line-height:1;cursor:pointer;
+  color:var(--footer-text);opacity:.6;padding:6px;
+}
+.season-banner button:hover{opacity:1;color:var(--footer-heading);}
+.season-badge{
+  display:inline-flex;align-items:center;gap:7px;margin-left:12px;
+  background:transparent;border:1px solid var(--season-accent);color:var(--season-accent);
+  padding:5px 14px 5px 10px;border-radius:999px;font-size:.68rem;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;vertical-align:middle;
+}
+.season-badge .season-dot{width:14px;height:14px;flex:none;filter:drop-shadow(0 0 3px var(--season-accent));}
+.season-badge .season-dot svg{width:100%;height:100%;display:block;}
+
+.petal-field{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden;}
+.petal{position:absolute;top:-10vh;width:var(--sz);height:var(--sz);opacity:0;filter:drop-shadow(0 0 6px var(--field-glow)) drop-shadow(0 4px 6px rgba(0,0,0,.15));animation:petal-fall var(--dur) linear infinite;animation-delay:var(--delay);}
+.petal svg{width:100%;height:100%;display:block;}
+@keyframes petal-fall{
+  0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0;}
+  8%{opacity:.85;}
+  50%{transform:translateY(55vh) translateX(var(--drift)) rotate(170deg);}
+  92%{opacity:.8;}
+  100%{transform:translateY(115vh) translateX(calc(var(--drift) * -1)) rotate(320deg);opacity:0;}
+}
+@media (prefers-reduced-motion: reduce){.petal-field{display:none;}}
+
+/* === Navidad: charamico dorado con las fotos colgando como adornos === */
+:root{--xmas-pine:#1F3A2E;--xmas-gold:#B8924A;--xmas-gold-hi:#E2C27E;--xmas-kraft:#E6D3B3;--xmas-kraft-ink:#4A3A26;--xmas-light:#F2C46B;}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--xmas-gold:#D2AE68;--xmas-kraft:#3B2E1C;--xmas-kraft-ink:#EBD9B8;}
+}
+:root[data-theme="dark"]{--xmas-gold:#D2AE68;--xmas-kraft:#3B2E1C;--xmas-kraft-ink:#EBD9B8;}
+
+.season-banner--navidad{background:var(--xmas-pine);color:#DCE3D6;font-size:.86rem;}
+.season-banner--navidad strong{color:var(--xmas-gold-hi);}
+.season-banner--navidad .season-dot{filter:drop-shadow(0 0 5px var(--xmas-light));}
+
+[data-season="navidad"] nav.main-nav a::after{background:var(--xmas-gold);}
+
+.season-badge--tag{
+  position:relative;margin-left:4px;padding:3px 16px 4px 26px;border:none;border-radius:0 6px 6px 0;
+  background:var(--xmas-kraft);color:var(--xmas-kraft-ink);
+  font-family:'Caveat',cursive;font-size:1.3rem;font-weight:600;letter-spacing:0;text-transform:none;
+  clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%);
+  transform:rotate(-3deg);transform-origin:left center;
+}
+.season-badge--tag::before{
+  content:"";position:absolute;left:11px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;
+  background:var(--paper);box-shadow:inset 0 0 0 1.5px var(--xmas-gold);
+}
+
+.hero-art.is-charamico{height:clamp(360px,38vw,460px);}
+.charamico{position:absolute;left:-4%;right:-4%;top:-14px;height:70px;pointer-events:none;z-index:2;}
+.charamico svg{width:100%;height:100%;display:block;overflow:visible;}
+.charamico .limb{fill:none;stroke:var(--xmas-gold);stroke-linecap:round;}
+.charamico .tip{fill:var(--xmas-gold-hi);}
+.charamico .light{fill:var(--xmas-light);filter:drop-shadow(0 0 3px var(--xmas-light));animation:twinkle 2.6s ease-in-out infinite;}
+.charamico .light:nth-of-type(3n){animation-delay:-.9s;animation-duration:3.1s;}
+.charamico .light:nth-of-type(3n+1){animation-delay:-1.7s;}
+@keyframes twinkle{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+.ornament{position:absolute;top:6px;z-index:1;}
+.ornament.o1{left:2%;width:43%;--drop:clamp(34px,4vw,52px);}
+.ornament.o2{left:56%;width:40%;--drop:clamp(80px,8vw,116px);z-index:3;}
+.ornament.o3{left:27%;width:36%;--drop:clamp(150px,16vw,214px);z-index:2;}
+.ornament-sway{position:relative;padding-top:var(--drop);transform-origin:50% 0;animation:ornament-sway 6s ease-in-out infinite;}
+.ornament.o2 .ornament-sway{animation-duration:7.4s;animation-delay:-2s;}
+.ornament.o3 .ornament-sway{animation-duration:5.2s;animation-delay:-3.5s;}
+@keyframes ornament-sway{0%,100%{transform:rotate(-1.4deg);}50%{transform:rotate(1.4deg);}}
+.ornament-sway::before{
+  content:"";position:absolute;left:50%;top:0;width:1px;height:calc(var(--drop) - 10px);
+  background:linear-gradient(var(--xmas-gold),var(--xmas-gold-hi));
+}
+.ornament-sway::after{
+  content:"";position:absolute;left:0;right:0;top:var(--drop);aspect-ratio:1;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle at 34% 28%,#FFF6DD 0,var(--xmas-gold-hi) 30%,var(--xmas-gold) 70%,#8E6A2E 100%);
+}
+.ornament-cap{
+  position:absolute;left:50%;top:calc(var(--drop) - 12px);width:16%;height:16px;transform:translateX(-50%);z-index:1;
+  border-radius:4px 4px 2px 2px;background:linear-gradient(90deg,#9C7637,var(--xmas-gold-hi) 45%,#9C7637);
+  box-shadow:0 2px 4px rgba(43,35,32,.25);
+}
+.ornament-cap::before{
+  content:"";position:absolute;left:50%;top:-8px;width:10px;height:10px;margin-left:-5px;border-radius:50%;
+  border:1.5px solid var(--xmas-gold);
+}
+.hero-art .ornament .seal-big{position:relative;inset:auto;width:100%;display:block;animation:none;border-color:var(--xmas-kraft);}
+
+.petal.rise{top:auto;bottom:-6vh;animation-name:ember-rise;animation-timing-function:ease-in-out;filter:drop-shadow(0 0 8px var(--field-glow));}
+.petal.rise svg{transform:scale(.4);}
+@keyframes ember-rise{
+  0%{transform:translate(0,0);opacity:0;}
+  12%{opacity:.9;}
+  40%{transform:translate(var(--drift),-40vh);opacity:.55;}
+  70%{transform:translate(calc(var(--drift) * -.6),-72vh);opacity:.85;}
+  100%{transform:translate(0,-110vh);opacity:0;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .charamico .light,.ornament-sway{animation:none;}
+}
+
+/* === San Valentín: listón de satín y sello de lacre amarrando las fotos === */
+:root{--val-wine:#4A0F1E;--val-lacre:#9E1B32;--val-satin:#C9576E;--val-satin-hi:#F2B8C2;--val-blush:#F1DCDA;--val-blush-ink:#6E1A2C;}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--val-satin:#D8687F;--val-blush:#3A2328;--val-blush-ink:#F2C9CF;}
+}
+:root[data-theme="dark"]{--val-satin:#D8687F;--val-blush:#3A2328;--val-blush-ink:#F2C9CF;}
+
+.season-banner--valentin{background:var(--val-wine);color:#F3DADD;font-size:.86rem;}
+.season-banner--valentin strong{color:var(--val-satin-hi);}
+
+[data-season="valentin"] nav.main-nav a::after{background:var(--val-satin);}
+
+.season-badge--note{
+  position:relative;margin-left:4px;padding:4px 16px 5px 34px;border:none;border-radius:3px;
+  background:var(--val-blush);color:var(--val-blush-ink);
+  font-family:'Caveat',cursive;font-size:1.3rem;font-weight:600;letter-spacing:0;text-transform:none;
+  box-shadow:0 1px 0 rgba(0,0,0,.06);transform:rotate(-2deg);transform-origin:left center;
+}
+.season-badge--note::before{
+  content:"";position:absolute;left:9px;top:50%;width:17px;height:17px;margin-top:-8.5px;border-radius:46% 54% 50% 50%;
+  background:radial-gradient(circle at 35% 30%,#C8394F,var(--val-lacre) 60%,#6E0F22);
+  box-shadow:inset 0 0 0 3px rgba(0,0,0,.12);
+}
+
+.hero-art.is-lazo .seal-big{animation:none;border-color:var(--val-blush);z-index:1;}
+.lazo{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.lazo--front{z-index:2;}
+.lazo .bow-fold path{fill:none;stroke:var(--val-lacre);stroke-width:2px;stroke-opacity:.45;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+.lazo svg{width:100%;height:100%;display:block;overflow:visible;}
+.lazo .ribbon path{fill:none;stroke:var(--val-satin);stroke-width:11px;stroke-linecap:butt;vector-effect:non-scaling-stroke;}
+.lazo .ribbon-shine path{fill:none;stroke:var(--val-satin-hi);stroke-width:2px;opacity:.55;vector-effect:non-scaling-stroke;}
+.lazo .bow path{fill:var(--val-satin);stroke:var(--val-lacre);stroke-width:1.5px;stroke-opacity:.35;vector-effect:non-scaling-stroke;}
+.wax-seal{
+  position:absolute;left:56%;top:40%;width:clamp(58px,6vw,74px);aspect-ratio:1;margin:calc(clamp(58px,6vw,74px) / -2) 0 0 calc(clamp(58px,6vw,74px) / -2);
+  z-index:3;pointer-events:none;filter:drop-shadow(0 6px 8px rgba(74,15,30,.35));
+}
+.wax-seal svg{width:100%;height:100%;display:block;}
+.wax-seal .wax{fill:var(--val-lacre);}
+
+/* === Día de las Flores Amarillas: una flor gigante que se abre detrás de las fotos === */
+:root{--fa-sun:#F2C94C;--fa-butter:#F8E08E;--fa-ochre:#C99A0E;--fa-heart:#B5791A;--fa-ink:#3B2E0A;}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--fa-sun:#E0B43A;--fa-butter:#EDD07A;}
+}
+:root[data-theme="dark"]{--fa-sun:#E0B43A;--fa-butter:#EDD07A;}
+
+.season-banner--flores-amarillas{background:var(--fa-sun);color:var(--fa-ink);font-size:.86rem;}
+.season-banner--flores-amarillas strong{color:var(--fa-ink);font-weight:700;}
+.season-banner--flores-amarillas button,.season-banner--flores-amarillas button:hover{color:var(--fa-ink);}
+.season-banner--flores-amarillas .season-dot{filter:none;}
+.season-banner--flores-amarillas .season-dot ellipse{fill:#FFFFFF;}
+
+[data-season="flores-amarillas"] nav.main-nav a::after{background:var(--fa-ochre);}
+
+.season-badge--marker{
+  margin-left:0;padding:2px 10px 4px;border:none;border-radius:0;
+  background:linear-gradient(176deg,transparent 22%,var(--fa-sun) 24%,var(--fa-sun) 82%,transparent 84%);
+  color:var(--fa-ink);font-family:'Caveat',cursive;font-size:1.4rem;font-weight:600;letter-spacing:0;text-transform:none;
+}
+
+.hero-art.is-flor .seal-big{animation:none;border-color:var(--fa-butter);}
+.hero-art.is-flor .s3{width:46%;left:27%;top:50%;bottom:auto;right:auto;margin-top:-23%;z-index:2;}
+.hero-art.is-flor .s1{width:27%;left:0;top:0;bottom:auto;right:auto;z-index:3;}
+.hero-art.is-flor .s2{width:27%;left:auto;right:0;top:auto;bottom:0;z-index:3;}
+.big-flower{position:absolute;inset:-4%;display:grid;place-items:center;pointer-events:none;z-index:0;}
+.big-flower svg{height:100%;width:auto;max-width:100%;display:block;overflow:visible;}
+.big-flower .petal-outer{fill:var(--fa-sun);stroke:var(--fa-ochre);stroke-width:.6;stroke-opacity:.5;}
+.big-flower .petal-inner{fill:var(--fa-butter);stroke:var(--fa-ochre);stroke-width:.5;stroke-opacity:.35;}
+.big-flower .flower-heart{fill:var(--fa-heart);}
+
+/* === Día de las Madres: las fotos como ramo envuelto en papel kraft === */
+:root{--mom-malva:#4B2E45;--mom-ink:#7A4E6D;--mom-petal:#EBD3D6;--mom-kraft-a:#E3CBA4;--mom-kraft-b:#D4B486;--mom-kraft-c:#C9A673;--mom-stem:#7C8B6F;--mom-card:#FFFCF8;}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--mom-ink:#E2BCD3;--mom-kraft-a:#8C7350;--mom-kraft-b:#7A6243;--mom-kraft-c:#6B5538;--mom-stem:#9CAE86;--mom-card:#F3E9DF;}
+}
+:root[data-theme="dark"]{--mom-ink:#E2BCD3;--mom-kraft-a:#8C7350;--mom-kraft-b:#7A6243;--mom-kraft-c:#6B5538;--mom-stem:#9CAE86;--mom-card:#F3E9DF;}
+
+.season-banner--madres{background:var(--mom-malva);color:#EBDDE6;font-size:.86rem;}
+.season-banner--madres strong{color:#F4CBD6;}
+
+[data-season="madres"] nav.main-nav a::after{background:var(--mom-ink);}
+
+.season-badge--card{
+  margin-left:4px;padding:3px 16px 5px;border:1px solid var(--border);border-radius:2px;
+  background:var(--mom-card);color:#7A4E6D;
+  font-family:'Caveat',cursive;font-size:1.32rem;font-weight:600;letter-spacing:0;text-transform:none;
+  box-shadow:0 6px 14px -8px rgba(75,46,69,.35);transform:rotate(-2.5deg);transform-origin:left center;
+}
+
+.hero-art.is-ramo{height:clamp(380px,40vw,480px);}
+.hero-art.is-ramo .seal-big{animation:none;border-color:var(--mom-petal);}
+.hero-art.is-ramo .s1{width:38%;top:22%;left:6%;bottom:auto;right:auto;z-index:2;}
+.hero-art.is-ramo .s2{width:38%;top:22%;left:56%;bottom:auto;right:auto;z-index:2;}
+.hero-art.is-ramo .s3{width:40%;top:0;left:30%;bottom:auto;right:auto;z-index:1;}
+.ramo-stems,.ramo-wrap{position:absolute;inset:0;pointer-events:none;}
+.ramo-stems{z-index:0;}
+.ramo-wrap{z-index:3;}
+.ramo-stems svg,.ramo-wrap svg{width:100%;height:100%;display:block;overflow:visible;}
+.ramo-stems path{fill:none;stroke:var(--mom-stem);stroke-width:3px;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+.ramo-wrap .kraft-a{fill:var(--mom-kraft-a);}
+.ramo-wrap .kraft-b{fill:var(--mom-kraft-b);}
+.ramo-wrap .kraft-c{fill:var(--mom-kraft-c);}
+.ramo-wrap .fold{fill:none;stroke:rgba(74,58,38,.22);stroke-width:1px;vector-effect:non-scaling-stroke;}
+.ramo-wrap .twine{fill:none;stroke:#F4EDE2;stroke-width:2px;stroke-linecap:round;vector-effect:non-scaling-stroke;filter:drop-shadow(0 1px 0 rgba(74,58,38,.35));}
+.ramo-wrap .stem-ends{fill:none;stroke:var(--mom-stem);stroke-width:3px;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+.ramo-card{
+  position:absolute;right:3%;top:74%;z-index:4;padding:6px 14px 8px;
+  background:var(--mom-card);color:#7A4E6D;border-radius:2px;
+  font-family:'Caveat',cursive;font-size:clamp(1.05rem,1.5vw,1.3rem);font-weight:600;line-height:1.1;white-space:nowrap;
+  box-shadow:0 10px 18px -10px rgba(75,46,69,.45);transform:rotate(7deg);transform-origin:0 0;
+}
+.ramo-card::before{
+  content:"";position:absolute;left:-26px;top:4px;width:30px;height:1.5px;background:#CDBFA9;transform:rotate(-24deg);transform-origin:right center;
+}
