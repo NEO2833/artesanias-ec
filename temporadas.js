@@ -200,6 +200,9 @@ function setupValentin(){
   const badge = document.querySelector('.season-badge');
   if (badge) { badge.classList.add('season-badge--note'); badge.querySelector('.season-dot')?.remove(); }
 
+  const archWindow = document.querySelector('.intro-window');
+  if (archWindow) setupValentinLanding(archWindow);
+
   const art = document.querySelector('.hero-art');
   if (!art) return;
   art.classList.add('is-lazo');
@@ -233,9 +236,49 @@ function setupValentin(){
   }).catch(() => {});
 }
 
+// Portada: rama de charamico sobre el arco, con bolas doradas colgando a distintas alturas.
+function buildArchCharamico(){
+  const baubles = [[130, 37, 64, 16], [245, 33, 118, 21], [360, 26, 84, 17], [470, 29, 140, 22]];
+  const hanging = baubles.map(([x, y, len, r], i) => `
+    <g class="arch-bauble"><g class="arch-sway" style="transform-origin:${x}px ${y}px;animation-delay:${-i * 1.3}s">
+      <line x1="${x}" y1="${y}" x2="${x}" y2="${y + len - r}" stroke="#E2C27E" stroke-width="1.2"/>
+      <rect x="${x - r * .32}" y="${y + len - r - 7}" width="${r * .64}" height="8" rx="2" fill="#B8924A"/>
+      <circle cx="${x}" cy="${y + len}" r="${r}" fill="url(#archGold)"/>
+      <ellipse cx="${x - r * .35}" cy="${y + len - r * .35}" rx="${r * .22}" ry="${r * .3}" fill="rgba(255,255,255,.55)"/>
+    </g></g>`).join('');
+  return `<svg viewBox="0 0 600 230" aria-hidden="true">
+    <defs><radialGradient id="archGold" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#FFF6DD"/><stop offset=".35" stop-color="#E2C27E"/><stop offset=".8" stop-color="#B8924A"/><stop offset="1" stop-color="#8E6A2E"/></radialGradient></defs>
+    ${hanging}
+    <path class="limb" stroke-width="4" pathLength="1" d="M-10 48 C80 30 160 40 245 33 S400 20 470 29 S560 42 610 22"/>
+    <path class="limb" stroke-width="2" pathLength="1" d="M70 40 C80 24 92 18 108 14 M180 38 C190 54 204 62 220 66 M300 28 C310 12 324 6 340 4 M410 24 C420 40 434 48 450 52 M520 34 C530 18 546 12 562 12"/>
+    <circle class="tip" cx="108" cy="14" r="3"/><circle class="tip" cx="220" cy="66" r="3"/><circle class="tip" cx="340" cy="4" r="3"/><circle class="tip" cx="450" cy="52" r="3"/><circle class="tip" cx="562" cy="12" r="3"/>
+    <circle class="light" cx="40" cy="44" r="3"/><circle class="light" cx="190" cy="37" r="3"/><circle class="light" cx="300" cy="28" r="3"/><circle class="light" cx="410" cy="24" r="3"/><circle class="light" cx="540" cy="36" r="3"/>
+  </svg>`;
+}
+
+function setupChristmasLanding(win){
+  const decor = document.createElement('div');
+  decor.className = 'arch-charamico charamico';
+  decor.innerHTML = buildArchCharamico();
+  win.appendChild(decor);
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  loadGsap().then(() => {
+    gsap.timeline({ delay: .3 })
+      .from(decor.querySelectorAll('.limb'), { strokeDasharray: 1, strokeDashoffset: 1, duration: 1.3, ease: 'power2.inOut', stagger: .2, clearProps: 'strokeDasharray,strokeDashoffset' })
+      .from(decor.querySelectorAll('.tip, .light'), { opacity: 0, duration: .4, stagger: .03, clearProps: 'opacity' }, '-=.6')
+      .from(decor.querySelectorAll('.arch-bauble'), { y: -60, opacity: 0, duration: 1.2, ease: 'elastic.out(1, .45)', stagger: .15 }, '-=.8');
+    // Al bajar, la rama sube y se desvanece mientras el arco se abre.
+    gsap.to(decor, { autoAlpha: 0, y: -80, ease: 'none', scrollTrigger: { trigger: '.intro', start: 'top 84px', end: '+=320', scrub: true } });
+  }).catch(() => {});
+}
+
 function setupChristmas(){
   const badge = document.querySelector('.season-badge');
   if (badge) { badge.classList.add('season-badge--tag'); badge.querySelector('.season-dot')?.remove(); }
+
+  const archWindow = document.querySelector('.intro-window');
+  if (archWindow) setupChristmasLanding(archWindow);
 
   const art = document.querySelector('.hero-art');
   if (!art) return;
@@ -299,6 +342,9 @@ function setupMadres(){
   const badge = document.querySelector('.season-badge');
   if (badge) { badge.classList.add('season-badge--card'); badge.querySelector('.season-dot')?.remove(); }
 
+  const archWindow = document.querySelector('.intro-window');
+  if (archWindow) setupMadresLanding(archWindow);
+
   const art = document.querySelector('.hero-art');
   if (!art) return;
   art.classList.add('is-ramo');
@@ -360,6 +406,9 @@ function buildBigFlower(){
 function setupFloresAmarillas(){
   const badge = document.querySelector('.season-badge');
   if (badge) { badge.classList.add('season-badge--marker'); badge.querySelector('.season-dot')?.remove(); }
+
+  const archWindow = document.querySelector('.intro-window');
+  if (archWindow) setupFloresLanding(archWindow);
 
   const art = document.querySelector('.hero-art');
   if (!art) return;
@@ -432,6 +481,87 @@ function spawnField(svgOrList, glow, variant){
   document.body.appendChild(field);
 }
 
+// === Portada: decoración de cada temporada alrededor del arco de la foto principal ===
+
+// Al bajar, la decoración sube y se desvanece mientras el arco se abre a pantalla completa.
+function fadeArchDecor(els){
+  // fromTo + immediateRender:false para que siempre parta visible, aunque la animación de entrada aún no termine.
+  gsap.fromTo(els, { autoAlpha: 1, y: 0 }, {
+    autoAlpha: 0, y: -80, ease: 'none', immediateRender: false,
+    scrollTrigger: { trigger: '.intro', start: 'top 84px', end: '+=320', scrub: true }
+  });
+}
+
+// San Valentín: el arco envuelto como regalo, con listón cruzado, moño y sello de lacre.
+function setupValentinLanding(win){
+  const clip = win.querySelector('.intro-clip') || win;
+  const ribbon = document.createElement('div');
+  ribbon.className = 'arch-ribbon';
+  ribbon.innerHTML = `<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="band" d="M72 -2 L72 102"/><path class="band" d="M-2 30 L102 30"/>
+    <path class="shine" d="M72 -2 L72 102"/><path class="shine" d="M-2 30 L102 30"/>
+  </svg>`;
+  clip.appendChild(ribbon);
+  const bow = document.createElement('div');
+  bow.className = 'arch-bow';
+  bow.innerHTML = `<svg viewBox="0 0 120 80" aria-hidden="true">
+    <path class="loop" d="M60 40 C40 8 8 10 14 34 C18 50 44 48 60 40 Z"/>
+    <path class="loop" d="M60 40 C80 8 112 10 106 34 C102 50 76 48 60 40 Z"/>
+    <path class="fold" d="M58 39 C44 26 30 22 22 28 M62 39 C76 26 90 22 98 28"/>
+    <path class="loop" d="M56 44 C50 58 44 68 36 78 L46 76 L50 80 C56 66 60 56 62 46 Z"/>
+    <path class="loop" d="M64 44 C70 58 76 68 84 78 L74 76 L70 80 C64 66 60 56 58 46 Z"/>
+  </svg><div class="arch-seal">${WAX_SEAL_SVG}</div>`;
+  win.appendChild(bow);
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  loadGsap().then(() => {
+    const seal = bow.querySelector('.arch-seal');
+    gsap.timeline({ delay: .3 })
+      .from(ribbon, { clipPath: 'inset(0% 100% 100% 0%)', duration: 1.1, ease: 'power2.inOut', clearProps: 'clipPath' })
+      .from(bow.querySelector('svg'), { scale: 0, transformOrigin: '50% 50%', duration: .6, ease: 'back.out(2)' }, '-=.3')
+      .from(seal, { scale: 1.9, rotation: -25, opacity: 0, duration: .45, ease: 'power3.in' }, '-=.1')
+      .to(seal, { scaleX: 1.08, scaleY: .92, duration: .08, yoyo: true, repeat: 1 });
+    fadeArchDecor([bow]);
+  }).catch(() => {});
+}
+
+// Día de las Madres: la parte de abajo del arco envuelta en papel kraft como un ramo, con tarjeta.
+function setupMadresLanding(win){
+  const wrap = document.createElement('div');
+  wrap.className = 'ramo-wrap arch-wrap';
+  wrap.innerHTML = RAMO_WRAP_SVG;
+  const card = document.createElement('div');
+  card.className = 'arch-card';
+  card.textContent = 'Para mamá, con amor';
+  win.append(wrap, card);
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  loadGsap().then(() => {
+    gsap.timeline({ delay: .3 })
+      .from(wrap.querySelectorAll('.kraft-a, .kraft-b, .kraft-c, .fold'), { y: 50, opacity: 0, duration: .8, ease: 'power3.out', stagger: .12 })
+      .from(wrap.querySelectorAll('.twine, .stem-ends'), { opacity: 0, duration: .4 }, '-=.2')
+      .from(card, { rotation: -40, opacity: 0, y: -20, duration: .9, ease: 'elastic.out(1, .5)' }, '-=.2');
+    fadeArchDecor([wrap, card]);
+  }).catch(() => {});
+}
+
+// Flores Amarillas: una flor amarilla gigante se abre detrás del arco, como un sol.
+function setupFloresLanding(win){
+  const flower = document.createElement('div');
+  flower.className = 'big-flower arch-flower';
+  flower.innerHTML = buildBigFlower();
+  win.prepend(flower);
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  loadGsap().then(() => {
+    gsap.timeline({ delay: .3 })
+      .from(flower.querySelectorAll('.petal-outer'), { scale: 0, svgOrigin: '100 100', duration: .9, ease: 'back.out(1.4)', stagger: .04 })
+      .from(flower.querySelectorAll('.petal-inner'), { scale: 0, svgOrigin: '100 100', duration: .7, ease: 'back.out(1.6)', stagger: .04 }, '-=.8');
+    gsap.to(flower.querySelector('svg'), { rotation: 60, transformOrigin: '50% 50%', ease: 'none', scrollTrigger: { trigger: '.intro', start: 'top 84px', end: 'bottom bottom', scrub: true } });
+    gsap.to(flower, { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: '.intro', start: 'top 84px', end: '+=420', scrub: true } });
+  }).catch(() => {});
+}
+
 (function applySeason(){
   const season = getActiveSeason();
   if (!season) return;
@@ -461,13 +591,20 @@ function spawnField(svgOrList, glow, variant){
       const bannerText = SEASON_BANNER_TEXT[season.id] ? SEASON_BANNER_TEXT[season.id]() : season.banner;
       banner.innerHTML = `<div class="season-banner season-banner--${season.id}"><span class="season-dot">${seasonIcon}</span><span>${bannerText}</span><button aria-label="Cerrar aviso">✕</button></div>`;
       const bar = banner.querySelector('.season-banner');
+      // La portada usa esta altura para que el arco quepa completo en pantalla con la barra puesta.
+      const setBannerHeight = h => {
+        document.documentElement.style.setProperty('--banner-h', h + 'px');
+        if (window.ScrollTrigger) ScrollTrigger.refresh();
+      };
+      setBannerHeight(bar.offsetHeight);
       banner.querySelector('button').addEventListener('click', () => {
         try { localStorage.setItem(dismissKey, '1'); } catch(e) {}
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           banner.innerHTML = '';
+          setBannerHeight(0);
         } else {
           bar.classList.add('closing');
-          bar.addEventListener('transitionend', () => { banner.innerHTML = ''; }, { once:true });
+          bar.addEventListener('transitionend', () => { banner.innerHTML = ''; setBannerHeight(0); }, { once:true });
         }
       });
     }
