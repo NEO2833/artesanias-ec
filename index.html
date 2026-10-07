@@ -494,6 +494,37 @@
   .wax-seal svg{width:100%;height:100%;display:block;}
   .wax-seal .wax{fill:var(--val-lacre);}
 
+  /* === Día de las Flores Amarillas: una flor gigante que se abre detrás de las fotos === */
+  :root{--fa-sun:#F2C94C;--fa-butter:#F8E08E;--fa-ochre:#C99A0E;--fa-heart:#B5791A;--fa-ink:#3B2E0A;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){--fa-sun:#E0B43A;--fa-butter:#EDD07A;}
+  }
+  :root[data-theme="dark"]{--fa-sun:#E0B43A;--fa-butter:#EDD07A;}
+
+  .season-banner--flores-amarillas{background:var(--fa-sun);color:var(--fa-ink);font-size:.86rem;}
+  .season-banner--flores-amarillas strong{color:var(--fa-ink);font-weight:700;}
+  .season-banner--flores-amarillas button,.season-banner--flores-amarillas button:hover{color:var(--fa-ink);}
+  .season-banner--flores-amarillas .season-dot{filter:none;}
+  .season-banner--flores-amarillas .season-dot ellipse{fill:#FFFFFF;}
+
+  [data-season="flores-amarillas"] nav.main-nav a::after{background:var(--fa-ochre);}
+
+  .season-badge--marker{
+    margin-left:0;padding:2px 10px 4px;border:none;border-radius:0;
+    background:linear-gradient(176deg,transparent 22%,var(--fa-sun) 24%,var(--fa-sun) 82%,transparent 84%);
+    color:var(--fa-ink);font-family:'Caveat',cursive;font-size:1.4rem;font-weight:600;letter-spacing:0;text-transform:none;
+  }
+
+  .hero-art.is-flor .seal-big{animation:none;border-color:var(--fa-butter);}
+  .hero-art.is-flor .s3{width:46%;left:27%;top:50%;bottom:auto;right:auto;margin-top:-23%;z-index:2;}
+  .hero-art.is-flor .s1{width:27%;left:0;top:0;bottom:auto;right:auto;z-index:3;}
+  .hero-art.is-flor .s2{width:27%;left:auto;right:0;top:auto;bottom:0;z-index:3;}
+  .big-flower{position:absolute;inset:-4%;display:grid;place-items:center;pointer-events:none;z-index:0;}
+  .big-flower svg{height:100%;width:auto;max-width:100%;display:block;overflow:visible;}
+  .big-flower .petal-outer{fill:var(--fa-sun);stroke:var(--fa-ochre);stroke-width:.6;stroke-opacity:.5;}
+  .big-flower .petal-inner{fill:var(--fa-butter);stroke:var(--fa-ochre);stroke-width:.5;stroke-opacity:.35;}
+  .big-flower .flower-heart{fill:var(--fa-heart);}
+
   /* === Día de las Madres: las fotos como ramo envuelto en papel kraft === */
   :root{--mom-malva:#4B2E45;--mom-ink:#7A4E6D;--mom-petal:#EBD3D6;--mom-kraft-a:#E3CBA4;--mom-kraft-b:#D4B486;--mom-kraft-c:#C9A673;--mom-stem:#7C8B6F;--mom-card:#FFFCF8;}
   @media (prefers-color-scheme: dark){
@@ -767,7 +798,7 @@
   const SEASONS = [
     { id:'flores-amarillas', badge:'Día de las Flores Amarillas',
       banner:'21 de septiembre: <strong>Día de las Flores Amarillas</strong> — sorprende con una flor eterna que no se marchita.',
-      accent:'#C9A94A', accentSoft:'#F5E6B8', start:[9,18], end:[9,21] },
+      accent:'#C99A0E', accentSoft:'#F7E7B0', glow:'#F2C94C', start:[9,18], end:[9,21] },
     { id:'navidad', badge:'Especial de Navidad',
       banner:'Ideas de regalo para esta <strong>Navidad</strong>: jabones, velones y flores eternas.',
       accent:'#8E2B3A', accentSoft:'#F3DDDF', glow:'#C8A15A', start:[12,1], end:[1,6] },
@@ -796,7 +827,7 @@
     return SEASONS.find(s => dateInRange(now.getMonth()+1, now.getDate(), s.start, s.end)) || null;
   }
 
-  const FLOWER_SVG = `<svg viewBox="0 0 40 40"><g fill="var(--season-accent)"><circle cx="20" cy="12" r="8"/><circle cx="27.6" cy="17.5" r="8"/><circle cx="24.7" cy="26.5" r="8"/><circle cx="15.3" cy="26.5" r="8"/><circle cx="12.4" cy="17.5" r="8"/></g><circle cx="20" cy="20" r="5.5" fill="var(--candle)"/></svg>`;
+  const FLOWER_SVG = `<svg viewBox="0 0 40 40"><g fill="#F2C94C"><ellipse cx="20" cy="10" rx="5" ry="9"/><ellipse cx="20" cy="10" rx="5" ry="9" transform="rotate(72 20 20)"/><ellipse cx="20" cy="10" rx="5" ry="9" transform="rotate(144 20 20)"/><ellipse cx="20" cy="10" rx="5" ry="9" transform="rotate(216 20 20)"/><ellipse cx="20" cy="10" rx="5" ry="9" transform="rotate(288 20 20)"/></g><circle cx="20" cy="20" r="4.5" fill="#B5791A"/></svg>`;
 
   const STAR_SVG = `<svg viewBox="0 0 40 40"><path d="M20 2 L23 17 L38 20 L23 23 L20 38 L17 23 L2 20 L17 17 Z" fill="#E2C27E"/><path d="M20 10 L21.5 18.5 L30 20 L21.5 21.5 L20 30 L18.5 21.5 L10 20 L18.5 18.5 Z" fill="#FFF3D6" transform="rotate(45 20 20)"/></svg>`;
 
@@ -823,7 +854,7 @@
   const GYPSOPHILA_SVG = `<svg viewBox="0 0 40 40"><path d="M20 38 L20 22 M20 26 L12 16 M20 24 L28 14 M20 22 L20 10" stroke="#8A9A78" stroke-width="1.4" fill="none" stroke-linecap="round"/><g fill="#FFFFFF" stroke="rgba(75,46,69,.25)" stroke-width=".8"><circle cx="12" cy="15" r="3.2"/><circle cx="9" cy="11" r="2.6"/><circle cx="15" cy="11" r="2.4"/><circle cx="28" cy="13" r="3.2"/><circle cx="31" cy="9" r="2.4"/><circle cx="25" cy="9" r="2.6"/><circle cx="20" cy="9" r="3.4"/><circle cx="20" cy="4.5" r="2.6"/></g></svg>`;
 
   const SEASON_FIELDS = {
-    'flores-amarillas': { svg: FLOWER_SVG, glow: 'var(--season-accent)' },
+    'flores-amarillas': { svg: FLOWER_SVG, glow: 'rgba(242,201,76,.5)' },
     'navidad': { svg: EMBER_SVG, glow: '#F2C46B', variant: 'rise' },
     'valentin': { svg: [PETAL_SVG, PETAL_BLUSH_SVG, PETAL_BLUSH_SVG], glow: 'rgba(158,27,50,.25)' },
     'madres': { svg: GYPSOPHILA_SVG, glow: 'rgba(255,255,255,.6)' }
@@ -1072,13 +1103,72 @@
     }).catch(() => {});
   }
 
+  function floresAmarillasBannerText(){
+    const now = new Date();
+    if (now.getMonth() === 8 && now.getDate() === 21) return 'Hoy es el <strong>Día de las Flores Amarillas</strong>. Regala una flor eterna que no se marchita.';
+    return `Faltan <strong>${daysLabel(daysUntil(9, 21))} para el Día de las Flores Amarillas</strong>. Regala una flor eterna que no se marchita.`;
+  }
+
+  // Flor amarilla gigante: dos coronas de pétalos que se abren detrás de las fotos.
+  function buildBigFlower(){
+    const ring = (count, len, width, offset, cls) => {
+      let out = '';
+      for (let i = 0; i < count; i++) {
+        const angle = offset + i * 360 / count;
+        out += `<path class="${cls}" d="M100 100 C${100 - width} ${100 - len * .35} ${100 - width * .7} ${100 - len} 100 ${100 - len} C${100 + width * .7} ${100 - len} ${100 + width} ${100 - len * .35} 100 100 Z" transform="rotate(${angle} 100 100)"/>`;
+      }
+      return out;
+    };
+    return `<svg viewBox="0 0 200 200">
+      <g class="petals-outer">${ring(14, 98, 20, 0, 'petal-outer')}</g>
+      <g class="petals-inner">${ring(14, 74, 16, 360 / 28, 'petal-inner')}</g>
+      <circle class="flower-heart" cx="100" cy="100" r="34"/>
+    </svg>`;
+  }
+
+  function setupFloresAmarillas(){
+    const badge = document.querySelector('.season-badge');
+    if (badge) { badge.classList.add('season-badge--marker'); badge.querySelector('.season-dot')?.remove(); }
+
+    const art = document.querySelector('.hero-art');
+    if (!art) return;
+    art.classList.add('is-flor');
+    const flower = document.createElement('div');
+    flower.className = 'big-flower';
+    flower.innerHTML = buildBigFlower();
+    art.prepend(flower);
+
+    // La foto del centro se queda fija en las rosas eternas amarillas (no entra en la rotación de fotos).
+    const center = art.querySelector('.seal-big.s3');
+    if (center) { center.src = 'imagenes/flores/rosas-eternas-amarillo-hero.jpg'; center.dataset.fixed = '1'; }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    loadGsap().then(() => {
+      const svg = flower.querySelector('svg');
+      gsap.timeline({ delay: .3 })
+        .from(flower.querySelectorAll('.petal-outer'), { scale: 0, svgOrigin: '100 100', duration: .9, ease: 'back.out(1.4)', stagger: .04 })
+        .from(flower.querySelectorAll('.petal-inner'), { scale: 0, svgOrigin: '100 100', duration: .7, ease: 'back.out(1.6)', stagger: .04 }, '-=.8')
+        .from(center, { scale: .4, opacity: 0, duration: .8, ease: 'back.out(1.8)', clearProps: 'opacity' }, '-=.5')
+        .from(art.querySelectorAll('.seal-big.s1, .seal-big.s2'), { scale: .5, opacity: 0, duration: .7, ease: 'back.out(1.6)', stagger: .15, clearProps: 'opacity' }, '-=.4');
+
+      // Parallax al hacer scroll: la flor gira despacio y crece, las fotos crecen un poco.
+      const hero = document.querySelector('.hero');
+      const scrub = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
+      gsap.to(art, { y: 70, ease: 'none', scrollTrigger: { ...scrub } });
+      gsap.to(svg, { rotation: 50, scale: 1.08, transformOrigin: '50% 50%', ease: 'none', scrollTrigger: { ...scrub } });
+      gsap.fromTo(art.querySelectorAll('.seal-big'), { scale: 1 }, { scale: 1.1, ease: 'none', immediateRender: false, scrollTrigger: { ...scrub } });
+    }).catch(() => {});
+  }
+
   const SEASON_SETUP = {
+    'flores-amarillas': setupFloresAmarillas,
     'navidad': setupChristmas,
     'valentin': setupValentin,
     'madres': setupMadres
   };
 
   const SEASON_BANNER_TEXT = {
+    'flores-amarillas': floresAmarillasBannerText,
     'navidad': christmasBannerText,
     'valentin': valentinBannerText,
     'madres': madresBannerText
@@ -1413,7 +1503,7 @@
       return pool[Math.floor(Math.random() * pool.length)];
     }
 
-    heroSlots.forEach((img, i) => {
+    heroSlots.filter(img => !img.dataset.fixed).forEach((img, i) => {
       setInterval(() => {
         const nextSrc = pickRandomImage();
         const preload = new Image();
