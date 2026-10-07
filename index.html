@@ -415,14 +415,81 @@
     .season-mascot.mothers-mascot .wing-mom, .season-mascot.mothers-mascot .wing-baby{animation:none;}
   }
 
-  .header-garland{
-    position:absolute;left:0;right:0;bottom:-20px;height:48px;
-    pointer-events:none;overflow:visible;
+  /* === Navidad: charamico dorado con las fotos colgando como adornos === */
+  :root{--xmas-pine:#1F3A2E;--xmas-gold:#B8924A;--xmas-gold-hi:#E2C27E;--xmas-kraft:#E6D3B3;--xmas-kraft-ink:#4A3A26;--xmas-light:#F2C46B;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){--xmas-gold:#D2AE68;--xmas-kraft:#3B2E1C;--xmas-kraft-ink:#EBD9B8;}
   }
-  .header-garland svg{width:100%;height:100%;display:block;animation:season-sway 5s ease-in-out infinite;transform-origin:top center;}
-  @keyframes season-sway{0%,100%{transform:rotate(-.6deg);}50%{transform:rotate(.6deg);}}
-  @media (prefers-reduced-motion: reduce){.header-garland svg{animation:none;}}
-  @media (max-width:760px){.header-garland{display:none;}}
+  :root[data-theme="dark"]{--xmas-gold:#D2AE68;--xmas-kraft:#3B2E1C;--xmas-kraft-ink:#EBD9B8;}
+
+  .season-banner--navidad{background:var(--xmas-pine);color:#DCE3D6;font-size:.86rem;}
+  .season-banner--navidad strong{color:var(--xmas-gold-hi);}
+  .season-banner--navidad .season-dot{filter:drop-shadow(0 0 5px var(--xmas-light));}
+
+  [data-season="navidad"] nav.main-nav a::after{background:var(--xmas-gold);}
+
+  .season-badge--tag{
+    position:relative;margin-left:4px;padding:3px 16px 4px 26px;border:none;border-radius:0 6px 6px 0;
+    background:var(--xmas-kraft);color:var(--xmas-kraft-ink);
+    font-family:'Caveat',cursive;font-size:1.3rem;font-weight:600;letter-spacing:0;text-transform:none;
+    clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%);
+    transform:rotate(-3deg);transform-origin:left center;
+  }
+  .season-badge--tag::before{
+    content:"";position:absolute;left:11px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;
+    background:var(--paper);box-shadow:inset 0 0 0 1.5px var(--xmas-gold);
+  }
+
+  .hero-art.is-charamico{height:clamp(360px,38vw,460px);}
+  .charamico{position:absolute;left:-4%;right:-4%;top:-14px;height:70px;pointer-events:none;z-index:2;}
+  .charamico svg{width:100%;height:100%;display:block;overflow:visible;}
+  .charamico .limb{fill:none;stroke:var(--xmas-gold);stroke-linecap:round;}
+  .charamico .tip{fill:var(--xmas-gold-hi);}
+  .charamico .light{fill:var(--xmas-light);filter:drop-shadow(0 0 3px var(--xmas-light));animation:twinkle 2.6s ease-in-out infinite;}
+  .charamico .light:nth-of-type(3n){animation-delay:-.9s;animation-duration:3.1s;}
+  .charamico .light:nth-of-type(3n+1){animation-delay:-1.7s;}
+  @keyframes twinkle{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+  .ornament{position:absolute;top:6px;z-index:1;}
+  .ornament.o1{left:2%;width:43%;--drop:clamp(34px,4vw,52px);}
+  .ornament.o2{left:56%;width:40%;--drop:clamp(80px,8vw,116px);z-index:3;}
+  .ornament.o3{left:27%;width:36%;--drop:clamp(150px,16vw,214px);z-index:2;}
+  .ornament-sway{position:relative;padding-top:var(--drop);transform-origin:50% 0;animation:ornament-sway 6s ease-in-out infinite;}
+  .ornament.o2 .ornament-sway{animation-duration:7.4s;animation-delay:-2s;}
+  .ornament.o3 .ornament-sway{animation-duration:5.2s;animation-delay:-3.5s;}
+  @keyframes ornament-sway{0%,100%{transform:rotate(-1.4deg);}50%{transform:rotate(1.4deg);}}
+  .ornament-sway::before{
+    content:"";position:absolute;left:50%;top:0;width:1px;height:calc(var(--drop) - 10px);
+    background:linear-gradient(var(--xmas-gold),var(--xmas-gold-hi));
+  }
+  .ornament-sway::after{
+    content:"";position:absolute;left:0;right:0;top:var(--drop);aspect-ratio:1;border-radius:50%;z-index:-1;
+    background:radial-gradient(circle at 34% 28%,#FFF6DD 0,var(--xmas-gold-hi) 30%,var(--xmas-gold) 70%,#8E6A2E 100%);
+  }
+  .ornament-cap{
+    position:absolute;left:50%;top:calc(var(--drop) - 12px);width:16%;height:16px;transform:translateX(-50%);z-index:1;
+    border-radius:4px 4px 2px 2px;background:linear-gradient(90deg,#9C7637,var(--xmas-gold-hi) 45%,#9C7637);
+    box-shadow:0 2px 4px rgba(43,35,32,.25);
+  }
+  .ornament-cap::before{
+    content:"";position:absolute;left:50%;top:-8px;width:10px;height:10px;margin-left:-5px;border-radius:50%;
+    border:1.5px solid var(--xmas-gold);
+  }
+  .hero-art .ornament .seal-big{position:relative;inset:auto;width:100%;display:block;animation:none;border-color:var(--xmas-kraft);}
+
+  .petal.rise{top:auto;bottom:-6vh;animation-name:ember-rise;animation-timing-function:ease-in-out;filter:drop-shadow(0 0 8px var(--field-glow));}
+  .petal.rise svg{transform:scale(.4);}
+  @keyframes ember-rise{
+    0%{transform:translate(0,0);opacity:0;}
+    12%{opacity:.9;}
+    40%{transform:translate(var(--drift),-40vh);opacity:.55;}
+    70%{transform:translate(calc(var(--drift) * -.6),-72vh);opacity:.85;}
+    100%{transform:translate(0,-110vh);opacity:0;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .charamico .light,.ornament-sway{animation:none;}
+  }
 </style>
 </head>
 <body>
@@ -655,7 +722,7 @@
       accent:'#C9A94A', accentSoft:'#F5E6B8', start:[9,18], end:[9,21] },
     { id:'navidad', badge:'Especial de Navidad',
       banner:'Ideas de regalo para esta <strong>Navidad</strong>: jabones, velones y flores eternas.',
-      accent:'#B23B3B', accentSoft:'#F4D9D6', start:[12,1], end:[1,6] },
+      accent:'#8E2B3A', accentSoft:'#F3DDDF', glow:'#C8A15A', start:[12,1], end:[1,6] },
     { id:'valentin', badge:'Especial de San Valentín',
       banner:'Detalles para <strong>San Valentín</strong>: velones aromáticos y flores eternas que no se marchitan.',
       accent:'#C2486B', accentSoft:'#F5DCE3', start:[2,1], end:[2,14] },
@@ -683,13 +750,9 @@
 
   const FLOWER_SVG = `<svg viewBox="0 0 40 40"><g fill="var(--season-accent)"><circle cx="20" cy="12" r="8"/><circle cx="27.6" cy="17.5" r="8"/><circle cx="24.7" cy="26.5" r="8"/><circle cx="15.3" cy="26.5" r="8"/><circle cx="12.4" cy="17.5" r="8"/></g><circle cx="20" cy="20" r="5.5" fill="var(--candle)"/></svg>`;
 
-  const CRYSTAL_SVG = `<svg viewBox="0 0 40 40"><g stroke="#EAF3FA" stroke-width="2" stroke-linecap="round">
-      <line x1="20" y1="4" x2="20" y2="36"/>
-      <line x1="20" y1="4" x2="20" y2="36" transform="rotate(60 20 20)"/>
-      <line x1="20" y1="4" x2="20" y2="36" transform="rotate(120 20 20)"/>
-      <line x1="20" y1="11" x2="15" y2="15"/><line x1="20" y1="11" x2="25" y2="15"/>
-      <line x1="20" y1="29" x2="15" y2="25"/><line x1="20" y1="29" x2="25" y2="25"/>
-    </g></svg>`;
+  const STAR_SVG = `<svg viewBox="0 0 40 40"><path d="M20 2 L23 17 L38 20 L23 23 L20 38 L17 23 L2 20 L17 17 Z" fill="#E2C27E"/><path d="M20 10 L21.5 18.5 L30 20 L21.5 21.5 L20 30 L18.5 21.5 L10 20 L18.5 18.5 Z" fill="#FFF3D6" transform="rotate(45 20 20)"/></svg>`;
+
+  const EMBER_SVG = `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="9" fill="#F2C46B"/><circle cx="20" cy="20" r="4.5" fill="#FFF1CF"/></svg>`;
 
   const DOT_SVG = `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="8" fill="var(--season-accent)"/></svg>`;
 
@@ -734,7 +797,8 @@
   </svg>`;
 
   const SEASON_ICONS = {
-    'valentin': WAX_HEART_SVG
+    'valentin': WAX_HEART_SVG,
+    'navidad': STAR_SVG
   };
 
   const MOTHERS_MASCOT_SVG = `<svg viewBox="0 0 200 170">
@@ -785,31 +849,94 @@
 
   const SEASON_FIELDS = {
     'flores-amarillas': { svg: FLOWER_SVG, glow: 'var(--season-accent)' },
-    'navidad': { svg: CRYSTAL_SVG, glow: '#BFE1FF' },
+    'navidad': { svg: EMBER_SVG, glow: '#F2C46B', variant: 'rise' },
     'valentin': { svg: [HEART_SVG, ROSE_SVG, CUPID_SVG], glow: 'var(--season-accent)' },
     'madres': { svg: BUTTERFLY_SVG, glow: 'var(--season-accent)', variant: 'flutter' }
   };
 
-  const GARLAND_WAVE = 'M0,10 Q50,45 100,10 Q150,45 200,10 Q250,45 300,10 Q350,45 400,10 Q450,45 500,10 Q550,45 600,10 Q650,45 700,10 Q750,45 800,10 Q850,45 900,10 Q950,45 1000,10 Q1050,45 1100,10 Q1150,45 1200,10';
+  // Charamico: rama seca pintada de dorado, el árbol de Navidad tradicional dominicano.
+  const CHARAMICO_SVG = `<svg viewBox="0 0 500 70" preserveAspectRatio="none">
+    <path class="limb" stroke-width="3.2" pathLength="1" d="M-6 34 C60 22 110 28 160 24 S260 14 320 20 S430 30 506 16"/>
+    <path class="limb" stroke-width="1.6" pathLength="1" d="M70 26 C80 12 92 8 104 6 M96 10 L102 -2 M150 25 C158 38 170 46 184 50 M232 18 C240 6 250 2 262 0 M300 19 C312 32 326 38 342 40 M330 34 L338 48 M392 26 C400 12 414 6 428 6 M452 22 C462 34 474 40 490 42 M24 30 C30 42 38 48 50 52"/>
+    <circle class="tip" cx="104" cy="6" r="2.6"/><circle class="tip" cx="102" cy="-2" r="2"/><circle class="tip" cx="184" cy="50" r="2.6"/>
+    <circle class="tip" cx="262" cy="0" r="2.6"/><circle class="tip" cx="342" cy="40" r="2.6"/><circle class="tip" cx="338" cy="48" r="2"/>
+    <circle class="tip" cx="428" cy="6" r="2.6"/><circle class="tip" cx="490" cy="42" r="2.6"/><circle class="tip" cx="50" cy="52" r="2.6"/>
+    <circle class="light" cx="40" cy="30" r="2.4"/><circle class="light" cx="128" cy="26" r="2.4"/><circle class="light" cx="206" cy="20" r="2.4"/>
+    <circle class="light" cx="280" cy="17" r="2.4"/><circle class="light" cx="364" cy="24" r="2.4"/><circle class="light" cx="440" cy="25" r="2.4"/>
+    <circle class="light" cx="84" cy="16" r="1.8"/><circle class="light" cx="168" cy="43" r="1.8"/><circle class="light" cx="316" cy="30" r="1.8"/><circle class="light" cx="470" cy="34" r="1.8"/>
+  </svg>`;
 
-  function buildChristmasGarland(){
-    const wave = GARLAND_WAVE;
-    let ornaments = '';
-    for (let i = 0; i < 12; i++){
-      const x = 50 + i * 100;
-      const color = i % 2 === 0 ? 'var(--season-accent)' : '#C9A94A';
-      ornaments += `<line x1="${x}" y1="18" x2="${x}" y2="38" stroke="#C9A94A" stroke-width="1"/>
-        <circle cx="${x}" cy="45" r="7" fill="${color}"/>
-        <ellipse cx="${x-2.5}" cy="42" rx="2" ry="2.6" fill="rgba(255,255,255,.35)"/>`;
-    }
-    return `<svg viewBox="0 0 1200 60" preserveAspectRatio="none">
-      <path d="${wave}" stroke="var(--flower)" stroke-width="3" fill="none" stroke-linecap="round"/>
-      ${ornaments}
-    </svg>`;
+  function christmasBannerText(){
+    const now = new Date(), m = now.getMonth() + 1, d = now.getDate();
+    if (m === 1) return 'Todavía hay tiempo para los <strong>Reyes</strong>: velones, jabones y flores eternas para regalar.';
+    if (m === 12 && d === 24) return 'Hoy es <strong>Nochebuena</strong>. Escríbenos y te ayudamos con un regalo de último momento.';
+    if (m === 12 && d > 24) return '<strong>Feliz Navidad</strong> de parte de Artesanías EC.';
+    const today = new Date(now.getFullYear(), now.getMonth(), d);
+    const days = Math.round((new Date(now.getFullYear(), 11, 24) - today) / 86400000);
+    return `Faltan <strong>${days} ${days === 1 ? 'día' : 'días'} para Nochebuena</strong>. Pide con tiempo tus regalos hechos a mano.`;
   }
 
-  const SEASON_HEADER_DECOR = {
-    'navidad': buildChristmasGarland
+  function loadScript(src){
+    return new Promise((resolve, reject) => {
+      const el = document.createElement('script');
+      el.src = src; el.onload = resolve; el.onerror = reject;
+      document.head.appendChild(el);
+    });
+  }
+
+  function setupChristmas(){
+    const badge = document.querySelector('.season-badge');
+    if (badge) { badge.classList.add('season-badge--tag'); badge.querySelector('.season-dot')?.remove(); }
+
+    const art = document.querySelector('.hero-art');
+    if (!art) return;
+    art.classList.add('is-charamico');
+    const branch = document.createElement('div');
+    branch.className = 'charamico';
+    branch.innerHTML = CHARAMICO_SVG;
+    art.prepend(branch);
+
+    // Cada foto se envuelve en un adorno (hilo + tapita dorada). La imagen conserva sus clases para que siga la rotación de fotos.
+    art.querySelectorAll('.seal-big').forEach((img, i) => {
+      const ornament = document.createElement('div');
+      ornament.className = `ornament o${i + 1}`;
+      ornament.innerHTML = '<div class="ornament-sway"><span class="ornament-cap"></span></div>';
+      img.replaceWith(ornament);
+      ornament.firstChild.appendChild(img);
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const CDN = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/';
+    loadScript(CDN + 'gsap.min.js')
+      .then(() => loadScript(CDN + 'ScrollTrigger.min.js'))
+      .then(() => {
+        gsap.registerPlugin(ScrollTrigger);
+        const ornaments = art.querySelectorAll('.ornament');
+        gsap.timeline()
+          .from(branch.querySelectorAll('.limb'), { strokeDasharray: 1, strokeDashoffset: 1, duration: 1.4, ease: 'power2.inOut', stagger: .2, clearProps: 'strokeDasharray,strokeDashoffset' })
+          .from(branch.querySelectorAll('.tip, .light'), { opacity: 0, duration: .4, stagger: .03, clearProps: 'opacity' }, '-=.6')
+          .from(ornaments, { y: -90, opacity: 0, duration: 1.3, ease: 'elastic.out(1, .45)', stagger: .18 }, '-=.9');
+
+        // Parallax al hacer scroll: la rama con sus adornos sube más lento que la página,
+        // cada adorno se columpia desde su hilo (sin despegarse de la rama) y la foto crece un poco.
+        const hero = document.querySelector('.hero');
+        const scrub = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
+        gsap.to(art, { y: 70, ease: 'none', scrollTrigger: { ...scrub } });
+        [5, -7, 9].forEach((rotation, i) => {
+          if (!ornaments[i]) return;
+          gsap.to(ornaments[i], { rotation, transformOrigin: '50% 0', ease: 'none', scrollTrigger: { ...scrub } });
+          gsap.fromTo(ornaments[i].querySelector('img'), { scale: 1 }, { scale: 1.12, ease: 'none', scrollTrigger: { ...scrub } });
+        });
+      })
+      .catch(() => {});
+  }
+
+  const SEASON_SETUP = {
+    'navidad': setupChristmas
+  };
+
+  const SEASON_BANNER_TEXT = {
+    'navidad': christmasBannerText
   };
 
   function spawnField(svgOrList, glow, variant){
@@ -843,7 +970,8 @@
     const season = getActiveSeason();
     if (!season) return;
 
-    document.documentElement.style.setProperty('--accent-glow', season.accent);
+    document.documentElement.dataset.season = season.id;
+    document.documentElement.style.setProperty('--accent-glow', season.glow || season.accent);
     document.documentElement.style.setProperty('--season-accent', season.accent);
     document.documentElement.style.setProperty('--season-accent-soft', season.accentSoft);
 
@@ -867,16 +995,7 @@
       }
     }
 
-    if (SEASON_HEADER_DECOR[season.id]) {
-      const header = document.querySelector('.site-header');
-      if (header) {
-        const garland = document.createElement('div');
-        garland.className = 'header-garland';
-        garland.setAttribute('aria-hidden', 'true');
-        garland.innerHTML = SEASON_HEADER_DECOR[season.id]();
-        header.appendChild(garland);
-      }
-    }
+    if (SEASON_SETUP[season.id]) SEASON_SETUP[season.id]();
 
     const dismissKey = `season-dismissed-${season.id}-${new Date().getFullYear()}`;
     let dismissed = false;
@@ -885,7 +1004,8 @@
     if (!dismissed) {
       const banner = document.getElementById('seasonBanner');
       if (banner) {
-        banner.innerHTML = `<div class="season-banner"><span class="season-dot">${seasonIcon}</span><span>${season.banner}</span><button aria-label="Cerrar aviso">✕</button></div>`;
+        const bannerText = SEASON_BANNER_TEXT[season.id] ? SEASON_BANNER_TEXT[season.id]() : season.banner;
+        banner.innerHTML = `<div class="season-banner season-banner--${season.id}"><span class="season-dot">${seasonIcon}</span><span>${bannerText}</span><button aria-label="Cerrar aviso">✕</button></div>`;
         const bar = banner.querySelector('.season-banner');
         banner.querySelector('button').addEventListener('click', () => {
           try { localStorage.setItem(dismissKey, '1'); } catch(e) {}
