@@ -243,7 +243,48 @@
   .new-item h3{font-size:1.12rem;line-height:1.2;}
   .new-item span{font-family:'Caveat',cursive;font-size:1.2rem;color:var(--sello);line-height:1;}
 
-  /* 6. Cómo pedir: franja salvia festoneada */
+  /* 6. Calendario de regalos: el evento más cercano en grande, los demás en pequeño */
+  .calendar{padding-block:0 clamp(96px,12vw,160px);}
+  .ev--navidad{--ev-bg:#1F3A2E;--ev-ink:#F3EEE4;--ev-accent:#E2C27E;}
+  .ev--valentin{--ev-bg:#4A0F1E;--ev-ink:#F8E6E9;--ev-accent:#F2B8C2;--season-accent:#C8394F;}
+  .ev--madres{--ev-bg:#4B2E45;--ev-ink:#F4E9F0;--ev-accent:#F4CBD6;}
+  .ev--flores-amarillas{--ev-bg:#F2C94C;--ev-ink:#3B2E0A;--ev-accent:#3B2E0A;}
+  .ev-feature{
+    position:relative;overflow:hidden;border-radius:var(--radius-lg);
+    background:var(--ev-bg);color:var(--ev-ink);
+    display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,5vw,72px);align-items:center;
+    padding:clamp(28px,5vw,64px);
+  }
+  @media (max-width:700px){.ev-feature{grid-template-columns:1fr;}}
+  .ev-icon{position:absolute;right:-40px;top:-40px;width:clamp(180px,26vw,300px);opacity:.14;pointer-events:none;}
+  .ev-icon svg{width:100%;height:auto;display:block;}
+  .ev--flores-amarillas .ev-icon ellipse{fill:#FFFFFF;}
+  .ev-count{position:relative;display:flex;flex-direction:column;}
+  .ev-count strong{
+    font-family:'Fraunces',Georgia,serif;font-weight:350;font-size:clamp(5rem,13vw,10rem);line-height:.85;
+    font-variation-settings:"SOFT" 100,"WONK" 1,"opsz" 144;letter-spacing:-.03em;color:var(--ev-accent);
+  }
+  .ev-count span{margin-top:10px;font-weight:600;font-size:1rem;}
+  .ev-body{position:relative;}
+  .ev-body .when{font-family:'Caveat',cursive;font-size:1.45rem;color:var(--ev-accent);}
+  .ev-body h3{font-size:clamp(2rem,4vw,3.2rem);margin-top:4px;font-variation-settings:"SOFT" 100,"WONK" 1,"opsz" 144;line-height:1;}
+  .ev-body p{margin-top:14px;max-width:40ch;opacity:.86;}
+  .ev-body .btn{margin-top:24px;background:var(--ev-ink);color:var(--ev-bg);}
+  .ev-body .btn:hover{box-shadow:0 14px 30px -14px rgba(0,0,0,.5);}
+  .ev-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px);margin-top:clamp(12px,2vw,24px);}
+  @media (max-width:820px){.ev-list{grid-template-columns:1fr;}}
+  .ev-mini{
+    display:grid;grid-template-columns:44px 1fr;gap:4px 14px;align-items:start;
+    padding:20px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);
+  }
+  .ev-mini .dot{grid-row:span 4;width:44px;height:44px;border-radius:50%;background:var(--ev-bg);display:grid;place-items:center;}
+  .ev-mini .dot svg{width:24px;height:24px;}
+  .ev-mini.ev--flores-amarillas .dot ellipse{fill:#FFFFFF;}
+  .ev-mini h3{font-size:1.15rem;}
+  .ev-mini .date{font-size:.88rem;color:var(--ink-soft);}
+  .ev-mini a{justify-self:start;margin-top:8px;font-weight:700;font-size:.86rem;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--sello);padding-bottom:2px;cursor:pointer;}
+
+  /* 7. Cómo pedir: franja salvia festoneada */
   .order{
     position:relative;background:var(--hero-bg);color:var(--hero-ink);
     padding-block:clamp(84px,11vw,140px);
@@ -471,6 +512,17 @@
     </div>
   </section>
 
+  <section class="calendar" id="fechas" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="display">Calendario de regalos</h2>
+        <p>Las fechas en que más se regala. Encarga con tiempo por WhatsApp.</p>
+      </div>
+      <div id="eventFeature"></div>
+      <div class="ev-list" id="eventList"></div>
+    </div>
+  </section>
+
   <section class="order" id="pedir">
     <div class="wrap">
       <div>
@@ -540,11 +592,58 @@
   const WHATSAPP_NUMBER = "18297200691";
   const INSTAGRAM_URL = "https://www.instagram.com/ec__artesanias";
 
+  // === EDITAR AQUÍ: textos del calendario de regalos. Las fechas y colores salen de temporadas.js ===
+  const EVENTOS = {
+    'navidad':          { nombre: 'Navidad', para: 'Nochebuena', encargo: 'Navidad',
+                          ideas: 'Sets de jabones, velones y flores eternas para regalar en familia.' },
+    'valentin':         { nombre: 'San Valentín', para: 'San Valentín', encargo: 'San Valentín',
+                          ideas: 'Velones aromáticos y flores eternas que no se marchitan.' },
+    'madres':           { nombre: 'Día de las Madres', para: 'el Día de las Madres', encargo: 'el Día de las Madres',
+                          ideas: 'Flores eternas y sets de jabones para mamá.' },
+    'flores-amarillas': { nombre: 'Día de las Flores Amarillas', para: 'las Flores Amarillas', encargo: 'el Día de las Flores Amarillas',
+                          ideas: 'Una flor eterna amarilla que no se marchita.' }
+  };
+
+  (function renderCalendar(){
+    if (typeof nextSeasonEvent !== 'function') return;
+    const fmt = new Intl.DateTimeFormat('es-DO', { weekday: 'long', day: 'numeric', month: 'long' });
+    const icon = id => SEASON_ICONS[id] || (SEASON_FIELDS[id] && [].concat(SEASON_FIELDS[id].svg)[0]) || '';
+    const events = Object.keys(EVENTOS)
+      .map(id => Object.assign({ id }, EVENTOS[id], nextSeasonEvent(id)))
+      .sort((a, b) => a.days - b.days);
+    const [first, ...rest] = events;
+    const countText = ev => ev.days === 0 ? 'Es hoy' : `${ev.days === 1 ? 'día' : 'días'} para ${ev.para}`;
+
+    document.getElementById('eventFeature').innerHTML = `
+      <article class="ev-feature ev--${first.id}">
+        <div class="ev-icon" aria-hidden="true">${icon(first.id)}</div>
+        <div class="ev-count">
+          ${first.days === 0 ? '' : `<strong data-days="${first.days}">${first.days}</strong>`}
+          <span>${countText(first)}</span>
+        </div>
+        <div class="ev-body">
+          <span class="when">${fmt.format(first.date)}</span>
+          <h3>${first.nombre}</h3>
+          <p>${first.ideas}</p>
+          <a class="btn" data-wa data-msg="Hola, quiero encargar un regalo para ${first.encargo}.">Encargar para ${first.nombre}</a>
+        </div>
+      </article>`;
+    document.getElementById('eventList').innerHTML = rest.map(ev => `
+      <article class="ev-mini ev--${ev.id}">
+        <span class="dot" aria-hidden="true">${icon(ev.id)}</span>
+        <h3>${ev.nombre}</h3>
+        <span class="date">${fmt.format(ev.date)}</span>
+        <span class="date">Faltan ${daysLabel(ev.days)}</span>
+        <a data-wa data-msg="Hola, quiero encargar un regalo para ${ev.encargo}.">Encargar</a>
+      </article>`).join('');
+    document.getElementById('fechas').hidden = false;
+  })();
+
   document.querySelectorAll('[data-wa]').forEach(el => {
     el.href = '#';
     el.addEventListener('click', (e) => {
       e.preventDefault();
-      const msg = 'Hola, vi la página de Artesanías EC y me gustaría más información.';
+      const msg = el.dataset.msg || 'Hola, vi la página de Artesanías EC y me gustaría más información.';
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
     });
   });
@@ -617,6 +716,18 @@
           scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: true }
         });
       });
+
+      // 5. El número grande del calendario cuenta hacia arriba cuando aparece.
+      const big = document.querySelector('.ev-count strong[data-days]');
+      if (big) {
+        const counter = { v: 0 };
+        gsap.to(counter, {
+          v: +big.dataset.days, duration: 1.6, ease: 'power2.out',
+          onStart: () => { big.textContent = '0'; },
+          onUpdate: () => { big.textContent = Math.round(counter.v); },
+          scrollTrigger: { trigger: big, start: 'top 85%', once: true }
+        });
+      }
 
       window.addEventListener('load', () => ScrollTrigger.refresh());
     }).catch(() => intro.classList.remove('is-animated'));

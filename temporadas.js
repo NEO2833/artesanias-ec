@@ -122,6 +122,26 @@ function daysUntil(month, day){
 
 function daysLabel(days){ return `${days} ${days === 1 ? 'día' : 'días'}`; }
 
+// Fecha del día especial de cada temporada en un año dado (la usa el calendario de regalos de la portada).
+function seasonEventDate(id, year){
+  switch (id) {
+    case 'flores-amarillas': return new Date(year, 8, 21);
+    case 'navidad': return new Date(year, 11, 24);
+    case 'valentin': return new Date(year, 1, 14);
+    case 'madres': return mothersDay(year);
+  }
+  return null;
+}
+
+// Próxima vez que llega ese día (si ya pasó este año, la del año que viene) y cuántos días faltan.
+function nextSeasonEvent(id){
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  let date = seasonEventDate(id, now.getFullYear());
+  if (date < today) date = seasonEventDate(id, now.getFullYear() + 1);
+  return { date, days: Math.round((date - today) / 86400000) };
+}
+
 function loadScript(src){
   return new Promise((resolve, reject) => {
     const el = document.createElement('script');
