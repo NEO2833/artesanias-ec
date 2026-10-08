@@ -497,7 +497,8 @@
         <h2 class="display">Lo más nuevo</h2>
         <p>Las últimas piezas que salieron del taller.</p>
       </div>
-      <div class="new-grid">
+      <!-- Se llena solo desde productos.js; estos 4 quedan de respaldo si ese archivo no carga -->
+      <div class="new-grid" id="newGrid">
         <a class="new-item" href="catalogo.html#jabones">
           <div class="ph" style="--img:url('imagenes/jabones/set-detalles-artesanales.jpg')"><img src="imagenes/jabones/set-detalles-artesanales.jpg" alt="Caja con mini jabones, sachet y vela" loading="lazy" /></div>
           <span>Regalo especial</span>
@@ -597,6 +598,7 @@
 </a>
 
 <script src="temporadas.js"></script>
+<script src="productos.js"></script>
 <script>
   // === EDITAR AQUÍ: número real de WhatsApp de mamá, formato país+número sin espacios ni signos ===
   const WHATSAPP_NUMBER = "18297200691";
@@ -613,6 +615,26 @@
     'flores-amarillas': { nombre: 'Día de las Flores Amarillas', para: 'las Flores Amarillas', encargo: 'el Día de las Flores Amarillas',
                           ideas: 'Una flor eterna amarilla que no se marchita.' }
   };
+
+  // "Lo más nuevo": los productos con isNew de productos.js. Primero los que tienen fecha (added) más reciente;
+  // después el resto, alternando categorías para que no salgan todos del mismo tipo.
+  (function renderNewest(){
+    if (typeof PRODUCTS !== 'object') return;
+    const lists = Object.keys(PRODUCTS).map(cat =>
+      PRODUCTS[cat].map((p, i) => Object.assign({ cat, i }, p)).filter(p => p.isNew).reverse());
+    const dated = lists.flat().filter(p => p.added).sort((a, b) => b.added.localeCompare(a.added));
+    const undated = [];
+    for (let round = 0; lists.some(l => l[round]); round++) lists.forEach(l => { if (l[round] && !l[round].added) undated.push(l[round]); });
+    const items = dated.concat(undated).slice(0, 4);
+    if (!items.length) return;
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+    document.getElementById('newGrid').innerHTML = items.map(p => `
+      <a class="new-item" href="catalogo.html#${p.cat}">
+        <div class="ph" style="--img:url('${p.img}')"><img src="${p.img}" alt="${esc(p.title + ', ' + p.tag)}" loading="lazy" /></div>
+        <span>${esc(p.tag)}</span>
+        <h3>${esc(p.title)}</h3>
+      </a>`).join('');
+  })();
 
   (function renderCalendar(){
     if (typeof nextSeasonEvent !== 'function') return;
