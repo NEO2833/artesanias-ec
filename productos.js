@@ -45,7 +45,9 @@ const PRODUCTS = {
     {img:"imagenes/velones/velon-eucalipto.jpg", title:"Velón Aromático", tag:"Eucalipto"},
     {img:"imagenes/velones/velon-flores-secas-lavanda.jpg", title:"Velón Aromático", tag:"Lavanda y Flores Secas", desc:"Vela en copa de cristal, decorada con flores secas de lavanda sobre la cera.", isNew:true},
     {img:"imagenes/velones/velon-te-alto-vaso-yute.jpg", title:"Velón Aromático", tag:"Té Alto", desc:"Velón en vaso de vidrio, amarrado con lazo de yute.", isNew:true, added:"2026-10-08"},
-    {img:"imagenes/velones/velon-te-blanco-petalos-rosas.jpg", title:"Velón Aromático", tag:"Té Blanco", desc:"Decorado con pétalos de rosas y ramas de crisantemos sobre la cera.", isNew:true, added:"2026-10-08"}
+    {img:"imagenes/velones/velon-te-blanco-petalos-rosas.jpg", title:"Velón Aromático", tag:"Té Blanco", desc:"Decorado con pétalos de rosas y ramas de crisantemos sobre la cera.", isNew:true, added:"2026-10-08"},
+    {img:"imagenes/velones/velitas-navidenas.jpg", title:"Velitas Navideñas", tag:"Colección de Navidad", desc:"Velitas con formas navideñas: arbolitos, campanas, galleta de jengibre, copos, regalitos y más.", isNew:true, added:"2026-10-12"},
+    {img:"imagenes/velones/centro-mesa-navideno.jpg", title:"Centro de Mesa Navideño", tag:"Edición Navidad", desc:"Velón blanco con copos en relieve sobre plato decorado con piñas, bayas y bolas navideñas.", isNew:true, added:"2026-10-12"}
   ],
   flores: [
     {img:"imagenes/flores/claveles-eternos-blanco.jpg", title:"Ramo de Claveles Eternos", tag:"Blanco clásico", desc:"Claveles preservados en florero de vidrio con moño decorativo."},
