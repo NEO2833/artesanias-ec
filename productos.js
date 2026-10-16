@@ -31,7 +31,9 @@ const PRODUCTS = {
     {img:"imagenes/jabones/jabon-canela-sandalo.jpg", title:"Sachet Aromático", tag:"Canela y Sándalo"},
     {img:"imagenes/jabones/sachet-vainilla.jpg", title:"Sachet Aromático", tag:"Fragancia Vainilla"},
     {img:"imagenes/jabones/sachet-ambar-algodon.jpg", title:"Sachet Aromático", tag:"Ámbar y Algodón"},
-    {img:"imagenes/jabones/sachet-cedro.jpg", title:"Sachet Aromático", tag:"Fragancia Cedro"}
+    {img:"imagenes/jabones/sachet-cedro.jpg", title:"Sachet Aromático", tag:"Fragancia Cedro"},
+    {img:"imagenes/jabones/sachets-navidad-formas.jpg", title:"Sachets Aromáticos Navideños", tag:"Vestidos para la Navidad", desc:"Estrella, árbol y medallones decorados con naranja seca, canela, piñas y bayas.", wide:true, isNew:true, added:"2026-10-15"},
+    {img:"imagenes/jabones/sachets-navidad-aros.jpg", title:"Sachets Aromáticos Navideños en Aro", tag:"Vestidos para la Navidad", desc:"Aro y medallón decorados con flores secas, ramitas y bayas rojas.", isNew:true, added:"2026-10-15"}
   ],
   velones: [
     {img:"imagenes/velones/velon-te-alto-1.jpg", title:"Velón Aromático", tag:"Té Alto"},
