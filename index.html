@@ -14,6 +14,32 @@
 <title>Artesanías EC</title>
 <meta name="description" content="Artesanías EC: jabones artesanales, sachets, velones, flores eternas y souvenirs hechos a mano. Pide por WhatsApp." />
 <meta name="theme-color" content="#120e0b" />
+<link rel="canonical" href="https://ecartesanias.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Artesanías EC" />
+<meta property="og:locale" content="es_DO" />
+<meta property="og:url" content="https://ecartesanias.com/" />
+<meta property="og:title" content="Artesanías EC · Hecho a mano, encendido con calma" />
+<meta property="og:description" content="Velones, flores eternas, jabones artesanales y souvenirs hechos a mano. Pide por WhatsApp." />
+<meta property="og:image" content="https://ecartesanias.com/img/compartir.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Velón artesanal de Artesanías EC a la luz de una vela" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Artesanías EC",
+  "url": "https://ecartesanias.com/",
+  "logo": "https://ecartesanias.com/img/logo.png",
+  "image": "https://ecartesanias.com/img/compartir.jpg",
+  "description": "Taller artesanal de velones, flores eternas, jabones, sachets y souvenirs hechos a mano. Pedidos por WhatsApp.",
+  "telephone": "+1-829-720-0691",
+  "address": { "@type": "PostalAddress", "addressCountry": "DO" },
+  "sameAs": ["https://www.instagram.com/ec__artesanias"]
+}
+</script>
 <link rel="icon" type="image/png" href="imagenes/favicon.png" />
 <link rel="apple-touch-icon" href="imagenes/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -395,9 +421,10 @@
   /* ---------- Cómo pedir ---------- */
   .closing .button { display: inline-flex; align-items: center; gap: 0.6rem; }
   .button svg { width: 1.15rem; height: 1.15rem; }
-  .how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; max-width: 62rem; margin: clamp(4rem, 9vh, 6rem) auto 0; padding: 0; list-style: none; text-align: left; }
+  .how { counter-reset: paso; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; max-width: 62rem; margin: clamp(4rem, 9vh, 6rem) auto 0; padding: 0; list-style: none; text-align: left; }
   .how li { padding-top: 1.1rem; border-top: 1px solid var(--line); color: var(--wax-dim); font-size: 0.95rem; }
-  .how span { display: block; font-family: var(--serif); font-style: italic; font-size: 1.6rem; color: var(--flame); line-height: 1; }
+  .how li { counter-increment: paso; }
+  .how li::before { content: counter(paso); display: block; font-family: var(--serif); font-style: italic; font-size: 1.6rem; color: var(--flame); line-height: 1; }
   .how b { display: block; margin: 0.4rem 0 0.2rem; color: var(--wax); font-family: var(--serif); font-weight: 500; font-size: 1.3rem; }
 
   /* ---------- Pie de página ---------- */
@@ -563,9 +590,9 @@
     <p>Escríbenos con la fecha y la ocasión, y lo preparamos a mano para ti.</p>
     <a class="button" data-wa href="#"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9 3 3 9 3 16c0 2.4.6 4.6 1.8 6.6L3 29l6.6-1.7A13 13 0 0 0 16 29c7 0 13-6 13-13S23 3 16 3zm0 23.5c-2.1 0-4.1-.6-5.8-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.4 10.4 0 0 1 5.5 16c0-5.8 4.7-10.5 10.5-10.5S26.5 10.2 26.5 16 21.8 26.5 16 26.5zm5.7-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.5-1.5 9.4 9.4 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.5.3-.5v-.5c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 2.9 1.3 3.1c.2.3 2.2 3.4 5.4 4.6.8.3 1.4.5 1.9.6.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg>Pedir por WhatsApp</a>
     <ol class="how" id="como-pedir" aria-label="Cómo pedir">
-      <li><span>1</span><b>Elige tus favoritos</b>Recorre el catálogo y toca el corazón de lo que te guste.</li>
-      <li><span>2</span><b>Escríbenos por WhatsApp</b>Pide un producto desde su tarjeta, o envía tu lista de favoritos de una vez.</li>
-      <li><span>3</span><b>Coordinamos todo</b>Te confirmamos precio y colores, y vemos si recoges en casa o en un punto de encuentro.</li>
+      <li><b>Elige tus favoritos.</b> Recorre el catálogo y toca el corazón de lo que te guste.</li>
+      <li><b>Escríbenos por WhatsApp.</b> Pide un producto desde su tarjeta, o envía tu lista de favoritos de una vez.</li>
+      <li><b>Coordinamos todo.</b> Te confirmamos precio y colores, y vemos si recoges en casa o en un punto de encuentro.</li>
     </ol>
   </section>
 </main>
