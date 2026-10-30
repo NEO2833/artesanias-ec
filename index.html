@@ -525,6 +525,15 @@
   </section>
   <script src="temporadas-cine.js"></script>
 
+  <!-- Lo más nuevo va justo debajo de la portada: así se ve sin tener que bajar mucho. -->
+  <section class="newest" id="nuevo" aria-labelledby="newest-title" hidden>
+    <div class="newest-head">
+      <h2 id="newest-title">Lo más <em>nuevo</em></h2>
+      <p>Lo último que salió del taller.</p>
+    </div>
+    <ul class="newest-grid"></ul>
+  </section>
+
   <section class="manifesto" aria-label="Nuestra forma de hacer">
     <p data-words>Cada pieza empieza con cera, flores y paciencia. No hay dos iguales: el lazo, el aroma y el color se eligen a mano, para que lo que regales se sienta pensado solo para esa persona.</p>
   </section>
@@ -541,14 +550,6 @@
       <article class="card" data-go="flores"><figure><img src="img/claveles-eternos-blanco.jpg" alt="Claveles eternos blancos" loading="lazy" /></figure><h3>Arreglos</h3><p>Centros de mesa y detalles.</p></article>
       <article class="card" data-go="subeniles"><figure><img src="img/baby-shower-caja-individual.jpg" alt="Recuerdo de baby shower en caja" loading="lazy" /></figure><h3>Souvenirs</h3><p>Para baby showers y eventos.</p></article>
     </div>
-  </section>
-
-  <section class="newest" id="nuevo" aria-labelledby="newest-title" hidden>
-    <div class="newest-head">
-      <h2 id="newest-title">Lo más <em>nuevo</em></h2>
-      <p>Lo último que salió del taller.</p>
-    </div>
-    <ul class="newest-grid"></ul>
   </section>
 
   <section class="shop" id="catalogo" aria-labelledby="shop-title">
@@ -672,8 +673,16 @@
   const chatIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>';
 
   const items = [];
+  // En cada línea, lo nuevo sale primero: los que tienen fecha (el más reciente
+  // arriba), después los demás marcados como nuevos (el último agregado arriba)
+  // y luego el resto en su orden de siempre.
+  const nuevoPrimero = (lista) => {
+    const conFecha = lista.filter((p) => p.isNew && p.added).sort((a, b) => b.added.localeCompare(a.added));
+    const nuevos = lista.filter((p) => p.isNew && !p.added).reverse();
+    return conFecha.concat(nuevos, lista.filter((p) => !p.isNew));
+  };
   ORDER.forEach((cat) => {
-    (PRODUCTS[cat] || []).forEach((p) => {
+    nuevoPrimero(PRODUCTS[cat] || []).forEach((p) => {
       const li = document.createElement("li");
       li.className = "item";
       li.dataset.cat = cat;
