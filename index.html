@@ -723,11 +723,15 @@
   }
 
   let current = "todos";
+  let reacomodo = null;
   function setFilter(cat, { instant = false } = {}) {
     current = cat;
     filters.querySelectorAll(".filter").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.cat === cat)));
     movePill(filters.querySelector(`[data-cat="${cat}"]`), instant);
 
+    // Si se toca otra línea mientras se reacomoda, el reacomodo anterior se termina de una vez.
+    if (reacomodo) reacomodo.progress(1);
+    if (window.gsap) { gsap.killTweensOf(grid); gsap.set(grid, { clearProps: "height" }); }
     const state = canAnimate && !instant ? Flip.getState(items) : null;
     const startHeight = grid.offsetHeight;
     items.forEach((li) => { li.hidden = !(cat === "todos" || li.dataset.cat === cat); });
@@ -738,17 +742,23 @@
     const refresh = () => window.ScrollTrigger && ScrollTrigger.refresh();
     if (!state) { refresh(); return; }
     // Durante el reacomodo los productos van "sueltos" (absolute) y la lista se
-    // quedaría sin altura: la página se acortaría y el navegador saltaría hacia
-    // arriba. Se fija la altura y se anima del alto viejo al nuevo.
-    gsap.fromTo(grid, { height: startHeight }, { height: endHeight, duration: 0.6, ease: "power3.inOut", clearProps: "height" });
-    Flip.from(state, {
+    // quedaría sin altura: la página se acortaría y la sección de abajo (Fechas
+    // para regalar) subiría y se asomaría entre los productos. Se anima del alto
+    // viejo al nuevo y ese alto se mantiene hasta que el ÚLTIMO producto termina
+    // de moverse (con el escalonado, el reacomodo dura más que 0.6 s).
+    gsap.fromTo(grid, { height: startHeight }, { height: endHeight, duration: 0.6, ease: "power3.inOut" });
+    reacomodo = Flip.from(state, {
       duration: 0.6,
       ease: "power3.inOut",
       absolute: true,
       stagger: 0.012,
       onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out", stagger: 0.025 }),
       onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.94, duration: 0.25, ease: "power2.in" }),
-      onComplete: refresh,
+      onComplete: () => {
+        gsap.set(grid, { clearProps: "height" });
+        reacomodo = null;
+        refresh();
+      },
     });
   }
 
