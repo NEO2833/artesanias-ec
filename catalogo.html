@@ -2,24 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="utf-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Catálogo · Artesanías EC</title>
 <meta name="robots" content="noindex" />
 <link rel="icon" type="image/png" href="imagenes/favicon.png" />
-<script>
-  // El catálogo ahora vive en la portada (index.html#catalogo). Los links viejos
-  // (catalogo.html#velones, catalogo.html#como-pedir, etc.) siguen funcionando:
-  // se mandan a la línea correspondiente.
-  (function () {
-    var lines = ["jabones", "sachets", "velones", "flores", "subeniles"];
-    var h = location.hash.slice(1);
-    var params = new URLSearchParams(location.search);
-    if (lines.indexOf(h) > -1) params.set("linea", h);
-    var q = params.toString();
-    var target = "index.html" + (q ? "?" + q : "") + (h === "como-pedir" ? "#como-pedir" : "#catalogo");
-    location.replace(target);
-  })();
-</script>
+<script src="js/redirigir.js"></script>
 </head>
 <body style="background:#120e0b;color:#f3e6d6;font-family:system-ui,sans-serif">
   <p style="padding:2rem">Abriendo el catálogo… Si no se abre solo, <a href="index.html#catalogo" style="color:#f0a65a">toca aquí</a>.</p>
