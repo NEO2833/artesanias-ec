@@ -50,7 +50,8 @@ const PRODUCTS = {
     {img:"imagenes/velones/velon-te-blanco-petalos-rosas.jpg", title:"Velón Aromático", tag:"Té Blanco", desc:"Decorado con pétalos de rosas y ramas de crisantemos sobre la cera.", isNew:true, added:"2026-10-08"},
     {img:"imagenes/velones/velitas-navidenas.jpg", title:"Velitas Navideñas", tag:"Colección de Navidad", desc:"Velitas con formas navideñas: arbolitos, campanas, galleta de jengibre, copos, regalitos y más.", isNew:true, added:"2026-10-12"},
     {img:"imagenes/velones/centro-mesa-navideno.jpg", title:"Centro de Mesa Navideño", tag:"Edición Navidad", desc:"Velón blanco con copos en relieve sobre plato decorado con piñas, bayas y bolas navideñas.", isNew:true, added:"2026-10-12"},
-    {img:"imagenes/velones/velon-navideno.jpg", title:"Velón Navideño", tag:"Navidad", isNew:true, added:"2026-10-28"}
+    {img:"imagenes/velones/velon-navideno.jpg", title:"Velón Navideño", tag:"Navidad", isNew:true, added:"2026-10-28"},
+    {img:"imagenes/velones/difusor-aromas-ceramica.jpg", title:"Difusor de Aromas", tag:"Para el hogar", isNew:true, added:"2026-11-10"}
   ],
   flores: [
     {img:"imagenes/flores/claveles-eternos-blanco.jpg", title:"Ramo de Claveles Eternos", tag:"Blanco clásico", desc:"Claveles preservados en florero de vidrio con moño decorativo."},
