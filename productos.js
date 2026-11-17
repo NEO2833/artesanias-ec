@@ -51,7 +51,9 @@ const PRODUCTS = {
     {img:"imagenes/velones/velitas-navidenas.jpg", title:"Velitas Navideñas", tag:"Colección de Navidad", desc:"Velitas con formas navideñas: arbolitos, campanas, galleta de jengibre, copos, regalitos y más.", isNew:true, added:"2026-10-12"},
     {img:"imagenes/velones/centro-mesa-navideno.jpg", title:"Centro de Mesa Navideño", tag:"Edición Navidad", desc:"Velón blanco con copos en relieve sobre plato decorado con piñas, bayas y bolas navideñas.", isNew:true, added:"2026-10-12"},
     {img:"imagenes/velones/velon-navideno.jpg", title:"Velón Navideño", tag:"Navidad", isNew:true, added:"2026-10-28"},
-    {img:"imagenes/velones/difusor-aromas-ceramica.jpg", title:"Difusor de Aromas", tag:"Para el hogar", isNew:true, added:"2026-11-10"}
+    {img:"imagenes/velones/difusor-aromas-ceramica.jpg", title:"Difusor de Aromas", tag:"Para el hogar", isNew:true, added:"2026-11-10"},
+    {img:"imagenes/velones/velon-renos-navidad.jpg", title:"Velón de Renos", tag:"Navidad", desc:"Velón con reno, copos de nieve y campanita en relieve. Disponible en verde oscuro, verde menta y blanco.", isNew:true, added:"2026-11-17"},
+    {img:"imagenes/velones/velas-arbol-esfera-navidad.jpg", title:"Velas Navideñas", tag:"Navidad", desc:"Vela de arbolito y vela esfera con casita nevada en relieve. Se venden por separado.", isNew:true, added:"2026-11-17"}
   ],
   flores: [
     {img:"imagenes/flores/claveles-eternos-blanco.jpg", title:"Ramo de Claveles Eternos", tag:"Blanco clásico", desc:"Claveles preservados en florero de vidrio con moño decorativo."},
